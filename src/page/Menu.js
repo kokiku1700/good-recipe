@@ -1,4 +1,4 @@
-
+import styled from "styled-components";
 
 const Menu = () => {
 
@@ -8,5 +8,9 @@ const Menu = () => {
         </div>
     );
 };
+
+const Div = styled.div`
+    background: green;
+`;
 
 export default Menu;

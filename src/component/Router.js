@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom"
-import App from "../App";
 import Menu from "../page/Menu";
 import Reserve from "../page/Reserve";
 import ReserveCheck from "../page/ReserveCheck";
 import FAQ from "../page/FAQ";
+import Main from "../page/Main";
 
-const Routers = () => {
+const Router = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<App />} />
+            <Route path="/" element={<Main />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/reserve" element={<Reserve />} />
             <Route path="/reserveCheck" element={<ReserveCheck />} />
@@ -18,4 +18,4 @@ const Routers = () => {
     );
 };
 
-export default Routers;
+export default Router;

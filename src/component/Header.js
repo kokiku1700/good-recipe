@@ -8,27 +8,37 @@ const Header = () => {
         <Div>
             <Logo />
             <Ul>
-                <Li><StyledLink to="/menu">메뉴</StyledLink></Li>
-                <Li><StyledLink to="/reserve">예약</StyledLink></Li>
-                <Li><StyledLink to="/reserveCheck">예약 확인</StyledLink></Li>
-                <Li><StyledLink to="/faq">FAQ</StyledLink></Li>
+                <StyledLink to="/menu"><Li>메뉴</Li></StyledLink>
+                <StyledLink to="/reserve"><Li>예약</Li></StyledLink>
+                <StyledLink to="/reserveCheck"><Li>예약 확인</Li></StyledLink>
+                <StyledLink to="/faq"><Li>FAQ</Li></StyledLink>
             </Ul>
         </Div>
     );
 };
 
 const Div = styled.div`
+    z-index: 999;
+    position: sticky;
+    top: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 1.3% 0;
+    border-bottom: 1px solid #000; 
+    background: #fff;
 `;
 
 const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 20px;
     color: black;
+    width: 25%;
+    padding: 2.5% 0;
+
+    &:hover{
+        color: #bbb;
+    }
 `;
 
 const Ul = styled.ul`
@@ -39,6 +49,7 @@ const Ul = styled.ul`
 
 const Li = styled.li`
     list-style: none;
+    text-align: center;
 `;
 
 export default Header;
