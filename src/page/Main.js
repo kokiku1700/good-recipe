@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import mainFirstImg from "../assets/img/main.jpg";
+import "../assets/fonts/fonts.css";
 
 const Main = () => {
 
@@ -14,11 +15,11 @@ const Main = () => {
 };
 
 const Opacity = keyframes`
-    0% {
+    from {
         opacity: 0;
     }
 
-    100% {
+    to {
         opacity: 1;
     }
 `;
@@ -47,21 +48,29 @@ const FirstMain = styled.div`
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgba(0,0,0,0.3);
     }
 `
 
 const Span1 = styled.span`
-    font-size: 40px;
-    margin: 1% 0;
+    margin: 1.5% 0;
     z-index: 99;
-    animation: ${Opacity} 3s;
+    opacity: 0;
+    animation: ${Opacity} 3s 0s ease;
+    animation-fill-mode: forwards;
+    font-size: 60px;
+    font-weight: bold;
+    font-family: 'ChosunGs';
 `;
 const Span2 = styled.span`
-    font-size: 40px;
-    margin: 1% 0;
+    margin: 1.5% 0;
     z-index: 99;
-    animation: ${Opacity} 3s 3s;
+    opacity: 0;
+    animation: ${Opacity} 3s 3.2s ease;
+    animation-fill-mode: forwards;
+    font-size: 60px;
+    font-weight: bold;
+    font-family: 'ChosunGs';
 `;
 
 export default Main;

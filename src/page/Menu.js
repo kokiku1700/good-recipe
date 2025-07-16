@@ -3,9 +3,9 @@ import styled from "styled-components";
 const Menu = () => {
 
     return (
-        <div>
+        <Div>
             Menu
-        </div>
+        </Div>
     );
 };
 

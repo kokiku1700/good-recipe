@@ -10,10 +10,11 @@ const Logo = () => {
 
 const StyledLink = styled(Link)`
     font-family: 'Shilla_CultureB-Bold';
-    font-size: 40px;
+    font-size: 50px;
     color: brown;
     text-decoration: none;
     padding: 0 1%;
+    text-shadow: 1px 1px 1px white;
 `;
 
 export default Logo;

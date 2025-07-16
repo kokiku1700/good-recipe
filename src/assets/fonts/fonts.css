@@ -4,3 +4,9 @@
     font-weight: 700;
     font-style: normal;
 }
+@font-face {
+    font-family: 'ChosunGs';
+    src: url('./ChosunGs.TTF') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

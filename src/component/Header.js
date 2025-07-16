@@ -13,27 +13,27 @@ const Header = () => {
                 <StyledLink to="/reserveCheck"><Li>예약 확인</Li></StyledLink>
                 <StyledLink to="/faq"><Li>FAQ</Li></StyledLink>
             </Ul>
+            
         </Div>
     );
 };
 
 const Div = styled.div`
     z-index: 999;
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 1px solid #000; 
-    background: #fff;
 `;
 
 const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 20px;
-    color: black;
-    width: 25%;
+    color: white;
+    width: 16%;
+    margin: 0 4.5%;
     padding: 2.5% 0;
 
     &:hover{
@@ -42,6 +42,7 @@ const StyledLink = styled(Link)`
 `;
 
 const Ul = styled.ul`
+    position: relative;
     width: 75%;
     display: flex;
     justify-content: space-around;
@@ -51,5 +52,6 @@ const Li = styled.li`
     list-style: none;
     text-align: center;
 `;
+
 
 export default Header;
