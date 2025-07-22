@@ -20,18 +20,19 @@ const Header = () => {
 
 const Div = styled.div`
     z-index: 999;
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background: white;
 `;
 
 const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 20px;
-    color: white;
+    color: black;
     width: 16%;
     margin: 0 4.5%;
     padding: 2.5% 0;
