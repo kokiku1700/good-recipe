@@ -12,7 +12,6 @@ const SubMenu = () => {
 const Div = styled.div`
     width: 100%;
     text-align: center;
-    background: green;
 `
 
 export default SubMenu;
