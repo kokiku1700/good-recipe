@@ -1,10 +1,18 @@
 import styled from "styled-components";
+import MenuCategory from "./MenuCategory";
+import { useState } from "react";
 
 const SubMenu = () => {
+    const [menuListValue, setMenuListValue] = useState("0");
+    const subMenuName = ["육전", "너비아니"];
+    
+    const onClickMenuListValue = e => {
+        setMenuListValue(e);
+    };
 
     return(
         <Div>
-            단품 메뉴
+            <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={subMenuName} />
         </Div>
     );
 };

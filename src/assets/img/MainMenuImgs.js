@@ -9,8 +9,14 @@ import lotus_leaf_rice from "./lotus_leaf_rice.jpg";
 import pancake from "./pancake.jpg";
 import pork_doughnut from "./pork_doughnut.jpg";
 import soy_sauce from "./soy_sauce.jpg";
+import gondre from "./gondre.jpg";
+import gondre_soy_sauce from "./gondre_soy_sauce.jpg";
+import leafFloor from "./leafFloor.jpg";
 
 export {
+    gondre,
+    gondre_soy_sauce,
+    leafFloor,
     anchovy,
     aubergine,
     burdock_japchae,
