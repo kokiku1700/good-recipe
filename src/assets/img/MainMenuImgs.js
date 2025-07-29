@@ -12,6 +12,7 @@ import soy_sauce from "./soy_sauce.jpg";
 import gondre from "./gondre.jpg";
 import gondre_soy_sauce from "./gondre_soy_sauce.jpg";
 import leafFloor from "./leafFloor.jpg";
+import salad from "./salad.jpg";
 
 export {
     gondre,
@@ -27,5 +28,6 @@ export {
     lotus_leaf_rice,
     pancake,
     pork_doughnut,
-    soy_sauce
+    soy_sauce,
+    salad
 };

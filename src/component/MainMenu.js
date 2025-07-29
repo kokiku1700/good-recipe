@@ -14,22 +14,23 @@ import {anchovy,
     soy_sauce,
     gondre,
     gondre_soy_sauce,
-    leafFloor} from "../assets/img/MainMenuImgs";
+    leafFloor,
+    salad} from "../assets/img/MainMenuImgs";
 import MenuCategory from "./MenuCategory";
 
 const MainMenu = () => {
     const menu = [
         [doenjang, lotus_leaf_rice, soy_sauce, laver, anchovy,
         kimchi, herbs, aubergine, pancake, burdock_japchae,
-        pork_doughnut, doenjang, lotus_leaf_rice],
+        pork_doughnut, salad, doenjang, lotus_leaf_rice],
 
         [doenjang, gondre, gondre_soy_sauce, laver, anchovy,
         kimchi, herbs, aubergine, pancake, burdock_japchae,
-        pork_doughnut, doenjang, gondre],
+        pork_doughnut, salad, doenjang, gondre],
 
         [leafFloor, lotus_leaf_rice, soy_sauce, laver, anchovy,
         kimchi, herbs, aubergine, pancake, burdock_japchae,
-        pork_doughnut, doenjang, leafFloor, lotus_leaf_rice],
+        pork_doughnut, salad, doenjang, leafFloor, lotus_leaf_rice],
 
     ];
     const [menuListValue, setMenuListValue] = useState("0");
@@ -43,7 +44,7 @@ const MainMenu = () => {
     return (
         <Div>
             <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={MainMenuName} />
-            <MainMenuList menu={menu[menuListValue]} menuListValue={menuListValue} />
+            <MainMenuList menu={menu[menuListValue]} />
         </Div>
     );
 };

@@ -3,7 +3,7 @@ import prev from "../assets/img/prev.png";
 import next from "../assets/img/next.png";
 import { useRef, useState } from "react";
 
-const MainMenuList = ({ menu, menuListValue }) => {
+const MainMenuList = ({ menu }) => {
     const menuImg = [...menu]
     const [imgIdx, setImgIdx] = useState(1);
     const [slideTransition, setSlideTransition] = useState(true);
