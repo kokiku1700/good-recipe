@@ -11,13 +11,15 @@ import pork_doughnut from "./pork_doughnut.jpg";
 import soy_sauce from "./soy_sauce.jpg";
 import gondre from "./gondre.jpg";
 import gondre_soy_sauce from "./gondre_soy_sauce.jpg";
-import leafFloor from "./leafFloor.jpg";
+import lotusFloor from "./lotusFloor.jpg";
 import salad from "./salad.jpg";
+import panFriedBeef from "./panFriedBeef.jpg";
+import neobiani from "./neobiani.jpg";
 
 export {
     gondre,
     gondre_soy_sauce,
-    leafFloor,
+    lotusFloor,
     anchovy,
     aubergine,
     burdock_japchae,
@@ -29,5 +31,7 @@ export {
     pancake,
     pork_doughnut,
     soy_sauce,
-    salad
+    salad,
+    panFriedBeef,
+    neobiani
 };

@@ -36,6 +36,7 @@ const TabDiv = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+
 `;
 
 const Label = styled.label`

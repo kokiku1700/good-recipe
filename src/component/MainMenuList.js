@@ -46,11 +46,14 @@ const MainMenuList = ({ menu }) => {
     };
     return (
         <Div>
+            <P>모든 정식의 반찬은 동일합니다.</P>
             <ImgWrap>  
                 <Ul $transition={slideTransition} $length={len} translate={700 * imgIdx}>
                     {menuImg.map((e, i) => (
                         <Li key={i}>
-                            <Img src={e} />
+                            <H2>{e.name}</H2>
+                            <Img src={e.src} />
+                            <Span>{e.explain}</Span>
                         </Li>
                     ))}
                 </Ul>
@@ -62,8 +65,20 @@ const MainMenuList = ({ menu }) => {
 }
 
 const Div = styled.div`
+    position: relative;
     width: 100%;
     padding: 1% 0;
+`;
+
+const H2 = styled.h2`
+    text-align: center;
+`;
+
+const P = styled.p`
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    color: red;
 `;
 
 const ImgWrap = styled.div`
@@ -81,11 +96,17 @@ const Ul = styled.ul`
 const Li = styled.li`
     float: left;
     list-style: none;
+    display: flex;
+    flex-direction: column;
 `;
 
 const Img = styled.img`
     width: 700px;
     height: 600px;
+`;
+
+const Span = styled.span`
+    margin: 0 auto;
 `;
 
 const ArrowImg = styled.img`
