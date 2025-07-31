@@ -22,14 +22,22 @@ const Div = styled.div`
 `;
 
 const Ul = styled.ul`
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-around;
 `;
 
 const Li = styled.li`
+    width: 100%;
+    text-align: center;
     list-style: none;
     cursor: pointer;
+    padding: 1% 0;
+    
+    &:hover {
+        background: #ddd;
+    }
 `;
 
 export default MenuCategory;

@@ -33,7 +33,6 @@ const MainMenu = () => {
 
 const Div = styled.div`
     width: 100%;
-    padding: 1% 0;
 `;
 
 

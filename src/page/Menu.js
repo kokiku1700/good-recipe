@@ -19,7 +19,7 @@ const Menu = () => {
                 </Label>
                 <Label  className={tabState === "subMenu" ? "checked" : ""}>
                     <Input type="radio" name="tab" value="subMenu" onClick={onClick} />
-                    단품 메뉴
+                    단품 
                 </Label> 
             </TabDiv>
               

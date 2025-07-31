@@ -2,11 +2,13 @@ import styled from "styled-components";
 import MenuCategory from "./MenuCategory";
 import { useState } from "react";
 import { panFriedBeef, neobiani } from "../assets/img/MainMenuImgs";
+import { subMenu } from "../constants/menuExplain";
 
 const SubMenu = () => {
     const [menuListValue, setMenuListValue] = useState(0);
-    const subMenuName = ["육전", "너비아니"];
-    
+    const menuName = [...subMenu];
+    const subMenuName = [menuName[0].name, menuName[1].name];
+
     const onClickMenuListValue = e => {
         setMenuListValue(e);
     };
@@ -15,8 +17,16 @@ const SubMenu = () => {
         <Div>
             <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={subMenuName} />
             <Ul>
-                <Li $display={menuListValue === 0 ? "block" : "none"}><Img src={panFriedBeef} /></Li>
-                <Li $display={menuListValue === 1 ? "block" : "none"}><Img src={neobiani} /></Li>  
+                <Li $display={menuListValue === 0 ? "block" : "none"}>
+                    <h2>{menuName[0].name}</h2>
+                    <Img src={menuName[0].src} />
+                    <p>{menuName[0].explain}</p>
+                </Li>
+                <Li $display={menuListValue === 1 ? "block" : "none"}>
+                    <h2>{menuName[1].name}</h2>
+                    <Img src={menuName[1].src} />
+                    <p>{menuName[1].explain}</p>
+                </Li>  
             </Ul> 
         </Div>
     );

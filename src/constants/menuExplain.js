@@ -12,7 +12,9 @@ import {anchovy,
     gondre,
     gondre_soy_sauce,
     lotusFloor,
-    salad} from "../assets/img/MainMenuImgs";
+    salad,
+    panFriedBeef,
+    neobiani} from "../assets/img/MainMenuImgs";
 // 연잎정식
 const lotusLeafRice = [
     {
@@ -231,4 +233,17 @@ const lotusFloorRice = [
     },
 ]
 
-export { lotusLeafRice, gondreRice, lotusFloorRice }
+const subMenu = [
+    {
+        "name": "육전",
+        "src": panFriedBeef,
+        "explain": "선한레시피만의 비법으로 부쳐낸 한우 육전을 특제 양배추 샐러드와 함께 싸서 드시는 요리입니다."
+    },
+    {
+        "name": "너비아니",
+        "src": neobiani,
+        "explain": "한우를 달달한 양념으로 구워 영양부추 위에 올렸습니다. 구운 버섯과 함게 더욱 깊고 풍부한 맛을 즐겨보세요. "
+    }
+];
+
+export { lotusLeafRice, gondreRice, lotusFloorRice, subMenu }
