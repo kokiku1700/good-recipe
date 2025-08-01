@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import MenuCategory from "./MenuCategory";
 import { useState } from "react";
-import { panFriedBeef, neobiani } from "../assets/img/MainMenuImgs";
 import { subMenu } from "../constants/menuExplain";
 
 const SubMenu = () => {
