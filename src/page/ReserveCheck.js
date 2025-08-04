@@ -3,9 +3,9 @@
 const ReserveCheck = () => {
 
     return (
-        <dvi>
+        <div>
             예약 확인
-        </dvi>
+        </div>
     );
 };
 
