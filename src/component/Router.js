@@ -4,6 +4,7 @@ import Reserve from "../page/Reserve";
 import ReserveCheck from "../page/ReserveCheck";
 import FAQ from "../page/FAQ";
 import Main from "../page/Main";
+import ReserveDetail from "../page/ReserveDetail";
 
 const Router = () => {
 
@@ -14,6 +15,7 @@ const Router = () => {
             <Route path="/reserve" element={<Reserve />} />
             <Route path="/reserveCheck" element={<ReserveCheck />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/reserveDetail" element={<ReserveDetail />} />
         </Routes>
     );
 };

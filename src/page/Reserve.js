@@ -1,43 +1,70 @@
+import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Reserve = () => {
-
     const [confirmation, setConfirmation] = useState({
         name: "",
         tel: "",
     });
     const [confirmationNumber, setConfirmationNumber] = useState("");
     const [confirmationNumberCheck, setConfirmationNumberCheck] = useState("");
+    const [confirmButton, setConfirmButton] = useState("인증번호 전송");
+    const [confirmSuccessStatus, setConfirmSuccessStatus] = useState(false);
+    const [nameStatus, setNameStatus] = useState(false);
+    const [telStatus, setTelStatus] = useState(false);
     // const [timer, setTimer] = useState(180);
+    const navigate = useNavigate();
 
     // 이름과 전화번호 입력정보를 저장
     const onChangeConFirmation = e => {
+        const nameRegExp = /^[가-힣]+$/;
+        const telRegExp = /^0\d{8,10}$/;
+        
         setConfirmation({
             ...confirmation,
             [e.target.name]: e.target.value
         });
-
-        console.log(confirmation);
+        if ( e.target.name === "name" ) {
+            if ( nameRegExp.test(e.target.value) ) {
+                setNameStatus(true);
+            } else {
+                setNameStatus(false);
+            }
+        } else if ( e.target.name === "tel" ) {
+            if ( telRegExp.test(e.target.value) ) {
+                setTelStatus(true);
+            } else {
+                setTelStatus(false);
+            }
+        }
     };
 
     const onClickConfirmationSend = () => {
-        const telRegExp = /^0\d{8,10}$/;
 
-        if ( telRegExp.test(confirmation.tel) ) {
+        if ( telStatus ) {
             let randomNum = Math.floor(Math.random() * 1000000);
+            
+            setConfirmButton("인증번호 재전송");
 
             if ( randomNum < 100000 ) {
                 randomNum = "0" + randomNum;
             }
 
             setConfirmationNumber(randomNum);
-            console.log(randomNum);
+            
+            axios.get("http://localhost:4000/confirmation", {params: {tel: confirmation.tel, num: randomNum}})
+            .then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+
         } else {
             console.log('번호를 제대로 입력해주세요')
         }
 
-         
     }
 
     // useEffect(() => {
@@ -62,12 +89,22 @@ const Reserve = () => {
     // 인증번호 확인을 누르면 생성된 인증번호와 
     // 입력한 인증번호의 일치유무를 체크
     const onClickConfirmationCheck = () => {
-        if ( Number(confirmationNumber) === Number(confirmationNumberCheck) ) {
+        if ( confirmationNumberCheck !== "" && Number(confirmationNumber) === Number(confirmationNumberCheck) ) {
+            setConfirmSuccessStatus(true);
             console.log("success");
         } else {
             console.log("fail");
         }
     };
+
+    const AllSuccess = () => {
+        if ( confirmSuccessStatus &&
+            nameStatus &&
+            telStatus
+        ) {
+            navigate("/reserveDetail", { state: {name: confirmation.name, tel: confirmation.tel} });
+        }
+    }
 
     return (
         <DivWrap>
@@ -79,13 +116,14 @@ const Reserve = () => {
                 <Span>
                     <H3>전화번호</H3>
                     <Input name="tel" width="67" type="tel" value={confirmation.tel} onChange={onChangeConFirmation} autoComplete="off" />
-                    <Button onClick={onClickConfirmationSend}>인증번호 전송</Button>
+                    <Button onClick={onClickConfirmationSend}>{confirmButton}</Button>
                 </Span>
                 <Span>
                     <H3>인증번호</H3>
-                    <Input width="67" value={confirmationNumberCheck} onChange={onChangeConfirmationCheck} autoComplete="off" />
-                    <Button onClick={onClickConfirmationCheck}>인증번호 학인</Button>
+                    <Input width="67" value={confirmationNumberCheck} onChange={onChangeConfirmationCheck} autoComplete="off" disabled={confirmSuccessStatus} />
+                    <Button onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus}>인증번호 학인</Button>
                 </Span>
+                <Button onClick={AllSuccess}>확인</Button>
             </Div>
         </DivWrap>
     );
@@ -101,9 +139,10 @@ const Div = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 7%;
     border-radius: 10px;
     border: 2px solid #aaa;
+    padding: 1% 0;
 `;
 
 const Span = styled.span`
@@ -132,6 +171,7 @@ const Button = styled.button`
     width: 30%;
     margin: 0 1%;
     padding: 2% 0;
+    cursor: pointer;
 `;
 
 export default Reserve;
