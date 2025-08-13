@@ -65,7 +65,7 @@ const Reserve = () => {
             console.log('번호를 제대로 입력해주세요')
         }
 
-    }
+    };
 
     // useEffect(() => {
     //     let minute = Math.floor(timer / 60);

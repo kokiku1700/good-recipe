@@ -1,7 +1,7 @@
 require('dotenv').config({ path: '../.env'});
 
 const { SolapiMessageService } = require('solapi');
-const messageService = new SolapiMessageService(process.env.REACT_APP_KEY, process.env.REACT_APP_SECRET_KEY);
+const messageService = new SolapiMessageService(process.env.REACT_APP_SOLAPI_KEY, process.env.REACT_APP_SOLAPI_SECRET_KEY);
 
 const express = require("express");
 const cors = require("cors");
