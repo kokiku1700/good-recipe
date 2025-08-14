@@ -1,12 +1,14 @@
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import { useState } from "react";
 import moment from "moment";
+import axios from "axios";
 
 const ReserveDetail = () => {
     const { state } = useLocation();
+    const navigate = useNavigate();
     // 데이터베이스에 저장 할 값 
     const [reserveData, setReserveData] = useState({
         name: state.name,
@@ -14,7 +16,6 @@ const ReserveDetail = () => {
         date: '',
         time: {AmPm: "", time: ""},
         people: {adult: "", children: ""},
-        babyChair: "",
     });
 
     // 달력에서 예약 날짜 선택 함수
@@ -59,17 +60,27 @@ const ReserveDetail = () => {
                     children: e.target.value
                 }
             }))
-        } else if ( e.target.name === "babyChair" ) {
-            setReserveData({
-                ...reserveData,
-                [e.target.name]: e.target.value
-            })
-        }
-    }
+        } 
+    };
 
     const onClickState = () => {
         console.log(reserveData);
     }
+
+    const onSubmit = async() => {
+        await axios.post("http://localhost:4000/Reserve", {
+            "name": reserveData.name,
+            "tel": reserveData.tel,
+            "date": reserveData.date,
+            "time": {"AmPm" : reserveData.time.AmPm, "time": reserveData.time.time},
+            "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
+        })
+        .then(res => {
+            if ( res.data === "success" && res.status === 200 ) {
+                navigate("/reserveSuccess", { replace: true });
+            }
+        });
+    };
 
     return (
         <Div onClick={onClickState}>
@@ -124,16 +135,8 @@ const ReserveDetail = () => {
                     <h6>{reserveData.people.adult}</h6>
                     <h6>{reserveData.people.children}</h6>
                 </Span>
-                <Span>
-                    <H3>아기의자</H3>
-                    <Select name="babyChair" value={reserveData.babyChair} onChange={onChangeRest}>
-                        <Option value="1">1</Option>
-                        <Option value="2">2</Option>
-                        <Option value="3">3</Option>
-                        <Option value="4">4</Option>
-                    </Select>
-                    <h6>{reserveData.babyChair}</h6>
-                </Span>
+                
+                <button onClick={onSubmit}>예약하기</button>
             </DetailDiv>
         </Div>
     );

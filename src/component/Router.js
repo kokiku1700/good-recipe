@@ -5,6 +5,7 @@ import ReserveCheck from "../page/ReserveCheck";
 import FAQ from "../page/FAQ";
 import Main from "../page/Main";
 import ReserveDetail from "../page/ReserveDetail";
+import ReserveSuccess from "../page/ReserveSuccess";
 
 const Router = () => {
 
@@ -16,6 +17,7 @@ const Router = () => {
             <Route path="/reserveCheck" element={<ReserveCheck />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/reserveDetail" element={<ReserveDetail />} />
+            <Route path="/reserveSuccess" element={<ReserveSuccess />} />
         </Routes>
     );
 };
