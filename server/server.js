@@ -34,6 +34,7 @@ app.get('/confirmation', (req, res) => {
     });
 });
 
+// 예약 
 app.post("/Reserve", (req, res) => {
     const data = {
         name: req.body.name,
@@ -70,6 +71,15 @@ app.post("/Reserve", (req, res) => {
 
     res.send("success");
 });
+
+// 예약 확인 
+app.get("/reserveCheck", (req, res) => {
+    Reserve.find({ name: req.query.name, tel: req.query.tel })
+    .then(data => {
+        return res.json(...data);
+    })
+    
+})
 
 // 서버 실행
 app.listen(PORT, () => {
