@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Button from "../component/components/Button";
 
 const ReserveSuccess = () => {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ const ReserveSuccess = () => {
     return (
         <>
             예약이 완료되었습니다.
-            <button onClick={onClickNavigate}>홈</button>
+            <Button width="20" content="홈" onClick={onClickNavigate} />
         </>
     );
 };

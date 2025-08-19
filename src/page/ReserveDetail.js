@@ -5,6 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import { useState } from "react";
 import moment from "moment";
 import axios from "axios";
+import Button from "../component/components/Button";
 
 const ReserveDetail = () => {
     const { state } = useLocation();
@@ -63,10 +64,6 @@ const ReserveDetail = () => {
         } 
     };
 
-    const onClickState = () => {
-        console.log(reserveData);
-    }
-
     const onSubmit = async() => {
         await axios.post("http://localhost:4000/Reserve", {
             "name": reserveData.name,
@@ -83,7 +80,7 @@ const ReserveDetail = () => {
     };
 
     return (
-        <Div onClick={onClickState}>
+        <Div>
             <DetailDiv>
                 <Span>
                     <H3>이름</H3>
@@ -136,7 +133,7 @@ const ReserveDetail = () => {
                     <h6>{reserveData.people.children}</h6>
                 </Span>
                 
-                <button onClick={onSubmit}>예약하기</button>
+                <Button width="50" content="예약하기" onClick={onSubmit} />
             </DetailDiv>
         </Div>
     );

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Button from "../component/components/Button";
 
 const Reserve = () => {
     const [confirmation, setConfirmation] = useState({
@@ -83,7 +84,6 @@ const Reserve = () => {
     // 입력한 인증번호를 저장
     const onChangeConfirmationCheck = e => {
         setConfirmationNumberCheck(e.target.value);
-        console.log(confirmationNumberCheck)
     };
 
     // 인증번호 확인을 누르면 생성된 인증번호와 
@@ -116,14 +116,14 @@ const Reserve = () => {
                 <Span>
                     <H3>전화번호</H3>
                     <Input name="tel" width="67" type="tel" value={confirmation.tel} onChange={onChangeConFirmation} autoComplete="off" />
-                    <Button onClick={onClickConfirmationSend}>{confirmButton}</Button>
+                    <Button width="30" content={confirmButton} onClick={onClickConfirmationSend} />
                 </Span>
                 <Span>
                     <H3>인증번호</H3>
                     <Input width="67" value={confirmationNumberCheck} onChange={onChangeConfirmationCheck} autoComplete="off" disabled={confirmSuccessStatus} />
-                    <Button onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus}>인증번호 학인</Button>
+                    <Button width="30" content="인증번호 학인" onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus} />
                 </Span>
-                <Button onClick={AllSuccess}>확인</Button>
+                <Button width="90" content="확인" onClick={AllSuccess} />
             </Div>
         </DivWrap>
     );
@@ -167,11 +167,5 @@ const Input = styled.input`
     }
 `;
 
-const Button = styled.button`
-    width: 30%;
-    margin: 0 1%;
-    padding: 2% 0;
-    cursor: pointer;
-`;
 
 export default Reserve;
