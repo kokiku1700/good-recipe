@@ -28,7 +28,7 @@ const Div = styled.div`
     width: 100%;
 `;
 
-const FirstMain = styled.div`
+const FirstMain = styled.section`
     position: relative;
     width: 100%;
     height: 900px;

@@ -1,8 +1,18 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "./components/Logo";
+import { breakPoints } from "../constants/breakPoints";
+import mobileMenu from "../assets/img/mobileMenu.png";
+import mobileClose from "../assets/img/mobileClose.png";
+
+import { useState } from "react";
 
 const Header = () => {
+    const [bool, setBool] = useState(false);
+
+    const toggleMenu = () => {
+        setBool(!bool);
+    };
 
     return (
         <Div>
@@ -13,7 +23,7 @@ const Header = () => {
                 <StyledLink to="/reserveCheck"><Li>예약 확인</Li></StyledLink>
                 <StyledLink to="/faq"><Li>FAQ</Li></StyledLink>
             </Ul>
-            
+            <Img onClick={toggleMenu} src={bool ? mobileClose : mobileMenu} alt="mobileMenu" />
         </Div>
     );
 };
@@ -27,6 +37,11 @@ const Div = styled.div`
     justify-content: space-around;
     align-items: center;
     background: white;
+
+    ${breakPoints.small} {
+        justify-content: space-between;
+        padding: 1% 0;
+    };
 `;
 
 const StyledLink = styled(Link)`
@@ -39,7 +54,12 @@ const StyledLink = styled(Link)`
 
     &:hover{
         color: #bbb;
-    }
+    };
+
+    ${breakPoints.small} {
+        font-size: 15px;
+        font-weight: bold;
+    };
 `;
 
 const Ul = styled.ul`
@@ -47,11 +67,26 @@ const Ul = styled.ul`
     width: 75%;
     display: flex;
     justify-content: space-around;
+
+    ${breakPoints.small} {
+        display: none;
+    };
 `
 
 const Li = styled.li`
     list-style: none;
     text-align: center;
+`;
+
+const Img = styled.img`
+    display: none;
+    width: 30px;
+    
+    ${breakPoints.small} {
+        display: block;
+        margin-right: 5%;
+    };
+
 `;
 
 

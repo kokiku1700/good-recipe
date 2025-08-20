@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import '../../assets/fonts/fonts.css';
 import { Link } from "react-router-dom";
+import { breakPoints } from "../../constants/breakPoints";
+
 const Logo = () => {
 
-    return (
-        <StyledLink to="/">선한레시피</StyledLink>
-    );
+    return <StyledLink to="/">선한레시피</StyledLink>;
 };
 
 const StyledLink = styled(Link)`
@@ -15,6 +15,14 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     padding: 0 1%;
     text-shadow: 1px 1px 1px white;
+
+    ${breakPoints.medium} {
+        font-size: 30px;
+    };
+        
+    ${breakPoints.small} {
+        margin-left: 5%;
+    };
 `;
 
 export default Logo;
