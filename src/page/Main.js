@@ -61,6 +61,8 @@ const Span1 = styled.span`
     font-size: 60px;
     font-weight: bold;
     font-family: 'ChosunGs';
+    cursor: default;
+    user-select: none;
 `;
 const Span2 = styled.span`
     margin: 1.5% 0;
@@ -71,6 +73,8 @@ const Span2 = styled.span`
     font-size: 60px;
     font-weight: bold;
     font-family: 'ChosunGs';
+    cursor: default;
+    user-select: none;
 `;
 
 export default Main;

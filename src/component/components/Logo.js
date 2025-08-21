@@ -15,6 +15,7 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     padding: 0 1%;
     text-shadow: 1px 1px 1px white;
+    user-select: none;
 
     ${breakPoints.medium} {
         font-size: 30px;

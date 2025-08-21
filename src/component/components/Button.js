@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-const Button = ({ width, content, onClick }) => {
+const Button = ({ width, background, content, onClick }) => {
 
     return (
-        <StyledButton $width={width} onClick={onClick} >
+        <StyledButton $width={width} background={background} onClick={onClick} >
             {content}
         </StyledButton>
     );
@@ -11,9 +11,14 @@ const Button = ({ width, content, onClick }) => {
 
 const StyledButton = styled.button`
     width: ${props => props.$width}%;
+    background: ${props => props.background};
     margin: 0 1%;
     padding: 2% 0;
     cursor: pointer; 
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    user-select: none;
 `
 
 export default Button;

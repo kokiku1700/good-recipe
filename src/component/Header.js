@@ -37,6 +37,7 @@ const Div = styled.div`
     justify-content: space-around;
     align-items: center;
     background: white;
+    user-select: none;
 
     ${breakPoints.small} {
         justify-content: space-between;
@@ -51,7 +52,7 @@ const StyledLink = styled(Link)`
     width: 16%;
     margin: 0 4.5%;
     padding: 2.5% 0;
-
+    
     &:hover{
         color: #bbb;
     };

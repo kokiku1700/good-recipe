@@ -124,19 +124,26 @@ const Reserve = () => {
             <Div>
                 <Span>
                     <H3>이름</H3>
-                    <Input name="name" width="97" type="name" value={confirmation.name} onChange={onChangeConFirmation} autoComplete="off" />
+                    <InputWrap>
+                        <Input name="name" width="97" type="name" value={confirmation.name} onChange={onChangeConFirmation} autoComplete="off" />
+                    </InputWrap>
                 </Span>
                 <Span>
                     <H3>전화번호</H3>
-                    <Input name="tel" width="67" type="tel" value={confirmation.tel} onChange={onChangeConFirmation} autoComplete="off" />
-                    <Button width="30" content={confirmButton} onClick={onClickConfirmationSend} />
+                    <InputWrap>
+                        <Input name="tel" width="67" type="tel" value={confirmation.tel} onChange={onChangeConFirmation} placeholder="'-' 빼고 입력해주세요" autoComplete="off" />
+                        <Button width="30" content={confirmButton} onClick={onClickConfirmationSend} />
+                    </InputWrap> 
+                    <P>이미 같은 번호로 예약이 되어 있습니다.</P>
                 </Span>
                 <Span>
                     <H3>인증번호</H3>
-                    <Input width="67" value={confirmationNumberCheck} onChange={onChangeConfirmationCheck} autoComplete="off" disabled={confirmSuccessStatus} />
-                    <Button width="30" content="인증번호 학인" onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus} />
+                    <InputWrap>
+                        <Input width="67" value={confirmationNumberCheck} onChange={onChangeConfirmationCheck} autoComplete="off" disabled={confirmSuccessStatus} />
+                        <Button width="30" content="인증번호 학인" onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus} />
+                    </InputWrap>
                 </Span>
-                <Button width="90" content="확인" onClick={AllSuccess} />
+                <Button width="90" background="#da5f01" content="확인" onClick={AllSuccess} />
             </Div>
         </DivWrap>
     );
@@ -161,7 +168,14 @@ const Div = styled.div`
 const Span = styled.span`
     width: 90%;
     align-items: center;
-    margin: 5% auto;
+    margin: 2% auto;
+    padding-bottom: 5%;
+
+`;
+
+const InputWrap = styled.span`
+    width: 100%;
+    display: flex;
 `;
 
 const H3 = styled.h3`
@@ -170,15 +184,20 @@ const H3 = styled.h3`
 
 const Input = styled.input`
     width: ${props => props.width}%;
-    padding: 2.5% 0;
+    padding: 2.5% 1%;
     margin: 1% 0;
     border: 1px solid brown;
     border-radius: 5px;
-    
+    font-size: 16px;
+
     &:focus {
         outline: none;
     }
 `;
 
+const P = styled.p`
+    color: red;
+    margin-left: 1%;
+`;
 
 export default Reserve;
