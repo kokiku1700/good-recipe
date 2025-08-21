@@ -23,6 +23,13 @@ app.get('/', (req, res) => {
     res.send("Server Response Success!!");
 });
 
+app.get('/existTel', (req, res) => {
+    Reserve.find({ tel: req.query.tel })
+    .then(data => {
+        return res.json(data);
+    })
+})
+
 // 휴대폰 인증 번호 보내는 코드
 app.get('/confirmation', (req, res) => {
     messageService.send({
@@ -77,9 +84,8 @@ app.get("/reserveCheck", (req, res) => {
     Reserve.find({ name: req.query.name, tel: req.query.tel })
     .then(data => {
         return res.json(...data);
-    })
-    
-})
+    })  
+});
 
 // 서버 실행
 app.listen(PORT, () => {

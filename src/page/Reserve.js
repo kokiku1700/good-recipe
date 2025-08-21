@@ -5,13 +5,19 @@ import { useNavigate } from "react-router-dom";
 import Button from "../component/components/Button";
 
 const Reserve = () => {
+    // 인증 및 예약에 필요한 최소한의 정보를 저장하는 변수
     const [confirmation, setConfirmation] = useState({
         name: "",
         tel: "",
     });
+    // 작성한 전화번호에 보낼 무작위 인증번호를 저장하는 함수
     const [confirmationNumber, setConfirmationNumber] = useState("");
+    // 입력한 인증번호를 저장하는 변수
     const [confirmationNumberCheck, setConfirmationNumberCheck] = useState("");
+    // 인증번호 상태에 따라 인증번호 버튼 문자 변환
     const [confirmButton, setConfirmButton] = useState("인증번호 전송");
+    // 아래 세 변수는 각각의 입력값이 올바르면 true, 아니면 false
+    // 세 변수가 모두 true면 예약 상세 페이지로 넘어간다.
     const [confirmSuccessStatus, setConfirmSuccessStatus] = useState(false);
     const [nameStatus, setNameStatus] = useState(false);
     const [telStatus, setTelStatus] = useState(false);
@@ -42,30 +48,37 @@ const Reserve = () => {
         }
     };
 
-    const onClickConfirmationSend = () => {
-
+    // 인증번호 전송 버튼 클릭 시 발생하는 함수
+    // 예약 정보에 같은 번호가 있다면 실패
+    // 없다면 예약 진행
+    const onClickConfirmationSend = async() => {
         if ( telStatus ) {
-            let randomNum = Math.floor(Math.random() * 1000000);
-            
-            setConfirmButton("인증번호 재전송");
-
-            if ( randomNum < 100000 ) {
-                randomNum = "0" + randomNum;
-            }
-
-            setConfirmationNumber(randomNum);
-            
-            axios.get("http://localhost:4000/confirmation", {params: {tel: confirmation.tel, num: randomNum}})
+            await axios.get("http://localhost:4000/existTel", { params: { tel: confirmation.tel }})
             .then(res => {
-                console.log(res);
-            }).catch(err => {
-                console.log(err);
-            })
+                if ( res.data.length === 0 ) {
+                    let randomNum = Math.floor(Math.random() * 1000000);
+                    
+                    setConfirmButton("인증번호 재전송");
 
+                    if ( randomNum < 100000 ) {
+                        randomNum = "0" + randomNum;
+                    }
+
+                    setConfirmationNumber(randomNum);
+                    
+                    axios.get("http://localhost:4000/confirmation", {params: {tel: confirmation.tel, num: randomNum}})
+                    .then(res => {
+                        console.log(res);
+                    }).catch(err => {
+                        console.log(err);
+                    })
+                } else {
+                    console.log("같은 번호로 예약이 되어있습니다.");
+                }
+            })
         } else {
             console.log('번호를 제대로 입력해주세요')
         }
-
     };
 
     // useEffect(() => {
