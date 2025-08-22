@@ -17,11 +17,16 @@ const ReserveDetail = () => {
     const [reserveData, setReserveData] = useState({
         name: state.name,
         tel: state.tel,
-        date: moment(tomorrow).format("YYYY년 MM월 DD일"),
-        time: {AmPm: "점심", time: "11:30"},
-        people: {adult: '0', children: '0'},
+        date: state.date ? state.date : moment(tomorrow).format("YYYY년 MM월 DD일"),
+        time: {AmPm: state.ampm ? state.ampm :"점심", time: state.time ? state.time :"11:30"},
+        people: {adult: state.adult ? state.adult : "", children: state.children ? state.children : ''},
     });
     
+    const [peopleState, setPeopleState] = useState({
+        under: false,
+        over: false,
+        empty: false
+    });
 
     // 달력에서 예약 날짜 선택 함수
     const onChangeDate = e => {
@@ -38,8 +43,8 @@ const ReserveDetail = () => {
             setReserveData(prevData => ({
                 ...prevData,
                 time: {
-                    ...prevData.time,
-                    AmPm: e.target.value
+                    AmPm: e.target.value,
+                    time: e.target.value === "점심" ? "11:30" : "17:00"
                 }
             }))
         } else if ( e.target.name === "time" ) {
@@ -79,22 +84,55 @@ const ReserveDetail = () => {
              reserveData.time.children !== "" &&
             ( peopleSum >= 5 && peopleSum <= 10 )
         ) {
-            await axios.post("http://localhost:4000/Reserve", {
-                "name": reserveData.name,
-                "tel": reserveData.tel,
-                "date": reserveData.date,
-                "time": {"AmPm" : reserveData.time.AmPm, "time": reserveData.time.time},
-                "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
-            })
+            await axios.get("http://localhost:4000/reserveCheck", {params: {name: reserveData.name, tel: reserveData.tel}})
             .then(res => {
-                if ( res.data === "success" && res.status === 200 ) {
-                    navigate("/reserveSuccess", { replace: true });
+                if ( res.data ) {
+                    axios.put("http://localhost:4000/reserveEdit", {
+                        "name": reserveData.name,
+                        "tel": reserveData.tel,
+                        "date": reserveData.date,
+                        "time": {"AmPm" : reserveData.time.AmPm, "time": reserveData.time.time},
+                        "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
+                    })
+                    .then(res => {
+                        console.log(res);
+                    })
+                } else {
+                    axios.post("http://localhost:4000/Reserve", {
+                        "name": reserveData.name,
+                        "tel": reserveData.tel,
+                        "date": reserveData.date,
+                        "time": {"AmPm" : reserveData.time.AmPm, "time": reserveData.time.time},
+                        "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
+                    })
+                    .then(res => {
+                        if ( res.data === "success" && res.status === 200 ) {
+                            navigate("/reserveSuccess", { replace: true });
+                        }
+                    });
                 }
-            });
+            })   
         } else {
-            console.log("입력칸을 모두 입력해주세요");
+            if ( peopleSum === 0 ) {
+                setPeopleState({
+                    under: false,
+                    over: false,
+                    empty: true
+                });
+            } else if ( peopleSum < 5 ) {
+                setPeopleState({
+                    under: true,
+                    over: false,
+                    empty: false
+                });
+            } else if ( peopleSum > 10 ) {
+                setPeopleState({
+                    under: false,
+                    over: true,
+                    empty: false
+                });
+            } 
         }
-        console.log(reserveData)
     };
 
     return (
@@ -134,11 +172,17 @@ const ReserveDetail = () => {
                             <Option value="점심">점심</Option>
                             <Option value="저녁">저녁</Option>
                         </Select>
-                        <Select $display={reserveData.time.AmPm === "점심" ? "inline" : "none"} name="time" value={reserveData.time.time} onChange={onChangeRest}>
+                        <Select $display={reserveData.time.AmPm === "점심" ? "inline" : "none"} 
+                                name="time" value={reserveData.time.time} 
+                                onChange={onChangeRest}
+                        >
                             <Option value="11:30">11:30</Option>
                             <Option value="13:00">13:00</Option>
                         </Select>
-                        <Select $display={reserveData.time.AmPm === "저녁" ? "inline" : "none"} name="time" value={reserveData.time.time} onChange={onChangeRest}>
+                        <Select $display={reserveData.time.AmPm === "저녁" ? "inline" : "none"} 
+                                name="time" value={reserveData.time.time} 
+                                onChange={onChangeRest}
+                        >
                             <Option value="17:00">17:00</Option>
                             <Option value="17:30">17:30</Option>
                             <Option value="18:00">18:00</Option>
@@ -158,6 +202,9 @@ const ReserveDetail = () => {
                         <Input name="children" type="number" value={reserveData.people.children} onChange={onChangeRest} />명
                     </Span>
                     <h6>총 {Number(reserveData.people.adult) + Number(reserveData.people.children)}명</h6>
+                    <P $display={peopleState.under ? "block" : "none"}>예약은 5명부터 가능합니다.</P>
+                    <P $display={peopleState.over ? "block" : "none"}>11명 이상은 전화로 예약 부탁드립니다.</P>
+                    <P $display={peopleState.empty ? "block" : "none"}>예약 인원을 적어주세요.</P>
                 </Span>
                 
                 <Button width="50" content="예약하기" onClick={onSubmit} />
@@ -196,6 +243,11 @@ const Select = styled.select`
 
 const Option = styled.option`
 
+`;
+
+const P = styled.p`
+    display: ${props => props.$display};
+    color: red;
 `;
 
 export default ReserveDetail;

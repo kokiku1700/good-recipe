@@ -21,6 +21,10 @@ const Reserve = () => {
     const [confirmSuccessStatus, setConfirmSuccessStatus] = useState(false);
     const [nameStatus, setNameStatus] = useState(false);
     const [telStatus, setTelStatus] = useState(false);
+    // 메세지 상태 관리 변수
+    const [errNameMessage, setErrNameMessage] = useState(true);
+    const [errTelMessage, setErrTelMessage] = useState(true);
+    const [errTelExistMessage, setErrTelExistMessage] = useState(true);
     // const [timer, setTimer] = useState(180);
     const navigate = useNavigate();
 
@@ -71,13 +75,12 @@ const Reserve = () => {
                         console.log(res);
                     }).catch(err => {
                         console.log(err);
-                    })
+                    });
+                    setErrTelExistMessage(true);
                 } else {
-                    console.log("같은 번호로 예약이 되어있습니다.");
+                    setErrTelExistMessage(false);
                 }
             })
-        } else {
-            console.log('번호를 제대로 입력해주세요')
         }
     };
 
@@ -110,14 +113,24 @@ const Reserve = () => {
         }
     };
 
+    const onBlur = e => {
+        if ( e.target.name === "name" ) {
+            if ( nameStatus ) setErrNameMessage(true);
+            else setErrNameMessage(false);
+        } else if ( e.target.name === "tel" ) {
+            if ( telStatus ) setErrTelMessage(true);
+            else setErrTelMessage(false); 
+        }
+    }
+
     const AllSuccess = () => {
         if ( confirmSuccessStatus &&
             nameStatus &&
             telStatus
         ) {
             navigate("/reserveDetail", { state: {name: confirmation.name, tel: confirmation.tel} });
-        }
-    }
+        } 
+    };
 
     return (
         <DivWrap>
@@ -125,16 +138,30 @@ const Reserve = () => {
                 <Span>
                     <H3>이름</H3>
                     <InputWrap>
-                        <Input name="name" width="97" type="name" value={confirmation.name} onChange={onChangeConFirmation} autoComplete="off" />
+                        <Input name="name" width="97" type="name" 
+                                value={confirmation.name} 
+                                onChange={onChangeConFirmation} 
+                                autoComplete="off" 
+                                placeholder="한글만 입력 가능합니다."
+                                onBlur={onBlur}
+                        />
                     </InputWrap>
+                    <P $display={errNameMessage ? "none" : "block"}>양식을 제대로 입력해주세요</P>
                 </Span>
                 <Span>
                     <H3>전화번호</H3>
                     <InputWrap>
-                        <Input name="tel" width="67" type="tel" value={confirmation.tel} onChange={onChangeConFirmation} placeholder="'-' 빼고 입력해주세요" autoComplete="off" />
+                        <Input name="tel" width="67" type="tel" 
+                                value={confirmation.tel} 
+                                onChange={onChangeConFirmation} 
+                                placeholder="'-' 빼고 입력해주세요" 
+                                autoComplete="off" 
+                                onBlur={onBlur}
+                        />
                         <Button width="30" content={confirmButton} onClick={onClickConfirmationSend} />
                     </InputWrap> 
-                    <P>이미 같은 번호로 예약이 되어 있습니다.</P>
+                    <P $display={errTelMessage ? "none" : "block"}>전화번호를 제대로 입력해주세요.</P>
+                    <P $display={errTelExistMessage ? "none" : "block"}>이미 같은 번호로 예약이 되어 있습니다.</P>
                 </Span>
                 <Span>
                     <H3>인증번호</H3>
@@ -196,6 +223,7 @@ const Input = styled.input`
 `;
 
 const P = styled.p`
+    display: ${props => props.$display};
     color: red;
     margin-left: 1%;
 `;

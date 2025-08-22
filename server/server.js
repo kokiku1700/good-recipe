@@ -87,6 +87,21 @@ app.get("/reserveCheck", (req, res) => {
     })  
 });
 
+// 예약 변경
+app.put("/reserveEdit", (req, res) => {
+    Reserve.findOneAndUpdate({ tel: req.body.tel },
+        {$set:{
+            date: req.body.date,
+            ampm: req.body.time.AmPm,
+            time: req.body.time.time,
+            adult: req.body.people.adult,
+            children: req.body.people.children
+        }})
+    .then(data => {
+        return res.send(data);
+    })
+})
+
 // 서버 실행
 app.listen(PORT, () => {
     console.log(`Server Start: http://localhost:${PORT}/`);
