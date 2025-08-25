@@ -158,7 +158,7 @@ const Reserve = () => {
                                 autoComplete="off" 
                                 onBlur={onBlur}
                         />
-                        <Button width="30" content={confirmButton} onClick={onClickConfirmationSend} />
+                        <Button width="30" background="#6BA368" content={confirmButton} onClick={onClickConfirmationSend} />
                     </InputWrap> 
                     <P $display={errTelMessage ? "none" : "block"}>전화번호를 제대로 입력해주세요.</P>
                     <P $display={errTelExistMessage ? "none" : "block"}>이미 같은 번호로 예약이 되어 있습니다.</P>
@@ -167,10 +167,10 @@ const Reserve = () => {
                     <H3>인증번호</H3>
                     <InputWrap>
                         <Input width="67" value={confirmationNumberCheck} onChange={onChangeConfirmationCheck} autoComplete="off" disabled={confirmSuccessStatus} />
-                        <Button width="30" content="인증번호 학인" onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus} />
+                        <Button width="30" background="#6BA368" content="인증번호 학인" onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus} />
                     </InputWrap>
                 </Span>
-                <Button width="90" background="#da5f01" content="확인" onClick={AllSuccess} />
+                <Button width="90" background="#6BA368" content="확인" onClick={AllSuccess} />
             </Div>
         </DivWrap>
     );
@@ -188,7 +188,7 @@ const Div = styled.div`
     margin: 0 auto;
     margin-top: 7%;
     border-radius: 10px;
-    border: 2px solid #aaa;
+    border: 2px solid #6BA368;
     padding: 1% 0;
 `;
 
@@ -213,13 +213,13 @@ const Input = styled.input`
     width: ${props => props.width}%;
     padding: 2.5% 1%;
     margin: 1% 0;
-    border: 1px solid black;
+    border: 1px solid #6BA368;
     border-radius: 5px;
     font-size: 16px;
 
     &:focus {
         outline: none;
-        border: 1px solid brown;
+        border: 1px solid #6BA368;
     }
 `;
 

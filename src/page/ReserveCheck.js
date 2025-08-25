@@ -92,7 +92,7 @@ const ReserveCheck = () => {
                 <P $display={checkErrMessage ? "block" : "none"}>입력 정보가 올바르지 않거나 예약 정보가 없습니다.</P>
                 <P $display={checkEmptyErrMessage ? "block" : "none"}>정보를 입력해주세요</P>
                 <Span>
-                    <Button width="100" content="예약 확인하기" onClick={onClickReserveCheck} />
+                    <Button width="100" background="#6BA368" content="예약 확인하기" onClick={onClickReserveCheck} />
                 </Span>
             </CheckDivWrap>
             <CheckDivWrap $display={checkState ? "flex" : "none"}>
@@ -125,7 +125,8 @@ const CheckDivWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #ddd;
+    border: 2px solid #6BA368;
+    border-radius: 10px;
 `;
 
 const Span = styled.span`
@@ -143,11 +144,10 @@ const Input = styled.input`
     padding: 2%;
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid #6BA368;
 
     &: focus {
         outline: none;
-        border: 1px solid brown;
     }
 `;
 

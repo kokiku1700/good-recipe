@@ -36,7 +36,6 @@ const Div = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: white;
     user-select: none;
 
     ${breakPoints.small} {

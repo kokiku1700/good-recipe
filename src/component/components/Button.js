@@ -19,6 +19,7 @@ const StyledButton = styled.button`
     border-radius: 5px;
     font-size: 16px;
     user-select: none;
+    color: white;
 `
 
 export default Button;
