@@ -95,7 +95,9 @@ const ReserveDetail = () => {
                         "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
                     })
                     .then(res => {
-                        console.log(res);
+                        if ( res.data === "reserveEdit Success" ) {
+                            navigate("/reserveSuccess", { replace: true, state: { result: res.data } });
+                        }
                     })
                 } else {
                     axios.post("http://localhost:4000/Reserve", {
@@ -106,8 +108,8 @@ const ReserveDetail = () => {
                         "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
                     })
                     .then(res => {
-                        if ( res.data === "success" && res.status === 200 ) {
-                            navigate("/reserveSuccess", { replace: true });
+                        if ( res.data === "reserve Success" && res.status === 200 ) {
+                            navigate("/reserveSuccess", { replace: true, state: { result: res.data } });
                         }
                     });
                 }
@@ -221,6 +223,7 @@ const DetailDiv = styled.div`
     width: 50%;
     border: 1px solid #eee;
     margin: 0 auto;
+    padding: 1%;
     display: flex;
     flex-direction: column;
 `;

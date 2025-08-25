@@ -213,12 +213,13 @@ const Input = styled.input`
     width: ${props => props.width}%;
     padding: 2.5% 1%;
     margin: 1% 0;
-    border: 1px solid brown;
+    border: 1px solid black;
     border-radius: 5px;
     font-size: 16px;
 
     &:focus {
         outline: none;
+        border: 1px solid brown;
     }
 `;
 

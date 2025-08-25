@@ -76,7 +76,7 @@ app.post("/Reserve", (req, res) => {
         ${data.tel}`
     });
 
-    res.send("success");
+    res.send("reserve Success");
 });
 
 // 예약 확인 
@@ -89,16 +89,46 @@ app.get("/reserveCheck", (req, res) => {
 
 // 예약 변경
 app.put("/reserveEdit", (req, res) => {
-    Reserve.findOneAndUpdate({ tel: req.body.tel },
+    const data = {
+        name: req.body.name,
+        tel: req.body.tel,
+        date: req.body.date,
+        ampm: req.body.time.AmPm,
+        time: req.body.time.time,
+        adult: req.body.people.adult,
+        children: req.body.people.children
+    };
+
+    Reserve.findOneAndUpdate({ tel: data.tel },
         {$set:{
-            date: req.body.date,
-            ampm: req.body.time.AmPm,
-            time: req.body.time.time,
-            adult: req.body.people.adult,
-            children: req.body.people.children
+            date: data.date,
+            ampm: data.ampm,
+            time: data.time,
+            adult: data.adult,
+            children: data.children
         }})
-    .then(data => {
-        return res.send(data);
+    .then(v => {
+        return res.send("reserveEdit Success");
+    })
+    .then(msg => {
+        // 예약자에게 예약 변경 문자 보내기
+        messageService.send({
+            "to": data.tel,
+            "from": "01027868409",
+            "text": `이름: ${data.name}
+            날짜&시간: ${data.date} ${data.ampm} ${data.time} 
+            인원: 성인 ${data.adult}명, 아이 ${data.children}명(${Number(data.adult) + Number(data.children)}명)으로 예약 변경되었습니다.
+            ${data.tel}`
+        });
+        // 관리자에게 예약 변경 문자 보내기
+        messageService.send({
+            "to": "01027868409",
+            "from": "01027868409",
+            "text": `이름: ${data.name}
+            날짜&시간: ${data.date} ${data.ampm} ${data.time} 
+            인원: 성인 ${data.adult}명, 아이 ${data.children}명(${Number(data.adult) + Number(data.children)}명)으로 예약 변경되었습니댜.
+            ${data.tel}`
+        });
     })
 })
 

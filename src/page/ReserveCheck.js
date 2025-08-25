@@ -143,6 +143,12 @@ const Input = styled.input`
     padding: 2%;
     font-size: 16px;
     border-radius: 5px;
+    border: 1px solid black;
+
+    &: focus {
+        outline: none;
+        border: 1px solid brown;
+    }
 `;
 
 const P = styled.p`
