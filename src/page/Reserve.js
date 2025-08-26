@@ -197,16 +197,17 @@ const Span = styled.span`
     align-items: center;
     margin: 2% auto;
     padding-bottom: 5%;
-
+    background: none;
 `;
 
 const InputWrap = styled.span`
     width: 100%;
     display: flex;
+    background: none;
 `;
 
 const H3 = styled.h3`
-    
+    background: none;
 `;
 
 const Input = styled.input`
@@ -216,6 +217,7 @@ const Input = styled.input`
     border: 1px solid #6BA368;
     border-radius: 5px;
     font-size: 16px;
+    background: none;
 
     &:focus {
         outline: none;
@@ -227,6 +229,7 @@ const P = styled.p`
     display: ${props => props.$display};
     color: red;
     margin-left: 1%;
+    background: none;
 `;
 
 export default Reserve;

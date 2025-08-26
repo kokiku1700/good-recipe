@@ -105,8 +105,8 @@ const ReserveCheck = () => {
                     <H3>아이: {reserveInformation.children}</H3>
                 </Span>
                 <Span $display="flex">
-                    <Button width="100" content="홈" onClick={onClickMove} />
-                    <Button width="100" content="예약 정보 변경" onClick={onClickMoveChange} />
+                    <Button width="100" background="#6BA368" content="홈" onClick={onClickMove} />
+                    <Button width="100" background="#6BA368" content="예약 정보 변경" onClick={onClickMoveChange} />
                 </Span>
             </CheckDivWrap>
         </Div>
@@ -118,7 +118,7 @@ const Div = styled.div`
 `;
 
 const CheckDivWrap = styled.div`
-    width: 40%;
+    width: 30%;
     margin: 8% auto;
     padding: 2% 0;
     display: ${props => props.$display};
@@ -131,7 +131,7 @@ const CheckDivWrap = styled.div`
 
 const Span = styled.span`
     display: ${props => props.$display};
-    width: 40%;
+    width: 80%;
     margin: 3% 0;
 `;
 
@@ -141,7 +141,7 @@ const H3 = styled.h3`
 
 const Input = styled.input`
     width: 100%;
-    padding: 2%;
+    padding: 2.5% 1%;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #6BA368;

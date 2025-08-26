@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const MenuCategory = ({ onClickMenuListValue, menuName}) => {
+const MenuCategory = ({ onClickMenuListValue, menuName, menuValue }) => {
     const menuNames = [...menuName];
 
     const onClickChangeValue = e => {
@@ -11,7 +11,13 @@ const MenuCategory = ({ onClickMenuListValue, menuName}) => {
         <Div>
             <Ul>
                 {menuNames.map((e, i) => (
-                    <Li value={i} key={i} onClick={onClickChangeValue}>{e}</Li>
+                    <Li value={i} 
+                        key={i} 
+                        background={menuValue === i ? "#ddd" : "none"} 
+                        onClick={onClickChangeValue}
+                    >
+                        {e}
+                    </Li>
                 ))}
             </Ul>
         </Div>
@@ -34,6 +40,7 @@ const Li = styled.li`
     list-style: none;
     cursor: pointer;
     padding: 1% 0;
+    background: ${props => props.background};
     
     &:hover {
         background: #ddd;

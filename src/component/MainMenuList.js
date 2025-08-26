@@ -1,26 +1,45 @@
 import styled from "styled-components";
 import prev from "../assets/img/prev.png";
 import next from "../assets/img/next.png";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const MainMenuList = ({ menu }) => {
-    const menuImg = [...menu]
+    const menuImg = [...menu];
     const [imgIdx, setImgIdx] = useState(1);
     const [slideTransition, setSlideTransition] = useState(true);
+    const liRef = useRef(null);
+    const ulRef = useRef(null);
     const timeRef = useRef(false);
-    const len = menuImg.length * 700;
-    
-    
+    const [liSize, setLiSize] = useState({ width: 0, height: 0 });
+    const len = menuImg.length * liSize.width;
+
+    useEffect(() => {
+        const width = liRef.current.offsetWidth;
+        const height = liRef.current.offsetHeight;
+        
+        setLiSize({ width: width + 20, height: height });
+    }, []);
+
+    useEffect(() => {
+        const ul = ulRef.current;
+        const handleTransitionEnd = () => {
+            if (imgIdx === menuImg.length - 1) {
+            setSlideTransition(false);
+            setImgIdx(1);
+            } else if (imgIdx === 0) {
+            setSlideTransition(false);
+            setImgIdx(menuImg.length - 2);
+            }
+        };
+        ul.addEventListener("transitionend", handleTransitionEnd);
+        return () => ul.removeEventListener("transitionend", handleTransitionEnd);
+    }, [imgIdx, menuImg.length]);
+
     const nextMove = () => {
         if ( !timeRef.current ) {
             setImgIdx(imgIdx + 1);
             setSlideTransition(true);
-            setTimeout(() => {
-                if ( imgIdx === menuImg.length - 1) {
-                    setImgIdx(1);
-                    setSlideTransition(false);
-                }
-            }, 10);
+            
             timeRef.current = true;
             setTimeout(() => {
                 timeRef.current = false;
@@ -32,12 +51,7 @@ const MainMenuList = ({ menu }) => {
         if ( !timeRef.current ) {
             setImgIdx(imgIdx - 1);
             setSlideTransition(true);
-            setTimeout(() => {
-                if ( imgIdx === 0) {
-                    setImgIdx(menuImg.length - 2);
-                    setSlideTransition(false);
-                }
-            }, 10);
+            
             timeRef.current = true;
             setTimeout(() => {
                 timeRef.current = false;
@@ -46,14 +60,17 @@ const MainMenuList = ({ menu }) => {
     };
     return (
         <Div>
-            <P>모든 정식의 반찬은 동일합니다.</P>
-            <ImgWrap>  
-                <Ul $transition={slideTransition} $length={len} translate={700 * imgIdx}>
+            <P>모든 정식의 반찬은 동일하게 제공됩니다.</P>
+            <ImgWrap $width={liSize.width + 200}>  
+                <Ul ref={ulRef} $transition={slideTransition} $length={len} translate={liSize.width * imgIdx -100}>
                     {menuImg.map((e, i) => (
-                        <Li key={i}>
-                            <H2>{e.name}</H2>
-                            <Img src={e.src} />
-                            <Span>{e.explain}</Span>
+                        <Li ref={liRef} key={i}>
+                            <ContentWrap>
+                                <H2>{e.name}</H2>
+                                <Img src={e.src} />
+                                <Span>{e.explain}</Span>
+                            </ContentWrap>
+                            
                         </Li>
                     ))}
                 </Ul>
@@ -71,7 +88,8 @@ const Div = styled.div`
 `;
 
 const H2 = styled.h2`
-    text-align: center;
+    background: none;
+    margin: 1%;
 `;
 
 const P = styled.p`
@@ -82,9 +100,10 @@ const P = styled.p`
 `;
 
 const ImgWrap = styled.div`
-    width: 700px;
+    width: ${props => props.$width}px;
     margin: 0 auto;
     overflow: hidden;
+    border-radius: 15px;
 `;
 
 const Ul = styled.ul`
@@ -94,19 +113,38 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
+    width: 500px;
+    height: 600px;
     float: left;
     list-style: none;
+    margin: 10px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background: #f9ecddff;
+    box-shadow: 1px 1px 4px #6BA368;
+`;
+
+const ContentWrap = styled.div`
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: none;
 `;
 
 const Img = styled.img`
-    width: 700px;
-    height: 600px;
+    width: 400px;
+    height: 300px;
+    border-radius: 15px;
+    margin: 1%;
 `;
 
 const Span = styled.span`
-    margin: 0 auto;
+    margin: 2% auto;
+    background: none;
 `;
 
 const ArrowImg = styled.img`

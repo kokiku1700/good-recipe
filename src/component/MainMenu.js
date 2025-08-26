@@ -14,7 +14,7 @@ const MainMenu = () => {
     // 각 카테고리의 value값 
     // 클릭 시 해당 value로 변경되고 카테고리에 맞는 
     // 슬라이드 이미지 제공
-    const [menuListValue, setMenuListValue] = useState("0");
+    const [menuListValue, setMenuListValue] = useState(0);
     // 정식 각 카테고리 이름
     const MainMenuName = ["연잎 정식", "곤드레 정식", "연꽃 정식"];
     // 카테고리 value 값 변경 이벤트
@@ -25,7 +25,7 @@ const MainMenu = () => {
 
     return (
         <Div>
-            <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={MainMenuName} />
+            <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={MainMenuName} menuValue={menuListValue} />
             <MainMenuList menu={menu[menuListValue]} />
         </Div>
     );

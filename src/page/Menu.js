@@ -48,8 +48,7 @@ const Label = styled.label`
     
 
     &.checked {
-        border: 1px solid #000;
-        border-bottom: none;
+        background: #ddd;
     }
 
     &:hover{

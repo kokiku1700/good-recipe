@@ -64,7 +64,8 @@ const ContentWrap = styled.div`
     display: ${props => props.$display};
     justify-content: ${props => props.$justifyContent};
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid #6BA368;
+    margin: 0.1% 0;
     padding: 1% 0;
     border-radius: 10px;
     animation: 1s;

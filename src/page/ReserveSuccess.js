@@ -16,7 +16,7 @@ const ReserveSuccess = () => {
                 <H2>예약이 완료되었습니다.</H2> :
                 <H2>예약이 변경되었습니다.</H2>
             }
-            <Button width="20" content="홈" onClick={onClickNavigate} />
+            <Button width="20" background="#6BA368" content="홈" onClick={onClickNavigate} />
         </div>
     );
 };
