@@ -29,6 +29,7 @@ const Opacity = keyframes`
 
 const Div = styled.div`
     width: 100%;
+    border-bottom: 1px solid #fff
 `;
 
 const Section1 = styled.section`
