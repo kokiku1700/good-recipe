@@ -20,6 +20,7 @@ const StyledButton = styled.button`
     font-size: 16px;
     user-select: none;
     color: white;
+    background: #6BA368;
 `
 
 export default Button;

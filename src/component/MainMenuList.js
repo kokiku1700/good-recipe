@@ -4,31 +4,31 @@ import next from "../assets/img/next.png";
 import { useEffect, useRef, useState } from "react";
 
 const MainMenuList = ({ menu }) => {
-    const menuImg = [...menu];
-    const [imgIdx, setImgIdx] = useState(1);
+    // 무한 캐러셀을 위해 첫 인덱스와 마지막 인덱스를 복사했다.
+    // 하지만 약간의 부자연스러움이 있어서 한 개 씩 더 추가
+    // 마지막 인덱스와 첫 번째 인덱스는 이미 menu에 포함되어 있음
+    const menuImg = [menu[menu.length - 4], menu[menu.length - 3], ...menu, menu[2], menu[3]];
+    const [imgIdx, setImgIdx] = useState(2);
     const [slideTransition, setSlideTransition] = useState(true);
     const liRef = useRef(null);
     const ulRef = useRef(null);
     const timeRef = useRef(false);
-    const [liSize, setLiSize] = useState({ width: 0, height: 0 });
+    // 슬라이드 버튼 빠르게 클릭 시 이미지 안나오는 버그를 막아줌
+    // 즉 이미지가 이동 중일 때 클릭을 무시하게 해줌 
+    const [animating, setAnimating] = useState(false);
+    const [liSize, setLiSize] = useState({ width: 520, height: 0 });
     const len = menuImg.length * liSize.width;
-
-    useEffect(() => {
-        const width = liRef.current.offsetWidth;
-        const height = liRef.current.offsetHeight;
-        
-        setLiSize({ width: width + 20, height: height });
-    }, []);
 
     useEffect(() => {
         const ul = ulRef.current;
         const handleTransitionEnd = () => {
-            if (imgIdx === menuImg.length - 1) {
+            setAnimating(false);
+            if (imgIdx === menuImg.length - 3) {
             setSlideTransition(false);
-            setImgIdx(1);
-            } else if (imgIdx === 0) {
+            setImgIdx(3);
+            } else if (imgIdx === 2) {
             setSlideTransition(false);
-            setImgIdx(menuImg.length - 2);
+            setImgIdx(menuImg.length - 4);
             }
         };
         ul.addEventListener("transitionend", handleTransitionEnd);
@@ -36,7 +36,10 @@ const MainMenuList = ({ menu }) => {
     }, [imgIdx, menuImg.length]);
 
     const nextMove = () => {
+        if (animating) return;
+
         if ( !timeRef.current ) {
+            setAnimating(true);
             setImgIdx(imgIdx + 1);
             setSlideTransition(true);
             
@@ -48,7 +51,10 @@ const MainMenuList = ({ menu }) => {
     };
 
     const prevMove = () => {
+        if (animating) return;
+
         if ( !timeRef.current ) {
+            setAnimating(true);
             setImgIdx(imgIdx - 1);
             setSlideTransition(true);
             
@@ -61,8 +67,8 @@ const MainMenuList = ({ menu }) => {
     return (
         <Div>
             <P>모든 정식의 반찬은 동일하게 제공됩니다.</P>
-            <ImgWrap $width={liSize.width + 200}>  
-                <Ul ref={ulRef} $transition={slideTransition} $length={len} translate={liSize.width * imgIdx -100}>
+            <ImgWrap $width={liSize.width * 3}>  
+                <Ul ref={ulRef} $transition={slideTransition} $length={len} translate={liSize.width * imgIdx}>
                     {menuImg.map((e, i) => (
                         <Li ref={liRef} key={i}>
                             <ContentWrap>
@@ -75,8 +81,8 @@ const MainMenuList = ({ menu }) => {
                     ))}
                 </Ul>
             </ImgWrap>
-            <ArrowImg $left="25" src={prev} onClick={prevMove} />
-            <ArrowImg  $right="25" src={next} onClick={nextMove} />
+            <ArrowImg $left="2" src={prev} onClick={prevMove} />
+            <ArrowImg  $right="2" src={next} onClick={nextMove} />
         </Div>
     );
 }

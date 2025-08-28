@@ -48,7 +48,7 @@ const P = styled.p`
 const Img = styled.img`
     width: 700px;
     margin-right: 1%;
-    box-shadow: 3px 3px 3px #6BA368;
+    box-shadow: 3px 3px 5px #6BA368;
     border-radius: 20px;
 `;
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
+import "../constants/Calendar.css";
 import { useState } from "react";
 import moment from "moment";
 import axios from "axios";
@@ -252,5 +253,6 @@ const P = styled.p`
     display: ${props => props.$display};
     color: red;
 `;
+
 
 export default ReserveDetail;
