@@ -26,9 +26,9 @@ const MainMenuList = ({ menu }) => {
             if (imgIdx === menuImg.length - 3) {
             setSlideTransition(false);
             setImgIdx(3);
-            } else if (imgIdx === 2) {
+            } else if (imgIdx === 1) {
             setSlideTransition(false);
-            setImgIdx(menuImg.length - 4);
+            setImgIdx(menuImg.length - 5);
             }
         };
         ul.addEventListener("transitionend", handleTransitionEnd);

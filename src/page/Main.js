@@ -2,6 +2,9 @@ import styled from "styled-components";
 import "../assets/fonts/fonts.css";
 import MainSec1 from "../component/MainSec1";
 import MainSec2 from "../component/MainSec2";
+import MainSec3 from "../component/MainSec3";
+import MainSec4 from "../component/MainSec4";
+import Footer from "../component/Footer";
 
 const Main = () => {
 
@@ -9,6 +12,9 @@ const Main = () => {
         <Div>
             <MainSec1 />
             <MainSec2 />
+            <MainSec3 />
+            <MainSec4 />
+            <Footer />
         </Div>
     );
 };

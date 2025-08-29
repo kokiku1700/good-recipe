@@ -37,6 +37,7 @@ const Div = styled.div`
     justify-content: space-around;
     align-items: center;
     user-select: none;
+    background: #fcefe0;
 
     ${breakPoints.small} {
         justify-content: space-between;
