@@ -36,6 +36,7 @@ const Div = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding: 1% 0;
     user-select: none;
     background: #fcefe0;
 
@@ -49,7 +50,7 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     font-size: 20px;
     color: black;
-    width: 16%;
+    width: 20%;
     margin: 0 4.5%;
     padding: 2.5% 0;
     
@@ -65,7 +66,7 @@ const StyledLink = styled(Link)`
 
 const Ul = styled.ul`
     position: relative;
-    width: 75%;
+    width: 40%;
     display: flex;
     justify-content: space-around;
 
@@ -82,7 +83,8 @@ const Li = styled.li`
 const Img = styled.img`
     display: none;
     width: 30px;
-    
+    cursor: pointer;
+
     ${breakPoints.small} {
         display: block;
         margin-right: 5%;

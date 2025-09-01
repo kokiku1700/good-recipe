@@ -6,6 +6,7 @@ import FAQ from "../page/FAQ";
 import Main from "../page/Main";
 import ReserveDetail from "../page/ReserveDetail";
 import ReserveSuccess from "../page/ReserveSuccess";
+import Street from "../page/Map";
 
 const Router = () => {
 
@@ -18,6 +19,7 @@ const Router = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/reserveDetail" element={<ReserveDetail />} />
             <Route path="/reserveSuccess" element={<ReserveSuccess />} />
+            <Route path="/street" element={<Street />} />
         </Routes>
     );
 };
