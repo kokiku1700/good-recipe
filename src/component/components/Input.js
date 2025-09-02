@@ -1,17 +1,21 @@
 import styled from "styled-components";
 
-const Input = ({ type, value, width, padding, margin, onChange, placeholder, onBlur, disabled }) => {
+const Input = ({ name, type, width, 
+                padding, margin, value, 
+                onChange, onBlur, placeholder, disabled, textAlign }) => {
     return <StyledInput 
-                    type={type}
                     value={value}
+                    name={name}
+                    type={type}
                     width={width}
                     $padding={padding}
                     $margin={margin}
+                    $textAlign={textAlign}
                     onChange={onChange}
                     onBlur={onBlur}
                     placeholder={placeholder}
-                    autoComplete="off"
-                    disabled={disabled} />
+                    disabled={disabled}
+                    autoComplete="off" />
 };
 
 const StyledInput = styled.input`
@@ -21,6 +25,8 @@ const StyledInput = styled.input`
     border: 1px solid #6BA368;
     border-radius: 5px;
     background: none;
+    font-size: 16px;
+    text-align: ${props => props.$textAlign};
 
     &: focus {
         outline: none;   

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../component/components/Button";
+import Input from "../component/components/Input";
 
 const ReserveCheck = () => {
     // 예약 정보를 찾기 위한 입력 정보 저장
@@ -83,11 +84,21 @@ const ReserveCheck = () => {
             <CheckDivWrap $display={checkState ? "none" : "flex"}>
                 <Span>
                     <H3>이름</H3>
-                    <Input name="name" value={reserveCheck.name} onChange={onChangeReserveCheck} />
+                    <Input name="name" value={reserveCheck.name}
+                            width="100"
+                            padding="2.5% 1%"
+                            onChange={onChangeReserveCheck} 
+                            autoComplete="off"
+                    />
                 </Span>
                 <Span>
                     <H3>전화번호</H3>
-                    <Input name="tel" value={reserveCheck.tel} onChange={onChangeReserveCheck} />
+                    <Input name="tel" value={reserveCheck.tel}
+                            width="100"
+                            padding="2.5% 1%"
+                            onChange={onChangeReserveCheck} 
+                            autoComplete="off"
+                    />
                 </Span>
                 <P $display={checkErrMessage ? "block" : "none"}>입력 정보가 올바르지 않거나 예약 정보가 없습니다.</P>
                 <P $display={checkEmptyErrMessage ? "block" : "none"}>정보를 입력해주세요</P>
@@ -137,18 +148,6 @@ const Span = styled.span`
 
 const H3 = styled.h3`
     margin-bottom: 5%;
-`;
-
-const Input = styled.input`
-    width: 100%;
-    padding: 2.5% 1%;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #6BA368;
-
-    &: focus {
-        outline: none;
-    }
 `;
 
 const P = styled.p`

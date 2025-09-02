@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-const Button = ({ width, content, onClick }) => {
+const Button = ({ name, width, content, onClick }) => {
 
     return (
-        <StyledButton $width={width} onClick={onClick} >
+        <StyledButton name={name} $width={width} onClick={onClick} >
             {content}
         </StyledButton>
     );

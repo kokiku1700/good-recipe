@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../component/components/Button";
+import Input from "../component/components/Input";
 
 const Reserve = () => {
     // 인증 및 예약에 필요한 최소한의 정보를 저장하는 변수
@@ -50,6 +51,8 @@ const Reserve = () => {
                 setTelStatus(false);
             }
         }
+
+        console.log(confirmation)
     };
 
     // 인증번호 전송 버튼 클릭 시 발생하는 함수
@@ -139,9 +142,10 @@ const Reserve = () => {
                     <H3>이름</H3>
                     <InputWrap>
                         <Input name="name" width="97" type="name" 
+                                margin="1% 0"
+                                padding="2.5% 1%"
                                 value={confirmation.name} 
                                 onChange={onChangeConFirmation} 
-                                autoComplete="off" 
                                 placeholder="한글만 입력 가능합니다."
                                 onBlur={onBlur}
                         />
@@ -152,6 +156,8 @@ const Reserve = () => {
                     <H3>전화번호</H3>
                     <InputWrap>
                         <Input name="tel" width="67" type="tel" 
+                                margin="1% 0"
+                                padding="2.5% 1%"
                                 value={confirmation.tel} 
                                 onChange={onChangeConFirmation} 
                                 placeholder="'-' 빼고 입력해주세요" 
@@ -166,7 +172,11 @@ const Reserve = () => {
                 <Span>
                     <H3>인증번호</H3>
                     <InputWrap>
-                        <Input width="67" value={confirmationNumberCheck} onChange={onChangeConfirmationCheck} autoComplete="off" disabled={confirmSuccessStatus} />
+                        <Input width="67" value={confirmationNumberCheck} 
+                        margin="1% 0" padding="2.5% 1%"
+                        onChange={onChangeConfirmationCheck} 
+                        autoComplete="off" disabled={confirmSuccessStatus} 
+                    />
                         <Button width="30" background="#6BA368" content="인증번호 학인" onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus} />
                     </InputWrap>
                 </Span>
@@ -208,21 +218,6 @@ const InputWrap = styled.span`
 
 const H3 = styled.h3`
     background: none;
-`;
-
-const Input = styled.input`
-    width: ${props => props.width}%;
-    padding: 2.5% 1%;
-    margin: 1% 0;
-    border: 1px solid #6BA368;
-    border-radius: 5px;
-    font-size: 16px;
-    background: none;
-
-    &:focus {
-        outline: none;
-        border: 1px solid #6BA368;
-    }
 `;
 
 const P = styled.p`

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import axios from "axios";
 import Button from "../component/components/Button";
+import Input from "../component/components/Input";
 
 const ReserveDetail = () => {
     const nowDate = new Date();
@@ -21,7 +22,7 @@ const ReserveDetail = () => {
         tel: state.tel,
         date: state.date ? state.date : moment(tomorrow).format("YYYY년 MM월 DD일"),
         time: {AmPm: state.ampm ? state.ampm :"점심", time: state.time ? state.time :"11:30"},
-        people: {adult: state.adult ? state.adult : "", children: state.children ? state.children : ''},
+        people: {adult: state.adult ? state.adult : "", children: state.children ? state.children : '0'},
     });
     
     const [peopleState, setPeopleState] = useState({
@@ -79,6 +80,7 @@ const ReserveDetail = () => {
         } 
     };
 
+    // 입력 정보가 올바르면 서버에 데이터 보냄
     const onSubmit = async() => {
         const peopleSum = Number(reserveData.people.adult) + Number(reserveData.people.children); 
         
@@ -86,7 +88,6 @@ const ReserveDetail = () => {
              reserveData.time.AmPm !== "" &&
              reserveData.time.time !== "" &&
              reserveData.people.adult !== "" &&
-             reserveData.time.children !== "" &&
             ( peopleSum >= 5 && peopleSum <= 10 )
         ) {
             await axios.get("http://localhost:4000/reserveCheck", {params: {name: reserveData.name, tel: reserveData.tel}})
@@ -119,6 +120,7 @@ const ReserveDetail = () => {
                     });
                 }
             })   
+        // 인원수에 따른 경고 문구를 위한 상태 
         } else {
             if ( peopleSum === 0 ) {
                 setPeopleState({
@@ -160,11 +162,18 @@ const ReserveDetail = () => {
                     <DivInSection>
                         <Span>
                             <H3>이름</H3>
-                            <Input value={state.name} disabled={true} />
+                            <Input value={state.name} disabled={true}
+                                    width="100"
+                                    padding="2.5% 1%"
+                                    
+                            />
                         </Span>
                         <Span>
                             <H3>전화번호</H3>
-                            <Input value={state.tel} disabled={true} />
+                            <Input value={state.tel} disabled={true} 
+                                    width="100"
+                                    padding="2.5% 1%"
+                            />
                         </Span>
                     </DivInSection>
                     <DivInSection>
@@ -184,7 +193,11 @@ const ReserveDetail = () => {
                                     formatDay={(locale, date) => moment(date).format("DD")}
                                 />
                             </CalendarWrap>  
-                            <Input type="text" value={reserveData.date} readOnly />
+                            <Input type="text" value={reserveData.date} 
+                                    width="100"
+                                    padding="2.5% 1%"
+                                    disabled={true}
+                            />
                         </Span>
                         <Span>
                             <H3>시간</H3>
@@ -216,11 +229,21 @@ const ReserveDetail = () => {
                 <BottomSection>
                         <Span>
                             <h6>8세 이상</h6>
-                            <Input name="adult" type="number" value={reserveData.people.adult} onChange={onChangeRest} />명
+                            <Input name="adult" type="text" 
+                                    width="100"
+                                    padding="2.5% 1%"
+                                    value={reserveData.people.adult} 
+                                    onChange={onChangeRest} 
+                            />명
                         </Span>
                         <Span>
                             <h6>7세 이하</h6>
-                            <Input name="children" type="number" value={reserveData.people.children} onChange={onChangeRest} />명
+                            <Input name="children" type="text" 
+                                    width="100"
+                                    padding="2.5% 1%"
+                                    value={reserveData.people.children} 
+                                    onChange={onChangeRest} 
+                            />명
                         </Span>
                         <Span>
                             <h6>총 {Number(reserveData.people.adult) + Number(reserveData.people.children)}명</h6>
@@ -271,6 +294,7 @@ const DivInSection = styled.div`
     border: 1px solid #6BA368;
     border-radius: 15px;
     margin: 2%;
+    padding: 1% 2%;
 `;
 
 const CalendarWrap = styled.span`
@@ -282,15 +306,11 @@ const CalendarWrap = styled.span`
 
 const Span = styled.span`
     padding: 1%;
-    margin: 1%;
+    margin: 1% 0;
 `;
 
 const H3 = styled.h3`
 
-`;
-
-const Input = styled.input`
-    
 `;
 
 const Select = styled.select`
