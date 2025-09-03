@@ -13,7 +13,8 @@ const MenuCategory = ({ onClickMenuListValue, menuName, menuValue }) => {
                 {menuNames.map((e, i) => (
                     <Li value={i} 
                         key={i} 
-                        background={menuValue === i ? "#ddd" : "none"} 
+                        $background={menuValue === i ? "rgba(221, 235, 157, .2)" : "none"} 
+                        boxShadow={menuValue === i ? "inset 0px 0px 5px #DDEB9D" : "0px 0px 5px #DDEB9D"} 
                         onClick={onClickChangeValue}
                     >
                         {e}
@@ -40,10 +41,12 @@ const Li = styled.li`
     list-style: none;
     cursor: pointer;
     padding: 1% 0;
-    background: ${props => props.background};
+    background: ${props => props.$background};
+    box-shadow: ${props => props.boxShadow};
     
+
     &:hover {
-        background: #ddd;
+        box-shadow: 0px 0px 8px #DDEB9D;
     }
 `;
 

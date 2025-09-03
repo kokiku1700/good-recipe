@@ -130,7 +130,26 @@ app.put("/reserveEdit", (req, res) => {
             ${data.tel}`
         });
     })
-})
+});
+
+app.delete("/delete", (req, res) => {
+    Reserve.deleteOne({tel: req.body.tel})
+    .then(data => {
+        messageService.send({
+            "to": req.body.tel,
+            "from": "01027868409",
+            "text": `${req.body.date}예약이 취소되었습니다.`
+        });
+        messageService.send({
+            "to": "01027868409",
+            "from": "01027868409",
+            "text": `${req.body.date}에 예약한 ${req.body.name}이 예약을 취소했습니다.`
+        });
+    })
+    .then(msg => {
+        res.send("Delete!!");
+    })
+});
 
 // 서버 실행
 app.listen(PORT, () => {

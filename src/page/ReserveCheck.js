@@ -60,11 +60,12 @@ const ReserveCheck = () => {
             setCheckEmptyErrMessage(true);
         }
 
-    }
+    };
 
     const onClickMove = () => {
         naviage("/");
-    }
+    };
+
     const onClickMoveChange = () => {
         naviage("/reserveDetail", { 
             state: { 
@@ -77,6 +78,21 @@ const ReserveCheck = () => {
                 children: reserveInformation.children,
             }
         });
+    };
+
+    const onClickDelete = async() => {
+        await axios.delete("http://localhost:4000/delete",
+                {
+                    data: 
+                        {
+                            name: reserveInformation.name,
+                            tel: reserveInformation.tel,
+                            date: reserveInformation.date                            
+                        }
+                })
+        .then(res => {
+            naviage('/');
+        })
     }
 
     return (
@@ -118,6 +134,7 @@ const ReserveCheck = () => {
                 <Span $display="flex">
                     <Button width="100" background="#6BA368" content="홈" onClick={onClickMove} />
                     <Button width="100" background="#6BA368" content="예약 정보 변경" onClick={onClickMoveChange} />
+                    <Button width="100" background="#6BA368" content="예약 취소" onClick={onClickDelete} />
                 </Span>
             </CheckDivWrap>
         </Div>

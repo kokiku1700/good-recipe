@@ -45,14 +45,17 @@ const Label = styled.label`
     text-align: center;
     padding: 1.5% 0;
     cursor: pointer;
-    
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    box-shadow: 0px 0px 4px #A0C878;
 
     &.checked {
-        background: #ddd;
+        background: rgba(160, 200, 120, .1);
+        box-shadow: inset 0px 0px 4px #A0C878;
     }
 
     &:hover{
-        background: #ddd;
+        box-shadow: 0px 0px 6px #A0C878;
     }
 `;
 

@@ -126,7 +126,7 @@ const Li = styled.li`
     margin: 10px;
     box-sizing: border-box;
     border-radius: 15px;
-    background: #f9ecddff;
+    background: rgba(160, 200, 120, .2);
     box-shadow: 1px 1px 4px #6BA368;
 `;
 

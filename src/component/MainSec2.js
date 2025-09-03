@@ -48,7 +48,9 @@ const TextWrap = styled.div`
     width: 100%; 
     display: flex;
     justify-content: center;
-    align-items: center;`;
+    align-items: center;
+       
+`;
 
 const Article = styled.article`
     width: 60%;
@@ -58,10 +60,11 @@ const Article = styled.article`
     align-items: center;
     border: 2px solid #6BA368;
     border-radius: 15px;
+    background-color: #FAF6E9; 
 `;
 
 const P = styled.p`
-    margin: 2.5% 0;
+    margin-bottom: 5%;
     font-size: 18px;
 `;
 

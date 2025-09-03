@@ -4,18 +4,40 @@ import Logo from "./components/Logo";
 import { breakPoints } from "../constants/breakPoints";
 import mobileMenu from "../assets/img/mobileMenu.png";
 import mobileClose from "../assets/img/mobileClose.png";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
     const [bool, setBool] = useState(false);
+
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [headerColor, setHeaderColor] = useState("#FFFDF6");
+    const [headShadow, setHeadShadow] = useState("none");
+    
+    const updateScroll = () => {
+        setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", updateScroll);
+        return() => window.removeEventListener("scroll", updateScroll);
+    }, []);
+
+    useEffect(() => {
+        if ( scrollPosition > 100 ) {
+            setHeaderColor("#FAF6E9");
+            setHeadShadow("0px 2px 4px #cac9c8ff");
+        } else {
+            setHeaderColor("#FFFDF6");
+            setHeadShadow("none");
+        } 
+    }, [scrollPosition]);
 
     const toggleMenu = () => {
         setBool(!bool);
     };
 
     return (
-        <Div>
+        <Div $background={headerColor} $boxShadow={headShadow}>
             <Logo />
             <Ul>
                 <StyledLink to="/menu"><Li>메뉴</Li></StyledLink>
@@ -36,9 +58,11 @@ const Div = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 1% 0;
+    padding: .5% 0;
     user-select: none;
-    background: #fcefe0;
+    background: ${props => props.$background};
+    box-shadow: ${props => props.$boxShadow};
+    transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 
     ${breakPoints.small} {
         justify-content: space-between;
@@ -48,14 +72,14 @@ const Div = styled.div`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     color: black;
     width: 20%;
     margin: 0 4.5%;
     padding: 2.5% 0;
     
     &:hover{
-        color: #bbb;
+        color: rgb(160, 200, 120);
     };
 
     ${breakPoints.small} {

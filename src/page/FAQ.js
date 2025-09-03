@@ -45,8 +45,9 @@ const Div = styled.div`
 `;
 
 const Nav = styled.nav`
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
+    margin-top: 5%;
 `;
 
 const Ul = styled.ul`
@@ -66,17 +67,17 @@ const ContentWrap = styled.div`
     width: 100%;
     border: 1px solid #6BA368;
     margin: 0.1% 0;
-    padding: 1% 0;
+    padding: 1%;
     border-radius: 10px;
     animation: 1s;
 `;
 
 const H3 = styled.h3`
-    padding-left: 1%;
+    
 `;
 
 const P = styled.p`
-    padding-left: 2%;
+    padding: 0 2%;
 `;
 
 const Img = styled.img`
