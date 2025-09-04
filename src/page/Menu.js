@@ -47,15 +47,15 @@ const Label = styled.label`
     cursor: pointer;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
-    box-shadow: 0px 0px 4px #A0C878;
+    box-shadow: 0px 0px 2px #A0C878;
 
     &.checked {
-        background: rgba(160, 200, 120, .1);
+        background: rgba(160, 200, 120, .3);
         box-shadow: inset 0px 0px 4px #A0C878;
     }
 
     &:hover{
-        box-shadow: 0px 0px 6px #A0C878;
+        box-shadow: 0px 0px 3px #A0C878;
     }
 `;
 

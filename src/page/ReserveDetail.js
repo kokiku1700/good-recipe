@@ -163,7 +163,7 @@ const ReserveDetail = () => {
                         <Span>
                             <H3>이름</H3>
                             <Input value={state.name} disabled={true}
-                                    width="100"
+                                    width="98"
                                     padding="2.5% 1%"
                                     
                             />
@@ -171,7 +171,7 @@ const ReserveDetail = () => {
                         <Span>
                             <H3>전화번호</H3>
                             <Input value={state.tel} disabled={true} 
-                                    width="100"
+                                    width="98"
                                     padding="2.5% 1%"
                             />
                         </Span>
@@ -194,17 +194,17 @@ const ReserveDetail = () => {
                                 />
                             </CalendarWrap>  
                             <Input type="text" value={reserveData.date} 
-                                    width="100"
+                                    width="98"
                                     padding="2.5% 1%"
                                     disabled={true}
                             />
                         </Span>
                         <Span>
                             <H3>시간</H3>
-                            <Select name="AmPm" value={reserveData.time.AmPm} onChange={onChangeRest}>
+                            <FirstSelect name="AmPm" value={reserveData.time.AmPm} onChange={onChangeRest}>
                                 <Option value="점심">점심</Option>
                                 <Option value="저녁">저녁</Option>
-                            </Select>
+                            </FirstSelect>
                             <Select $display={reserveData.time.AmPm === "점심" ? "inline" : "none"} 
                                     name="time" value={reserveData.time.time} 
                                     onChange={onChangeRest}
@@ -221,38 +221,39 @@ const ReserveDetail = () => {
                                 <Option value="18:00">18:00</Option>
                                 <Option value="18:30">18:30</Option>
                             </Select>
-                            <h6>{reserveData.time.AmPm}</h6>
-                            <h6>{reserveData.time.time}</h6>
                         </Span>
                     </DivInSection>
                 </TopSection>
                 <BottomSection>
-                        <Span>
-                            <h6>8세 이상</h6>
-                            <Input name="adult" type="text" 
-                                    width="100"
-                                    padding="2.5% 1%"
-                                    value={reserveData.people.adult} 
-                                    onChange={onChangeRest} 
-                            />명
-                        </Span>
-                        <Span>
-                            <h6>7세 이하</h6>
-                            <Input name="children" type="text" 
-                                    width="100"
-                                    padding="2.5% 1%"
-                                    value={reserveData.people.children} 
-                                    onChange={onChangeRest} 
-                            />명
-                        </Span>
-                        <Span>
-                            <h6>총 {Number(reserveData.people.adult) + Number(reserveData.people.children)}명</h6>
-                        </Span>
+                    <PeopleTitleSpan>
+                        <H3>인원</H3>
+                    </PeopleTitleSpan>
+                    <Span>
+                        <h6>8세 이상</h6>
+                        <Input name="adult" type="text" 
+                                width="98"
+                                padding="2.5% 1%"
+                                value={reserveData.people.adult} 
+                                onChange={onChangeRest} 
+                        />
+                    </Span>
+                    <Span>
+                        <h6>7세 이하</h6>
+                        <Input name="children" type="text" 
+                                width="98"
+                                padding="2.5% 1%"
+                                value={reserveData.people.children} 
+                                onChange={onChangeRest} 
+                        />
+                    </Span>
+                    <PeopleSpan>
+                        <h4>총 {Number(reserveData.people.adult) + Number(reserveData.people.children)}명</h4>
+                    </PeopleSpan>
                 </BottomSection>
                 <P $display={peopleState.under ? "block" : "none"}>예약은 5명부터 가능합니다.</P>
                 <P $display={peopleState.over ? "block" : "none"}>11명 이상은 전화로 예약 부탁드립니다.</P>
                 <P $display={peopleState.empty ? "block" : "none"}>예약 인원을 적어주세요.</P>
-                <Button width="95" content="예약하기" onClick={onSubmit} />
+                <Button width="98.5" content={state.date ? "수정하기" : "예약하기"} onClick={onSubmit} />
             </DetailDiv>
         </Div>
     );
@@ -280,7 +281,7 @@ const TopSection = styled.section`
 const BottomSection = styled.section`
     width: 96%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     border: 1px solid #6BA368;
     border-radius: 15px;
     margin: 2%;
@@ -309,16 +310,40 @@ const Span = styled.span`
     margin: 1% 0;
 `;
 
-const H3 = styled.h3`
+const PeopleTitleSpan = styled.span`
+    display: flex;
+    align-items: center;
+`;
 
+const PeopleSpan = styled(Span)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 2%;
+`;
+
+const H3 = styled.h3`
+    margin-bottom: 2%;
 `;
 
 const Select = styled.select`
     display: ${props => props.$display};
+    width: 48%;
+    padding: 2% 0;
+    border: 1px solid #6BA368;
+    border-radius: 5px;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const FirstSelect = styled(Select)`
+    margin-right: 4%;
 `;
 
 const Option = styled.option`
-
+    
 `;
 
 const P = styled.p`

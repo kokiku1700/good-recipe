@@ -14,7 +14,7 @@ const MenuCategory = ({ onClickMenuListValue, menuName, menuValue }) => {
                     <Li value={i} 
                         key={i} 
                         $background={menuValue === i ? "rgba(221, 235, 157, .2)" : "none"} 
-                        boxShadow={menuValue === i ? "inset 0px 0px 5px #DDEB9D" : "0px 0px 5px #DDEB9D"} 
+                        boxShadow={menuValue === i ? "inset 0px 0px 4px #DDEB9D" : "0px 0px 2px #DDEB9D"} 
                         onClick={onClickChangeValue}
                     >
                         {e}
@@ -46,7 +46,7 @@ const Li = styled.li`
     
 
     &:hover {
-        box-shadow: 0px 0px 8px #DDEB9D;
+        box-shadow: 0px 0px 4px #DDEB9D;
     }
 `;
 

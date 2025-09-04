@@ -3,7 +3,7 @@ import prev from "../assets/img/prev.png";
 import next from "../assets/img/next.png";
 import { useEffect, useRef, useState } from "react";
 
-const MainMenuList = ({ menu }) => {
+const MainMenuList = ({ menu, menuName }) => {
     // 무한 캐러셀을 위해 첫 인덱스와 마지막 인덱스를 복사했다.
     // 하지만 약간의 부자연스러움이 있어서 한 개 씩 더 추가
     // 마지막 인덱스와 첫 번째 인덱스는 이미 menu에 포함되어 있음
@@ -16,7 +16,7 @@ const MainMenuList = ({ menu }) => {
     // 슬라이드 버튼 빠르게 클릭 시 이미지 안나오는 버그를 막아줌
     // 즉 이미지가 이동 중일 때 클릭을 무시하게 해줌 
     const [animating, setAnimating] = useState(false);
-    const [liSize, setLiSize] = useState({ width: 520, height: 0 });
+    const liSize = { width: 520, height: 0 };
     const len = menuImg.length * liSize.width;
 
     useEffect(() => {
@@ -66,6 +66,7 @@ const MainMenuList = ({ menu }) => {
     };
     return (
         <Div>
+            <H1>{menuName}</H1>
             <P>모든 정식의 반찬은 동일하게 제공됩니다.</P>
             <ImgWrap $width={liSize.width * 3}>  
                 <Ul ref={ulRef} $transition={slideTransition} $length={len} translate={liSize.width * imgIdx}>
@@ -93,8 +94,12 @@ const Div = styled.div`
     padding: 1% 0;
 `;
 
+const H1 = styled.h1`
+    margin: 1%;
+    text-align: center;
+`;
+
 const H2 = styled.h2`
-    background: none;
     margin: 1%;
 `;
 

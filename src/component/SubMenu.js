@@ -14,15 +14,15 @@ const SubMenu = () => {
 
     return(
         <Div>
-            <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={subMenuName} />
+            <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={subMenuName} menuValue={menuListValue} />
             <Ul>
                 <Li $display={menuListValue === 0 ? "block" : "none"}>
-                    <h2>{menuName[0].name}</h2>
+                    <H1>{menuName[0].name}</H1>
                     <Img src={menuName[0].src} />
                     <p>{menuName[0].explain}</p>
                 </Li>
                 <Li $display={menuListValue === 1 ? "block" : "none"}>
-                    <h2>{menuName[1].name}</h2>
+                    <H1>{menuName[1].name}</H1>
                     <Img src={menuName[1].src} />
                     <p>{menuName[1].explain}</p>
                 </Li>  
@@ -40,6 +40,7 @@ const Ul = styled.ul`
     width: 100%;
     display: flex;
     justify-content: center;
+    padding: 1% 0;
 `;
 
 const Li = styled.li`
@@ -48,9 +49,12 @@ const Li = styled.li`
     list-style: none;
 `;
 
+const H1 = styled.h1`
+    margin: 2% 0;
+`;
+
 const Img = styled.img`
-    width: 700px;
-    height: 600px;
+    width: 500px;
 `;
 
 export default SubMenu;
