@@ -9,6 +9,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.REACT_APP_PORT;
+const number = process.env.REACT_APP_NUMBER;
 const dbConnenct = require("./dbconnect");
 const Reserve = require("../server/dbModels/Reserves");
 
@@ -34,7 +35,7 @@ app.get('/existTel', (req, res) => {
 app.get('/confirmation', (req, res) => {
     messageService.send({
         "to": req.query.tel,
-        "from": "01027868409",
+        "from": number,
         "text": req.query.num,
     }).then(res => {
         console.log(res);
@@ -60,7 +61,7 @@ app.post("/Reserve", (req, res) => {
     // 예약자에게 예약 확정 문자 보내기
     messageService.send({
         "to": data.tel,
-        "from": "01027868409",
+        "from": number,
         "text": `이름: ${data.name}
         날짜&시간: ${data.date} ${data.ampm} ${data.time} 
         인원: 성인 ${data.adult}명, 아이 ${data.children}명(${Number(data.adult) + Number(data.children)}명)
@@ -68,8 +69,8 @@ app.post("/Reserve", (req, res) => {
     });
     // 관리자에게 예약 문자 보내기
     messageService.send({
-        "to": "01027868409",
-        "from": "01027868409",
+        "to": number,
+        "from": number,
         "text": `이름: ${data.name}
         날짜&시간: ${data.date} ${data.ampm} ${data.time} 
         인원: 성인 ${data.adult}명, 아이 ${data.children}명(${Number(data.adult) + Number(data.children)}명)
@@ -114,7 +115,7 @@ app.put("/reserveEdit", (req, res) => {
         // 예약자에게 예약 변경 문자 보내기
         messageService.send({
             "to": data.tel,
-            "from": "01027868409",
+            "from": number,
             "text": `이름: ${data.name}
             날짜&시간: ${data.date} ${data.ampm} ${data.time} 
             인원: 성인 ${data.adult}명, 아이 ${data.children}명(${Number(data.adult) + Number(data.children)}명)으로 예약 변경되었습니다.
@@ -122,8 +123,8 @@ app.put("/reserveEdit", (req, res) => {
         });
         // 관리자에게 예약 변경 문자 보내기
         messageService.send({
-            "to": "01027868409",
-            "from": "01027868409",
+            "to": number,
+            "from": number,
             "text": `이름: ${data.name}
             날짜&시간: ${data.date} ${data.ampm} ${data.time} 
             인원: 성인 ${data.adult}명, 아이 ${data.children}명(${Number(data.adult) + Number(data.children)}명)으로 예약 변경되었습니댜.
@@ -137,12 +138,12 @@ app.delete("/delete", (req, res) => {
     .then(data => {
         messageService.send({
             "to": req.body.tel,
-            "from": "01027868409",
+            "from": number,
             "text": `${req.body.date}예약이 취소되었습니다.`
         });
         messageService.send({
-            "to": "01027868409",
-            "from": "01027868409",
+            "to": number,
+            "from": number,
             "text": `${req.body.date}에 예약한 ${req.body.name}이 예약을 취소했습니다.`
         });
     })

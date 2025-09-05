@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../component/components/Button";
 import Input from "../component/components/Input";
+import Timer from "../component/components/Timer";
 
 const Reserve = () => {
     // 인증 및 예약에 필요한 최소한의 정보를 저장하는 변수
@@ -17,6 +18,8 @@ const Reserve = () => {
     const [confirmationNumberCheck, setConfirmationNumberCheck] = useState("");
     // 인증번호 상태에 따라 인증번호 버튼 문자 변환
     const [confirmButton, setConfirmButton] = useState("인증번호 전송");
+    // 인증번호 전송 버튼을 클릭하면 타이머 보여줌
+    const [showTimer, setShowTimer] = useState(false);
     // 아래 세 변수는 각각의 입력값이 올바르면 true, 아니면 false
     // 세 변수가 모두 true면 예약 상세 페이지로 넘어간다.
     const [confirmSuccessStatus, setConfirmSuccessStatus] = useState(false);
@@ -51,8 +54,6 @@ const Reserve = () => {
                 setTelStatus(false);
             }
         }
-
-        console.log(confirmation)
     };
 
     // 인증번호 전송 버튼 클릭 시 발생하는 함수
@@ -65,6 +66,7 @@ const Reserve = () => {
                 if ( res.data.length === 0 ) {
                     let randomNum = Math.floor(Math.random() * 1000000);
                     
+                    setShowTimer(true);
                     setConfirmButton("인증번호 재전송");
 
                     if ( randomNum < 100000 ) {
@@ -72,7 +74,7 @@ const Reserve = () => {
                     }
 
                     setConfirmationNumber(randomNum);
-                    
+                    console.log(confirmationNumber)
                     axios.get("http://localhost:4000/confirmation", {params: {tel: confirmation.tel, num: randomNum}})
                     .then(res => {
                         console.log(res);
@@ -86,19 +88,6 @@ const Reserve = () => {
             })
         }
     };
-
-    // useEffect(() => {
-    //     let minute = Math.floor(timer / 60);
-    //     let second = timer % 60;
-        
-    //     const time = setInterval(() => {
-    //         setTimer(timer - 1);
-    //         if ( timer === 0 ) {
-    //             clearInterval(time);
-    //         }
-    //         console.log(minute, second);
-    //     }, 1000) 
-    // }, [timer]);
 
     // 입력한 인증번호를 저장
     const onChangeConfirmationCheck = e => {
@@ -135,6 +124,13 @@ const Reserve = () => {
         } 
     };
 
+    const endTime = () => {
+        setConfirmationNumber("");
+        setShowTimer(false);
+        console.log(confirmationNumber)
+        alert("인증 시간 만료.");
+    };
+
     return (
         <DivWrap>
             <Div>
@@ -142,7 +138,6 @@ const Reserve = () => {
                     <H3>이름</H3>
                     <InputWrap>
                         <Input name="name" width="97" type="name" 
-                                margin="1% 0"
                                 padding="2.5% 1%"
                                 value={confirmation.name} 
                                 onChange={onChangeConFirmation} 
@@ -156,7 +151,6 @@ const Reserve = () => {
                     <H3>전화번호</H3>
                     <InputWrap>
                         <Input name="tel" width="67" type="tel" 
-                                margin="1% 0"
                                 padding="2.5% 1%"
                                 value={confirmation.tel} 
                                 onChange={onChangeConFirmation} 
@@ -164,7 +158,13 @@ const Reserve = () => {
                                 autoComplete="off" 
                                 onBlur={onBlur}
                         />
-                        <Button width="30" background="#6BA368" content={confirmButton} onClick={onClickConfirmationSend} />
+                        <Button width="30"
+                                content={confirmButton} 
+                                background={ !telStatus || showTimer ? "#999" : "#6BA368"}
+                                onClick={onClickConfirmationSend} 
+                                cursor={ !telStatus || showTimer ? "default" : "pointer"}
+                                disabled={ !telStatus || showTimer}
+                        />
                     </InputWrap> 
                     <P $display={errTelMessage ? "none" : "block"}>전화번호를 제대로 입력해주세요.</P>
                     <P $display={errTelExistMessage ? "none" : "block"}>이미 같은 번호로 예약이 되어 있습니다.</P>
@@ -172,15 +172,24 @@ const Reserve = () => {
                 <Span>
                     <H3>인증번호</H3>
                     <InputWrap>
-                        <Input width="67" value={confirmationNumberCheck} 
-                        margin="1% 0" padding="2.5% 1%"
-                        onChange={onChangeConfirmationCheck} 
-                        autoComplete="off" disabled={confirmSuccessStatus} 
-                    />
-                        <Button width="30" background="#6BA368" content="인증번호 학인" onClick={onClickConfirmationCheck} disabled={confirmSuccessStatus} />
+                        <Input width="67" 
+                                value={confirmationNumberCheck} 
+                                padding="2.5% 1%"
+                                onChange={onChangeConfirmationCheck} 
+                                autoComplete="off" disabled={confirmSuccessStatus} 
+                        />
+                        {showTimer && <Timer onEnd={endTime} />}
+                        <Button width="30" 
+                                background={confirmationNumberCheck.length !== 6 ? "#999" : "#6BA368"} 
+                                content="인증번호 학인" onClick={onClickConfirmationCheck} 
+                                disabled={confirmationNumberCheck.length !== 6} 
+                                cursor={confirmationNumberCheck.length !== 6 ? "default" : "pointer"}
+                        />
                     </InputWrap>
                 </Span>
-                <Button width="90" background="#6BA368" content="확인" onClick={AllSuccess} />
+                <Button width="90" background="#6BA368" 
+                        content="확인" onClick={AllSuccess} 
+                />
             </Div>
         </DivWrap>
     );
@@ -203,28 +212,27 @@ const Div = styled.div`
 `;
 
 const Span = styled.span`
+    position: relative;
     width: 90%;
     align-items: center;
     margin: 2% auto;
     padding-bottom: 5%;
-    background: none;
 `;
 
 const InputWrap = styled.span`
     width: 100%;
     display: flex;
-    background: none;
 `;
 
 const H3 = styled.h3`
-    background: none;
+    margin-bottom: 1.5%;
 `;
 
 const P = styled.p`
     display: ${props => props.$display};
     color: red;
     margin-left: 1%;
-    background: none;
+    
 `;
 
 export default Reserve;
