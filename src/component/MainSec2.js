@@ -3,6 +3,7 @@ import lotusLeafSet from "../assets/img/lotusLeafSet.jpg";
 import Button from "../component/components/Button";
 import { useNavigate } from "react-router-dom";
 import divisionLeaf from "../assets/img/divisionLeaf.png";
+import { breakPoints } from "../constants/breakPoints";
 
 const MainSec2 = () => {
     const navigate = useNavigate();
@@ -35,6 +36,10 @@ const Section2 = styled.section`
     display: flex;
     padding: 1% 0;
     border-bottom: 1px solid white;
+
+    ${breakPoints.small} {
+        flex-direction: column;
+    }
 `;
 
 const ImgWrap = styled.div`
@@ -42,6 +47,11 @@ const ImgWrap = styled.div`
     display: flex;
     justify-content: end;
     align-items: center;
+
+    ${breakPoints.small} {
+        justify-content: center;
+        margin-bottom: 2%;
+    }
 `;
 
 const TextWrap = styled.div`
@@ -61,22 +71,45 @@ const Article = styled.article`
     border: 2px solid #6BA368;
     border-radius: 15px;
     background-color: #FAF6E9; 
+
+    ${breakPoints.medium} {
+        width: 80%;
+    }
+    ${breakPoints.small} {
+        width: 60%;
+    }
 `;
 
 const P = styled.p`
     margin-bottom: 5%;
     font-size: 18px;
+
+    ${breakPoints.medium} {
+        margin-bottom: 2.5%;
+        font-size: 15px;
+    }
 `;
 
 const Img = styled.img`
-    width: 700px;
+    width: 80%;
     margin-right: 1%;
     box-shadow: 3px 3px 5px #6BA368;
     border-radius: 20px;
+
+    ${breakPoints.medium} {
+        width: 90%;
+    }
+    ${breakPoints.small} {
+        width: 70%;
+    }
 `;
 
 const ImgILL = styled.img`
     width: 280px;
+
+    ${breakPoints.medium} {
+        width: 200px;
+    }
 `;
 
 export default MainSec2;

@@ -55,6 +55,7 @@ const H1 = styled.h1`
 
 const Img = styled.img`
     width: 500px;
+    border-radius: 15px;
 `;
 
 export default SubMenu;

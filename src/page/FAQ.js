@@ -57,7 +57,6 @@ const Ul = styled.ul`
 const Li = styled.li`
     width: 100%;
     list-style: none;
-    margin: 1% 0;
     cursor: pointer;
 `;
 
@@ -66,10 +65,7 @@ const ContentWrap = styled.div`
     justify-content: ${props => props.$justifyContent};
     width: 100%;
     border: 1px solid #6BA368;
-    margin: 0.1% 0;
     padding: 1%;
-    border-radius: 10px;
-    animation: 1s;
 `;
 
 const H3 = styled.h3`

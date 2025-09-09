@@ -72,7 +72,8 @@ const Div = styled.div`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
-    font-size: 18px;
+    font-size: 15px;
+    font-weight: bold;
     color: black;
     width: 20%;
     margin: 0 4.5%;
@@ -82,9 +83,9 @@ const StyledLink = styled(Link)`
         color: rgb(160, 200, 120);
     };
 
-    ${breakPoints.small} {
-        font-size: 15px;
-        font-weight: bold;
+    ${breakPoints.medium} {
+        width:25%;
+        margin: 0;
     };
 `;
 

@@ -48,7 +48,7 @@ const Span1 = styled.span`
     opacity: 0;
     animation: ${Opacity} 3s 0s ease;
     animation-fill-mode: forwards;
-    font-size: 50px;
+    font-size: 3vw;
     font-weight: bold;
     font-family: 'ChosunGs';
     cursor: default;

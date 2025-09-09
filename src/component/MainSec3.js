@@ -2,6 +2,7 @@ import styled from "styled-components";
 import B from "../assets/img/B.png";
 import boxmenu from "../assets/img/boxMenu.jpg";
 import C from "../assets/img/C.png";
+import { breakPoints } from "../constants/breakPoints";
 
 const MainSec3 = () => {
     
@@ -28,6 +29,9 @@ const Section3 = styled.section`
     border-bottom: 1px solid white;
     display: flex;
 
+    ${breakPoints.small} {
+        flex-direction: column;
+    }
 `;
 
 const TextWrap = styled.div`
@@ -37,33 +41,55 @@ const TextWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    ${breakPoints.medium} {
+        padding: 1% 0;
+    }
 `;
 
 const ImgWrap = styled.div`
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 `;
 
 const Img = styled.img`
-    width: 100px;
+    width: 10%;
     position: absolute;
 `;
 
 const Img1 = styled(Img)`
-    top: 20%;
-    left: 20%;
+    top: 15%;
+    left: 15%;
+
+    ${breakPoints.medium} {
+        top: 10%;
+        left: 10%;
+    }
 `;
 
 const Img2 = styled(Img)`
-    bottom: 20%;
-    right: 20%;
+    bottom: 15%;
+    right: 15%;
+
+    ${breakPoints.medium} {
+        bottom: 10%;
+        right: 10%;
+    }
 `;
 
 const P = styled.p`
     margin: 2% 0;
+    font-size: 20px;
+    ${breakPoints.medium} {
+        font-size: 1.8vw;
+    }
 `;
 
 const MenuImg = styled.img`
-    width: 650px;
+    width: 70%;
     margin-right: 1%;
     box-shadow: 3px 3px 5px #6BA368;
     border-radius: 20px;

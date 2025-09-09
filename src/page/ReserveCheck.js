@@ -101,7 +101,7 @@ const ReserveCheck = () => {
                 <Span>
                     <H3>이름</H3>
                     <Input name="name" value={reserveCheck.name}
-                            width="100"
+                            width="98"
                             padding="2.5% 1%"
                             onChange={onChangeReserveCheck} 
                             autoComplete="off"
@@ -110,7 +110,7 @@ const ReserveCheck = () => {
                 <Span>
                     <H3>전화번호</H3>
                     <Input name="tel" value={reserveCheck.tel}
-                            width="100"
+                            width="98"
                             padding="2.5% 1%"
                             onChange={onChangeReserveCheck} 
                             autoComplete="off"
@@ -147,7 +147,7 @@ const Div = styled.div`
 
 const CheckDivWrap = styled.div`
     width: 30%;
-    margin: 8% auto;
+    margin: 9% auto;
     padding: 2% 0;
     display: ${props => props.$display};
     flex-direction: column;
@@ -164,7 +164,7 @@ const Span = styled.span`
 `;
 
 const H3 = styled.h3`
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 `;
 
 const P = styled.p`

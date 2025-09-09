@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
-const Button = ({ name, width, background, content, onClick, disabled, cursor }) => {
+const Button = ({ name, width, background, margin, content, onClick, disabled, cursor }) => {
 
     return (
         <StyledButton name={name} $background={background} 
+                        $margin={margin}
                         $width={width} onClick={onClick}
                         disabled={disabled}
                         $cursor={cursor}
@@ -15,7 +16,7 @@ const Button = ({ name, width, background, content, onClick, disabled, cursor })
 
 const StyledButton = styled.button`
     width: ${props => props.$width}%;
-    margin: 0 1%;
+    margin: ${props => props.$margin};
     padding: 2% 0;
     cursor: ${props => props.$cursor ? props.$cursor : "pointer"}; 
     border: none;

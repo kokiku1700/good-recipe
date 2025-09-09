@@ -18,10 +18,11 @@ const StyledLink = styled(Link)`
     user-select: none;
 
     ${breakPoints.medium} {
-        font-size: 30px;
+        font-size: 40px;
     };
         
     ${breakPoints.small} {
+        font-size: 30px;
         margin-left: 5%;
     };
 `;

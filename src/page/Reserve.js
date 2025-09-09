@@ -29,6 +29,7 @@ const Reserve = () => {
     const [errNameMessage, setErrNameMessage] = useState(true);
     const [errTelMessage, setErrTelMessage] = useState(true);
     const [errTelExistMessage, setErrTelExistMessage] = useState(true);
+    const [errCheckNumber, setErrCheckNumber] = useState(true);
     // const [timer, setTimer] = useState(180);
     const navigate = useNavigate();
 
@@ -99,9 +100,9 @@ const Reserve = () => {
     const onClickConfirmationCheck = () => {
         if ( confirmationNumberCheck !== "" && Number(confirmationNumber) === Number(confirmationNumberCheck) ) {
             setConfirmSuccessStatus(true);
-            console.log("success");
+            setErrCheckNumber(true);
         } else {
-            console.log("fail");
+            setErrCheckNumber(false);
         }
     };
 
@@ -115,6 +116,7 @@ const Reserve = () => {
         }
     }
 
+    // 입력 정보가 제대로 입력된 경우 예약 상세 페이지로 이동
     const AllSuccess = () => {
         if ( confirmSuccessStatus &&
             nameStatus &&
@@ -125,9 +127,9 @@ const Reserve = () => {
     };
 
     const endTime = () => {
-        setConfirmationNumber("");
+        setConfirmationNumberCheck("");
         setShowTimer(false);
-        console.log(confirmationNumber)
+        setErrCheckNumber(true);
         alert("인증 시간 만료.");
     };
 
@@ -137,12 +139,13 @@ const Reserve = () => {
                 <Span>
                     <H3>이름</H3>
                     <InputWrap>
-                        <Input name="name" width="97" type="name" 
+                        <Input name="name" width="98" type="name" 
                                 padding="2.5% 1%"
                                 value={confirmation.name} 
                                 onChange={onChangeConFirmation} 
                                 placeholder="한글만 입력 가능합니다."
                                 onBlur={onBlur}
+                                disabled={showTimer}
                         />
                     </InputWrap>
                     <P $display={errNameMessage ? "none" : "block"}>양식을 제대로 입력해주세요</P>
@@ -150,15 +153,17 @@ const Reserve = () => {
                 <Span>
                     <H3>전화번호</H3>
                     <InputWrap>
-                        <Input name="tel" width="67" type="tel" 
+                        <Input name="tel" width="68" type="tel" 
                                 padding="2.5% 1%"
                                 value={confirmation.tel} 
                                 onChange={onChangeConFirmation} 
                                 placeholder="'-' 빼고 입력해주세요" 
                                 autoComplete="off" 
                                 onBlur={onBlur}
+                                disabled={showTimer}
                         />
                         <Button width="30"
+                                margin="0 0 0 1%"
                                 content={confirmButton} 
                                 background={ !telStatus || showTimer ? "#999" : "#6BA368"}
                                 onClick={onClickConfirmationSend} 
@@ -172,7 +177,7 @@ const Reserve = () => {
                 <Span>
                     <H3>인증번호</H3>
                     <InputWrap>
-                        <Input width="67" 
+                        <Input width="68" 
                                 value={confirmationNumberCheck} 
                                 padding="2.5% 1%"
                                 onChange={onChangeConfirmationCheck} 
@@ -180,16 +185,25 @@ const Reserve = () => {
                         />
                         {showTimer && <Timer onEnd={endTime} />}
                         <Button width="30" 
-                                background={confirmationNumberCheck.length !== 6 ? "#999" : "#6BA368"} 
+                                margin="0 0 0 1%"
+                                background={confirmationNumberCheck.length !== 6 || confirmSuccessStatus ? "#999" : "#6BA368"} 
                                 content="인증번호 학인" onClick={onClickConfirmationCheck} 
-                                disabled={confirmationNumberCheck.length !== 6} 
-                                cursor={confirmationNumberCheck.length !== 6 ? "default" : "pointer"}
+                                disabled={confirmationNumberCheck.length !== 6 || confirmSuccessStatus} 
+                                cursor={confirmationNumberCheck.length !== 6 || confirmSuccessStatus ? "default" : "pointer"}
                         />
                     </InputWrap>
+                    <P $display={errCheckNumber ? "none" : "block"}>인증번호가 올바르지 않습니다.</P>
                 </Span>
-                <Button width="90" background="#6BA368" 
+                <Span>
+                    <Button width="100" 
+                        margin="0"
+                        background={!confirmSuccessStatus || !telStatus || !nameStatus ? "#999" :  "#6BA368"} 
                         content="확인" onClick={AllSuccess} 
-                />
+                        disabled={!confirmSuccessStatus || !telStatus || !nameStatus}
+                        cursor={!confirmSuccessStatus || !telStatus || !nameStatus ? "default" : "pointer"}
+                    />
+                </Span>
+                
             </Div>
         </DivWrap>
     );
