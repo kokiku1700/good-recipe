@@ -97,6 +97,7 @@ const Div = styled.div`
 const H1 = styled.h1`
     margin: 1%;
     text-align: center;
+    text-shadow: 0px 0px 40px rgba(114, 206, 22, 1);
 `;
 
 const H2 = styled.h2`
@@ -131,8 +132,8 @@ const Li = styled.li`
     margin: 10px;
     box-sizing: border-box;
     border-radius: 15px;
-    background: rgba(160, 200, 120, .2);
-    box-shadow: 1px 1px 4px #6BA368;
+    background: linear-gradient(rgba(160, 200, 120, .3), rgba(221, 235, 157, .2));
+    box-shadow: 0px 0px 4px #6BA368;
 `;
 
 const ContentWrap = styled.div`

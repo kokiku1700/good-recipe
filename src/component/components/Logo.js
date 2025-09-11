@@ -14,9 +14,9 @@ const StyledLink = styled(Link)`
     color: #6BA368;
     text-decoration: none;
     padding: 0 1%;
-    text-shadow: 1px 1px 1px white;
+    text-shadow: 2px 2px 3px #DDEB9D;
     user-select: none;
-
+    
     ${breakPoints.medium} {
         font-size: 40px;
     };

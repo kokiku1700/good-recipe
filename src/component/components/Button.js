@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { breakPoints } from "../../constants/breakPoints";
 
 const Button = ({ name, width, background, margin, content, onClick, disabled, cursor }) => {
 
@@ -21,10 +22,17 @@ const StyledButton = styled.button`
     cursor: ${props => props.$cursor ? props.$cursor : "pointer"}; 
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1.2vw;
     user-select: none;
     color: white;
     background: ${props => props.$background ? props.$background : "#6BA368"};
-`
+
+    ${breakPoints.medium} {
+        font-size: 1.6vw;
+    }
+    ${breakPoints.small} {
+        font-size: 1.8vw;
+    }
+`;
 
 export default Button;

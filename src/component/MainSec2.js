@@ -1,29 +1,48 @@
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import lotusLeafSet from "../assets/img/lotusLeafSet.jpg";
 import Button from "../component/components/Button";
 import { useNavigate } from "react-router-dom";
 import divisionLeaf from "../assets/img/divisionLeaf.png";
 import { breakPoints } from "../constants/breakPoints";
+import { useEffect, useState } from "react";
 
 const MainSec2 = () => {
     const navigate = useNavigate();
+    const [scroll, setScroll] = useState(0);
+    const [trigger, setTrigger] = useState(false);
 
+    const handleScroll = () => {
+        const location = window.scrollY || document.documentElement.scrollTop;
+
+        if ( location >= 300 &&!trigger ) {
+            setTrigger(true);
+        }
+
+        setScroll(location);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [trigger]);
+    
     const onClickMoveMenu = () => {
         navigate('/menu');
-    }
+    };
 
     return (
         <Section2>
-            <ImgWrap>
+            <ImgWrap $trigger={trigger}>
                 <Img src={lotusLeafSet} />
             </ImgWrap>
-            <TextWrap>
+            <TextWrap $trigger={trigger}>
                 <Article>
                     <ImgILL src={divisionLeaf} />
                     <P>연잎의 향을 머금은 따뜻한 한 끼 정식</P>
                     <P>자연을 담은 연잎밥과 정갈한 반찬의 조화</P>
                     <P>몸과 마음을 채우는 건강한 밥상</P>
-                    <Button content="메뉴 보러 가기" width="30" background="#6BA368" onClick={onClickMoveMenu} />
+                    <Button content="메뉴 보러 가기" width="30" onClick={onClickMoveMenu} />
                     <ImgILL src={divisionLeaf} />
                 </Article>
             </TextWrap>
@@ -31,11 +50,33 @@ const MainSec2 = () => {
     )
 };
 
+const MoveAniLeft = keyframes`
+    from{
+        transform: translate(-1200px);
+        opacity: 0;
+    }
+    to{
+        tranform: translate(0);
+        opacity: 1;
+    }
+`;
+const MoveAniRight = keyframes`
+    from{
+        transform: translate(1200px);
+        opacity: 0;
+    }
+    to{
+        tranform: translate(0);
+        opacity: 1;
+    }
+`;
+
 const Section2 = styled.section`
     width: 100%;
     display: flex;
     padding: 1% 0;
     border-bottom: 1px solid white;
+    overflow: hidden;
 
     ${breakPoints.small} {
         flex-direction: column;
@@ -47,6 +88,13 @@ const ImgWrap = styled.div`
     display: flex;
     justify-content: end;
     align-items: center;
+    opacity: 0;
+    ${({ $trigger }) => $trigger && css`animation: ${MoveAniLeft} 1.5s ease-out forwards;`}
+
+    ${breakPoints.medium} {
+        animation: none;
+        opacity: 1;
+    }
 
     ${breakPoints.small} {
         justify-content: center;
@@ -59,7 +107,14 @@ const TextWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-       
+    opacity: 0;
+    ${({ $trigger }) => $trigger && css`animation: ${MoveAniRight} 1.5s ease-out forwards;`}
+
+    ${breakPoints.medium} {
+        animation: none;
+        opacity: 1;
+    }
+
 `;
 
 const Article = styled.article`
@@ -68,9 +123,10 @@ const Article = styled.article`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid #6BA368;
+    box-shadow: 0px 0px 6px #6BA368;
     border-radius: 15px;
-    background-color: #FAF6E9; 
+    background: linear-gradient(#FAF6E9, #ecf1d6ff); 
+    
 
     ${breakPoints.medium} {
         width: 80%;
@@ -83,6 +139,7 @@ const Article = styled.article`
 const P = styled.p`
     margin-bottom: 5%;
     font-size: 18px;
+    text-shadow: 0px 0px 10px #6BA368; 
 
     ${breakPoints.medium} {
         margin-bottom: 2.5%;
@@ -93,7 +150,7 @@ const P = styled.p`
 const Img = styled.img`
     width: 80%;
     margin-right: 1%;
-    box-shadow: 3px 3px 5px #6BA368;
+    box-shadow: 0px 0px 8px #6BA368;    
     border-radius: 20px;
 
     ${breakPoints.medium} {

@@ -46,7 +46,7 @@ const Span1 = styled.span`
     margin: 1.5% 0;
     z-index: 99;
     opacity: 0;
-    animation: ${Opacity} 3s 0s ease;
+    animation: ${Opacity} 1.5s 0s ease;
     animation-fill-mode: forwards;
     font-size: 3vw;
     font-weight: bold;
@@ -56,12 +56,12 @@ const Span1 = styled.span`
     background: none;
 `;
 const Span2 = styled(Span1)`
-    animation: ${Opacity} 3s 3.2s ease;
+    animation: ${Opacity} 1.5s 1.5s ease;
     animation-fill-mode: forwards;
 
 `;
 const Span3 = styled(Span1)`
-    animation: ${Opacity} 3s 6.4s ease;
+    animation: ${Opacity} 1.5s 3s ease;
     animation-fill-mode: forwards;
 `;
 

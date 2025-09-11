@@ -3,31 +3,73 @@ import B from "../assets/img/B.png";
 import boxmenu from "../assets/img/boxMenu.jpg";
 import C from "../assets/img/C.png";
 import { breakPoints } from "../constants/breakPoints";
+import { useState, useEffect } from "react";
+import { keyframes, css } from "styled-components";
 
 const MainSec3 = () => {
     
+    const [scroll, setScroll] = useState(0);
+    const [trigger, setTrigger] = useState(false);
+
+    const handleScroll = () => {
+        const location = window.scrollY || document.documentElement.scrollTop;
+
+        if ( location >= 800 &&!trigger ) {
+            setTrigger(true);
+        }
+
+        setScroll(location);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [trigger]);
 
     return (
         <Section3>
-            <TextWrap>
+            <TextWrap $trigger={trigger}>
                 <Img1 src={B} />
                 <P>“도시락·반찬, 1개부터 단체까지 포장 OK!”</P>
                 <P>“모든 메뉴 포장 가능합니다 — 전화 주문·배달 앱 이용 가능”</P>
                 <P>“한 끼든 단체든, 편리하게 포장하세요”</P>
                 <Img2 src={C} />
             </TextWrap>
-            <ImgWrap>
+            <ImgWrap $trigger={trigger}>
                 <MenuImg src={boxmenu} />
             </ImgWrap>
         </Section3>
     )
 };
 
+const MoveAniLeft = keyframes`
+    from{
+        transform: translate(-1200px);
+        opacity: 0;
+    }
+    to{
+        tranform: translate(0);
+        opacity: 1;
+    }
+`;
+const MoveAniRight = keyframes`
+    from{
+        transform: translate(1200px);
+        opacity: 0;
+    }
+    to{
+        tranform: translate(0);
+        opacity: 1;
+    }
+`;
+
 const Section3 = styled.section`
     width: 100%;
     padding: 1% 0;
     border-bottom: 1px solid white;
     display: flex;
+    overflow: hidden;
 
     ${breakPoints.small} {
         flex-direction: column;
@@ -41,6 +83,13 @@ const TextWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    ${({ $trigger }) => $trigger && css`animation: ${MoveAniLeft} 1.5s ease-out forwards;`}
+
+    ${breakPoints.medium} {
+        animation: none;
+        opacity: 1;
+    }
 
     ${breakPoints.medium} {
         padding: 1% 0;
@@ -52,7 +101,13 @@ const ImgWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    ${({ $trigger }) => $trigger && css`animation: ${MoveAniRight} 1.5s ease-out forwards;`}
 
+    ${breakPoints.medium} {
+        animation: none;
+        opacity: 1;
+    }
 `;
 
 const Img = styled.img`
@@ -82,7 +137,8 @@ const Img2 = styled(Img)`
 
 const P = styled.p`
     margin: 2% 0;
-    font-size: 20px;
+    font-size: 18px;
+    text-shadow: 0px 0px 10px #A0C878; 
     ${breakPoints.medium} {
         font-size: 1.8vw;
     }
@@ -91,7 +147,7 @@ const P = styled.p`
 const MenuImg = styled.img`
     width: 70%;
     margin-right: 1%;
-    box-shadow: 3px 3px 5px #6BA368;
+    box-shadow: 0px 0px 8px #6BA368; 
     border-radius: 20px;
     
 `;
