@@ -8,20 +8,18 @@ import { useEffect, useState } from "react";
 
 const MainSec2 = () => {
     const navigate = useNavigate();
-    const [scroll, setScroll] = useState(0);
     const [trigger, setTrigger] = useState(false);
 
-    const handleScroll = () => {
-        const location = window.scrollY || document.documentElement.scrollTop;
-
-        if ( location >= 300 &&!trigger ) {
-            setTrigger(true);
-        }
-
-        setScroll(location);
-    };
+    
 
     useEffect(() => {
+        const handleScroll = () => {
+            const location = window.scrollY || document.documentElement.scrollTop;
+
+            if ( location >= 300 &&!trigger ) {
+                setTrigger(true);
+            }
+        };
         window.addEventListener("scroll", handleScroll);
         
         return () => window.removeEventListener("scroll", handleScroll);

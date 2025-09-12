@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../component/components/Button";
 import Input from "../component/components/Input";
+import { breakPoints } from "../constants/breakPoints";
 
 const ReserveCheck = () => {
     // 예약 정보를 찾기 위한 입력 정보 저장
@@ -132,9 +133,9 @@ const ReserveCheck = () => {
                     <H3>아이: {reserveInformation.children}</H3>
                 </Span>
                 <Span $display="flex">
-                    <Button width="100" background="#6BA368" content="홈" onClick={onClickMove} />
-                    <Button width="100" background="#6BA368" content="예약 정보 변경" onClick={onClickMoveChange} />
-                    <Button width="100" background="#6BA368" content="예약 취소" onClick={onClickDelete} />
+                    <Button width="100" margin="0 1%" background="#6BA368" content="홈" onClick={onClickMove} />
+                    <Button width="100" margin="0 1%" background="#6BA368" content="예약 정보 변경" onClick={onClickMoveChange} />
+                    <Button width="100" margin="0 1%" background="#6BA368" content="예약 취소" onClick={onClickDelete} />
                 </Span>
             </CheckDivWrap>
         </Div>
@@ -146,8 +147,9 @@ const Div = styled.div`
 `;
 
 const CheckDivWrap = styled.div`
-    width: 30%;
-    margin: 9% auto;
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 7%;
     padding: 2% 0;
     display: ${props => props.$display};
     flex-direction: column;
@@ -155,6 +157,11 @@ const CheckDivWrap = styled.div`
     align-items: center;
     border: 2px solid #6BA368;
     border-radius: 10px;
+
+    ${breakPoints.medium} {
+        width: 60%;
+        margin-top: 10%;
+    }
 `;
 
 const Span = styled.span`

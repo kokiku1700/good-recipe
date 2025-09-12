@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../component/components/Button";
 import Input from "../component/components/Input";
 import Timer from "../component/components/Timer";
+import { breakPoints } from "../constants/breakPoints";
 
 const Reserve = () => {
     // 인증 및 예약에 필요한 최소한의 정보를 저장하는 변수
@@ -49,6 +50,7 @@ const Reserve = () => {
                 setNameStatus(false);
             }
         } else if ( e.target.name === "tel" ) {
+            if (!errTelExistMessage) setErrTelExistMessage(true);
             if ( telRegExp.test(e.target.value) ) {
                 setTelStatus(true);
             } else {
@@ -214,7 +216,7 @@ const DivWrap = styled.div`
 `;
 
 const Div = styled.div`
-    width: 30%;
+    width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -223,14 +225,23 @@ const Div = styled.div`
     border-radius: 10px;
     border: 2px solid #6BA368;
     padding: 1% 0;
+
+    ${breakPoints.medium} {
+        width: 60%;
+        margin-top: 10%;
+    }
 `;
 
 const Span = styled.span`
     position: relative;
-    width: 90%;
+    width: 80%;
     align-items: center;
-    margin: 2% auto;
+    margin: 1% auto;
     padding-bottom: 5%;
+
+    ${breakPoints.medium} {
+        width: 90%;
+    }
 `;
 
 const InputWrap = styled.span`

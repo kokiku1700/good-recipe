@@ -22,7 +22,7 @@ const StyledButton = styled.button`
     cursor: ${props => props.$cursor ? props.$cursor : "pointer"}; 
     border: none;
     border-radius: 5px;
-    font-size: 1.2vw;
+    font-size: 1.6vh;
     user-select: none;
     color: white;
     background: ${props => props.$background ? props.$background : "#6BA368"};

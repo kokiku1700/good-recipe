@@ -8,6 +8,7 @@ import moment from "moment";
 import axios from "axios";
 import Button from "../component/components/Button";
 import Input from "../component/components/Input";
+import { breakPoints } from "../constants/breakPoints";
 
 const ReserveDetail = () => {
     const nowDate = new Date();
@@ -151,13 +152,13 @@ const ReserveDetail = () => {
     return (
         <Div>
             <DetailDiv>
-                <Span>
-                    <h6>예약 인원은 아이 포함 5명부터 가능합니다.</h6>
-                    <h6>10명이 넘을 경우 전화로 문의 부탁드립니다.</h6>
-                    <h6>매장이 협소해 예약시간을 정해두고 있습니다. 원하는 시간이 아닐 경우 전화로 문의 부탁드립니다.</h6>
-                    <h6>브레이크 타임은 3시부터 5시입니다.</h6>
-                    <h6>당일 예약을 원하실 경우 전화로 예약 부탁드립니다.</h6>      
-                </Span>
+                <H6Section>
+                    <H6>예약 인원은 아이 포함 5명부터 가능합니다.</H6>
+                    <H6>10명이 넘을 경우 전화로 문의 부탁드립니다.</H6>
+                    <H6>매장이 협소해 예약시간을 정해두고 있습니다. 원하는 시간이 아닐 경우 전화로 문의 부탁드립니다.</H6>
+                    <H6>브레이크 타임은 3시부터 5시입니다.</H6>
+                    <H6>당일 예약을 원하실 경우 전화로 예약 부탁드립니다.</H6>      
+                </H6Section>
                 <TopSection>
                     <DivInSection>
                         <Span>
@@ -224,12 +225,12 @@ const ReserveDetail = () => {
                         </Span>
                     </DivInSection>
                 </TopSection>
-                <BottomSection>
-                    <PeopleTitleSpan>
-                        <H3>인원</H3>
-                    </PeopleTitleSpan>
+                <PeopleTitleSpan>
+                    <H3>인원</H3>
+                </PeopleTitleSpan>
+                <BottomSection> 
                     <Span>
-                        <h6>8세 이상</h6>
+                        <H5>8세 이상</H5>
                         <Input name="adult" type="text" 
                                 width="98"
                                 padding="2.5% 1%"
@@ -238,7 +239,7 @@ const ReserveDetail = () => {
                         />
                     </Span>
                     <Span>
-                        <h6>7세 이하</h6>
+                        <H5>7세 이하</H5>
                         <Input name="children" type="text" 
                                 width="98"
                                 padding="2.5% 1%"
@@ -247,13 +248,15 @@ const ReserveDetail = () => {
                         />
                     </Span>
                     <PeopleSpan>
-                        <h4>총 {Number(reserveData.people.adult) + Number(reserveData.people.children)}명</h4>
+                        <H5>총 {Number(reserveData.people.adult) + Number(reserveData.people.children)}명</H5>
                     </PeopleSpan>
                 </BottomSection>
                 <P $display={peopleState.under ? "block" : "none"}>예약은 5명부터 가능합니다.</P>
                 <P $display={peopleState.over ? "block" : "none"}>11명 이상은 전화로 예약 부탁드립니다.</P>
                 <P $display={peopleState.empty ? "block" : "none"}>예약 인원을 적어주세요.</P>
-                <Button width="98.5" content={state.date ? "수정하기" : "예약하기"} onClick={onSubmit} />
+                <ButtonSpan>
+                    <Button width="98" content={state.date ? "수정하기" : "예약하기"} onClick={onSubmit} />
+                </ButtonSpan>
             </DetailDiv>
         </Div>
     );
@@ -264,13 +267,25 @@ const Div = styled.div`
 `;
 
 const DetailDiv = styled.div`
-    width: 40%;
+    width: 800px;
     border: 2px solid #6BA368;
     border-radius: 15px;
     margin: 5% auto;
     padding: 1%;
     display: flex;
     flex-direction: column;
+    
+    ${breakPoints.medium} {
+        width: 80%;
+    }
+    ${breakPoints.small} {
+        width: 90%;
+    }
+`;
+
+const H6Section = styled.section`
+    width: 96%;
+    margin: 0 2%;
 `;
 
 const TopSection = styled.section`
@@ -308,11 +323,20 @@ const CalendarWrap = styled.span`
 const Span = styled.span`
     padding: 1%;
     margin: 1% 0;
+    
+`;
+
+const ButtonSpan = styled(Span)`
+    display: flex;
+    justify-content: center;
 `;
 
 const PeopleTitleSpan = styled.span`
+    width: 10%;
     display: flex;
     align-items: center;
+    margin-left: 2%;
+    padding-left: 3%;
 `;
 
 const PeopleSpan = styled(Span)`
@@ -320,10 +344,6 @@ const PeopleSpan = styled(Span)`
     justify-content: center;
     align-items: center;
     margin: 0 2%;
-`;
-
-const H3 = styled.h3`
-    margin-bottom: 2%;
 `;
 
 const Select = styled.select`
@@ -350,6 +370,17 @@ const P = styled.p`
     display: ${props => props.$display};
     color: red;
     text-align: center;
+`;
+
+const H3 = styled.h3`
+    margin-bottom: 2%;
+`;
+
+const H5 = styled.h5`
+    font-size: 14px;
+`;
+const H6 = styled.h6`
+    font-size: 13px;
 `;
 
 

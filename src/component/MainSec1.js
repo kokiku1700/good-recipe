@@ -5,14 +5,12 @@ const MainSec1 = () => {
 
 
     return (
-        <Div>
-            <Section1>
-                <Span1>약식동원(藥食同源)</Span1>
-                <Span2>"약과 음식은 근본이 같다"는 뜻으로</Span2>
-                <Span3>선한레시피가 지켜가는 마음입니다.</Span3>
-                <Img src={lotusLeafILL} />
-            </Section1>
-        </Div>
+        <Section1>
+            <Span1>약식동원(藥食同源)</Span1>
+            <Span2>"약과 음식은 근본이 같다"는 뜻으로</Span2>
+            <Span3>선한레시피가 지켜가는 마음입니다.</Span3>
+            <Img src={lotusLeafILL} />
+        </Section1>
     )
 };
 
@@ -27,11 +25,6 @@ const Opacity = keyframes`
     }
 `;
 
-const Div = styled.div`
-    width: 100%;
-    border-bottom: 1px solid #fff
-`;
-
 const Section1 = styled.section`
     width: 100%;
     height: 100%;
@@ -40,6 +33,7 @@ const Section1 = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 `;
 
 const Span1 = styled.span`
