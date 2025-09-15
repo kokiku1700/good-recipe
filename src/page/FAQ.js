@@ -25,13 +25,13 @@ const FAQ = () => {
                 <Ul>
                     {contents.map((e, i) => (
                         <Li key={i} onClick={() => onClickToggle(i)}>
-                            <ContentWrap $display="flex" $justifyContent="space-between">
+                            <MainWrap $display="flex" $justifyContent="space-between">
                                 <H3>{e.title}</H3>  
                                  <Img src={bool[i] ? minus : plus} /> 
-                            </ContentWrap>
-                            <ContentWrap $display={bool[i] ? "block" : "none"}>
+                            </MainWrap>
+                            <SubWrap $display={bool[i] ? "block" : "none"}>
                                 <P>{e.content}</P>
-                            </ContentWrap>
+                            </SubWrap>
                         </Li>
                     ))}
                 </Ul>
@@ -45,7 +45,7 @@ const Div = styled.div`
 `;
 
 const Nav = styled.nav`
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
     margin-top: 5%;
 `;
@@ -58,14 +58,20 @@ const Li = styled.li`
     width: 100%;
     list-style: none;
     cursor: pointer;
+    margin-bottom: 1%;
 `;
 
-const ContentWrap = styled.div`
+const MainWrap = styled.div`
     display: ${props => props.$display};
     justify-content: ${props => props.$justifyContent};
     width: 100%;
     border: 1px solid #6BA368;
+        border-radius: 5px;
+
     padding: 1%;
+`;
+const SubWrap = styled(MainWrap)`
+    border-top: none;
 `;
 
 const H3 = styled.h3`

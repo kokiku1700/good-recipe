@@ -64,11 +64,12 @@ const MoveAniRight = keyframes`
 
 const Section3 = styled.section`
     width: 100%;
-    padding: 1% 0;
+    padding: 5% 0;
     border-bottom: 1px solid white;
     display: flex;
     overflow: hidden;
 
+    box-shadow: 1px 0px 5px #A0C878;
     ${breakPoints.small} {
         flex-direction: column;
     }

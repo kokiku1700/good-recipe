@@ -24,7 +24,7 @@ const StyledInput = styled.input`
     margin: ${props => props.$margin};
     border: 1px solid #6BA368;
     border-radius: 5px;
-    background: none;
+    background: ${props => props.disabled ? "none" : "white"};
     font-size: 16px;
     text-align: ${props => props.$textAlign};
 

@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components"
 import lotusLeafILL from "../assets/img/lotusLeafILL.png";
 
 const MainSec1 = () => {
-
+    
 
     return (
         <Section1>
@@ -33,14 +33,14 @@ const Section1 = styled.section`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    box-shadow: 1px 0px 5px #A0C878;
 `;
 
 const Span1 = styled.span`
     margin: 1.5% 0;
     z-index: 99;
     opacity: 0;
-    animation: ${Opacity} 1.5s 0s ease;
+    animation: ${Opacity} 2s 0s ease;
     animation-fill-mode: forwards;
     font-size: 3vw;
     font-weight: bold;
@@ -50,12 +50,13 @@ const Span1 = styled.span`
     background: none;
 `;
 const Span2 = styled(Span1)`
-    animation: ${Opacity} 1.5s 1.5s ease;
+    font-size: 2.2vw;
+    animation: ${Opacity} 1s .5s ease;
     animation-fill-mode: forwards;
-
 `;
 const Span3 = styled(Span1)`
-    animation: ${Opacity} 1.5s 3s ease;
+    font-size: 2.2vw;
+    animation: ${Opacity} 1s .5s ease;
     animation-fill-mode: forwards;
 `;
 
@@ -65,7 +66,7 @@ const Img = styled.img`
     top: 13%;
     left: 13%;
     opacity: 0;
-    animation: ${Opacity} 3s 8.6s ease;
+    animation: ${Opacity} 1s 3s ease;
     animation-fill-mode: forwards;
 
 `;

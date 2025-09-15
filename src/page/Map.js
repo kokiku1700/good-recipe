@@ -10,7 +10,6 @@ const Street = () => {
                     center={{ lat: 37.394726159, lng: 127.111209047 }}
                     style={{ width: '1000px', height: '700px' }}
                     level={3}
-                    zoomable={false}
                 />
                 <Article>
                     판교역 1번 출구로 나와서 건너편 정류장을 이용하시면 됩니다.

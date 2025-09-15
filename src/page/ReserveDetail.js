@@ -9,6 +9,8 @@ import axios from "axios";
 import Button from "../component/components/Button";
 import Input from "../component/components/Input";
 import { breakPoints } from "../constants/breakPoints";
+import calendarImg from "../assets/img/calendar.png";
+
 
 const ReserveDetail = () => {
     const nowDate = new Date();
@@ -153,11 +155,11 @@ const ReserveDetail = () => {
         <Div>
             <DetailDiv>
                 <H6Section>
-                    <H6>예약 인원은 아이 포함 5명부터 가능합니다.</H6>
-                    <H6>10명이 넘을 경우 전화로 문의 부탁드립니다.</H6>
-                    <H6>매장이 협소해 예약시간을 정해두고 있습니다. 원하는 시간이 아닐 경우 전화로 문의 부탁드립니다.</H6>
-                    <H6>브레이크 타임은 3시부터 5시입니다.</H6>
-                    <H6>당일 예약을 원하실 경우 전화로 예약 부탁드립니다.</H6>      
+                    <H6>※ 예약 인원은 아이 포함 5명부터 가능합니다.</H6>
+                    <H6>※ 10명이 넘을 경우 전화로 문의 부탁드립니다.</H6>
+                    <H6>※ 매장이 협소해 예약시간을 정해두고 있습니다. 원하는 시간이 아닐 경우 전화로 문의 부탁드립니다.</H6>
+                    <H6>※ 브레이크 타임은 3시부터 5시입니다.</H6>
+                    <H6>※ 당일 예약을 원하실 경우 전화로 예약 부탁드립니다.</H6>      
                 </H6Section>
                 <TopSection>
                     <DivInSection>
@@ -179,7 +181,7 @@ const ReserveDetail = () => {
                     </DivInSection>
                     <DivInSection>
                         <Span>
-                            <H3 onClick={calendarToggle}>날짜</H3>
+                            <H3>날짜</H3>
                             <CalendarWrap $display={calendarHide ? "block" : "none"}>
                                 <Calendar 
                                     name="date"
@@ -199,6 +201,7 @@ const ReserveDetail = () => {
                                     padding="2.5% 1%"
                                     disabled={true}
                             />
+                            <Img src={calendarImg} onClick={calendarToggle} />
                         </Span>
                         <Span>
                             <H3>시간</H3>
@@ -379,9 +382,19 @@ const H3 = styled.h3`
 const H5 = styled.h5`
     font-size: 14px;
 `;
+
 const H6 = styled.h6`
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: .5% 0;
 `;
 
+const Img = styled.img`
+    z-index: 1;
+    position: absolute;
+    top: 30%;
+    right: 7%;
+    cursor: pointer;
+`;
 
 export default ReserveDetail;

@@ -72,9 +72,10 @@ const MoveAniRight = keyframes`
 const Section2 = styled.section`
     width: 100%;
     display: flex;
-    padding: 1% 0;
+    padding: 5% 0;
     border-bottom: 1px solid white;
     overflow: hidden;
+    box-shadow: 1px 0px 5px #A0C878;
 
     ${breakPoints.small} {
         flex-direction: column;
