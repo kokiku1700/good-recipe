@@ -120,7 +120,13 @@ const ReserveCheck = () => {
                 <P $display={checkErrMessage ? "block" : "none"}>입력 정보가 올바르지 않거나 예약 정보가 없습니다.</P>
                 <P $display={checkEmptyErrMessage ? "block" : "none"}>정보를 입력해주세요</P>
                 <Span>
-                    <Button width="100" background="#6BA368" content="예약 확인하기" onClick={onClickReserveCheck} />
+                    <Button width="100"
+                            background={reserveCheck.name === "" || reserveCheck.tel === "" ? "#999" : "#6BA368"}
+                            content="예약 확인하기" 
+                            onClick={onClickReserveCheck} 
+                            disabled={reserveCheck.name === "" || reserveCheck.tel === ""}
+                            cursor={reserveCheck.name === "" || reserveCheck.tel === ""}
+                    />
                 </Span>
             </CheckDivWrap>
             <CheckDivWrap $display={checkState ? "flex" : "none"}>
@@ -133,9 +139,9 @@ const ReserveCheck = () => {
                     <H3>아이: {reserveInformation.children}</H3>
                 </Span>
                 <Span $display="flex">
-                    <Button width="100" margin="0 1%" background="#6BA368" content="홈" onClick={onClickMove} />
-                    <Button width="100" margin="0 1%" background="#6BA368" content="예약 정보 변경" onClick={onClickMoveChange} />
-                    <Button width="100" margin="0 1%" background="#6BA368" content="예약 취소" onClick={onClickDelete} />
+                    <Button width="100" margin="0 1%" content="홈" onClick={onClickMove} />
+                    <Button width="100" margin="0 1%" content="예약 정보 변경" onClick={onClickMoveChange} />
+                    <Button width="100" margin="0 1%" content="예약 취소" onClick={onClickDelete} />
                 </Span>
             </CheckDivWrap>
         </Div>
