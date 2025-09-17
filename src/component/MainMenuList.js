@@ -2,6 +2,7 @@ import styled from "styled-components";
 import prev from "../assets/img/prev.png";
 import next from "../assets/img/next.png";
 import { useEffect, useRef, useState } from "react";
+import { breakPoints } from "../constants/breakPoints";
 
 const MainMenuList = ({ menu, menuName }) => {
     // 무한 캐러셀을 위해 첫 인덱스와 마지막 인덱스를 복사했다.
@@ -9,7 +10,7 @@ const MainMenuList = ({ menu, menuName }) => {
     // 마지막 인덱스와 첫 번째 인덱스는 이미 menu에 포함되어 있음
     const menuImg = [menu[menu.length - 4], menu[menu.length - 3], ...menu, menu[2], menu[3]];
     // 현재 보여지는 이미지 번호
-    const [imgIdx, setImgIdx] = useState(2);
+    const [imgIdx, setImgIdx] = useState(3);
     // 슬라이드 효과 
     // 무한 슬라이드에서 눈속임을 위한 변수
     // false일 때 transition을 없애기 위한 변수
@@ -22,7 +23,7 @@ const MainMenuList = ({ menu, menuName }) => {
     // 즉 이미지가 이동 중일 때 클릭을 무시하게 해줌 
     const [animating, setAnimating] = useState(false);
     // 각 메뉴의 margin 포함된 넓이
-    const liSize = 520;
+    const [liSize, setLiSize] = useState(520);
     // ul의 총 길이.
     const len = menuImg.length * liSize;
     // 현재 브라우저 넓이
@@ -35,10 +36,14 @@ const MainMenuList = ({ menu, menuName }) => {
         const handleBrowserWidth = () => {
             const width = window.innerWidth;
             setBrowserWdith(width);
-
+            setLiSize(width <= 765 ? 420 : 520);
+            
             if ( width <= 1300 ) setVisibleNum(1);
             else if ( width <= 1900 ) setVisibleNum(2);
             else setVisibleNum(3);
+
+            setSlideTransition(false);
+            setImgIdx(i => i);
         };
 
         handleBrowserWidth();
@@ -47,7 +52,7 @@ const MainMenuList = ({ menu, menuName }) => {
 
         return () => window.removeEventListener("resize", handleBrowserWidth);
 
-    }, [visibleNum, browserWidth])
+    }, [visibleNum, browserWidth]);
 
     // 앞, 뒤로 슬라이드 이동 시 처음 혹은 마지막을 만났을 때 
     // 자연스러운 움직임을 위한 코드
@@ -167,6 +172,10 @@ const Li = styled.li`
     border-radius: 15px;
     background: linear-gradient(rgba(160, 200, 120, .3), rgba(221, 235, 157, .2));
     box-shadow: 0px 0px 4px #6BA368;
+
+    ${breakPoints.small} {
+        width: 400px;
+    }
 `;
 
 const ContentWrap = styled.div`
@@ -185,6 +194,11 @@ const Img = styled.img`
     height: 300px;
     border-radius: 15px;
     margin: 1%;
+
+    ${breakPoints.small} {
+        width: 300px;
+        height: 250px;
+    }
 `;
 
 const Span = styled.span`

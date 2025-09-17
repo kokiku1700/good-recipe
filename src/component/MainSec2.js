@@ -48,6 +48,18 @@ const MainSec2 = () => {
     )
 };
 
+const BackgroundChange = keyframes`
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+`;
+
 const MoveAniLeft = keyframes`
     from{
         transform: translate(-1200px);
@@ -75,7 +87,6 @@ const Section2 = styled.section`
     padding: 5% 0;
     border-bottom: 1px solid white;
     overflow: hidden;
-    box-shadow: 1px 0px 5px #A0C878;
 
     ${breakPoints.small} {
         flex-direction: column;
@@ -124,9 +135,10 @@ const Article = styled.article`
     align-items: center;
     box-shadow: 0px 0px 6px #6BA368;
     border-radius: 15px;
-    background: linear-gradient(#FAF6E9, #ecf1d6ff); 
+    background: linear-gradient(270deg, #ecf1d6ff, #FAF6E9, #eafcccff);
+    background-size: 600% 600%;
+    animation: ${BackgroundChange} 5s ease infinite; 
     
-
     ${breakPoints.medium} {
         width: 80%;
     }

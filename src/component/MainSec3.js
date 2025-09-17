@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { keyframes, css } from "styled-components";
 
 const MainSec3 = () => {
-    
     const [trigger, setTrigger] = useState(false);
 
     
@@ -16,7 +15,7 @@ const MainSec3 = () => {
         const handleScroll = () => {
             const location = window.scrollY || document.documentElement.scrollTop;
 
-            if ( location >= 900 &&!trigger ) {
+            if ( location >= 1300 &&!trigger ) {
                 setTrigger(true);
             }
         };
@@ -40,6 +39,30 @@ const MainSec3 = () => {
         </Section3>
     )
 };
+
+const UpDownB = keyframes`
+    0% {
+        top: 16%;
+    }
+    50% {
+        top: 15%;
+    }    
+    100% {
+        top: 16%;
+    }
+`;
+
+const UpDownC = keyframes`
+    0% {
+        bottom: 16%;
+    }
+    50% {
+        bottom: 15%;
+    }    
+    100% {
+        bottom: 16%;
+    }
+`;
 
 const MoveAniLeft = keyframes`
     from{
@@ -69,7 +92,6 @@ const Section3 = styled.section`
     display: flex;
     overflow: hidden;
 
-    box-shadow: 1px 0px 5px #A0C878;
     ${breakPoints.small} {
         flex-direction: column;
     }
@@ -115,8 +137,8 @@ const Img = styled.img`
 `;
 
 const Img1 = styled(Img)`
-    top: 15%;
     left: 15%;
+    animation: ${UpDownB} 2s infinite;
 
     ${breakPoints.medium} {
         top: 10%;
@@ -125,8 +147,8 @@ const Img1 = styled(Img)`
 `;
 
 const Img2 = styled(Img)`
-    bottom: 15%;
     right: 15%;
+    animation: ${UpDownC} 2s infinite;
 
     ${breakPoints.medium} {
         bottom: 10%;
