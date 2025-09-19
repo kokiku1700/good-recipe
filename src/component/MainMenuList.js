@@ -4,7 +4,7 @@ import next from "../assets/img/next.png";
 import { useEffect, useRef, useState } from "react";
 import { breakPoints } from "../constants/breakPoints";
 
-const MainMenuList = ({ menu, menuName }) => {
+const MainMenuList = ({ menu, menuName, menuListValue }) => {
     // 무한 캐러셀을 위해 첫 인덱스와 마지막 인덱스를 복사했다.
     // 하지만 약간의 부자연스러움이 있어서 한 개 씩 더 추가
     // 마지막 인덱스와 첫 번째 인덱스는 이미 menu에 포함되어 있음
@@ -30,6 +30,11 @@ const MainMenuList = ({ menu, menuName }) => {
     const [browserWidth, setBrowserWdith] = useState(0);
     // 화면에 보여줄 이미지 개수
     const [visibleNum, setVisibleNum] = useState(3);
+
+    useEffect(() => {
+        setImgIdx(3);
+        setSlideTransition(false);
+    }, [menuListValue])
 
     // 화면에 크기에 따라 보여지는 슬라이드 개수를 조정하기 위한 코드
     useEffect(() => {        
@@ -212,6 +217,10 @@ const ArrowImg = styled.img`
     left: ${props => props.$left}%;
     right: ${props => props.$right}%;
     cursor: pointer;
+
+    ${breakPoints.small} {
+        width:60px;
+    }
 `;
 
 export default MainMenuList;

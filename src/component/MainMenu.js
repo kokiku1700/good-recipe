@@ -26,7 +26,7 @@ const MainMenu = () => {
     return (
         <Div>
             <MenuCategory onClickMenuListValue={onClickMenuListValue} menuName={MainMenuName} menuValue={menuListValue} />
-            <MainMenuList menu={menu[menuListValue]} menuName={MainMenuName[menuListValue]} />
+            <MainMenuList menu={menu[menuListValue]} menuName={MainMenuName[menuListValue]} menuListValue={menuListValue} />
         </Div>
     );
 };

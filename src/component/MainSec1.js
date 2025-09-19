@@ -80,20 +80,22 @@ const Img = styled.img`
     width: 10%;
     position: absolute;
     opacity: 0;
-    animation: ${Opacity} 3s 1.5s ease;
-    animation-fill-mode: forwards;
 `;
 
 const ImgL = styled(Img)`
     top: 13%;
     left: 13%;
     filter: drop-shadow(3px 3px 8px #6BA368);
+    animation: ${Opacity} 3s 1.7s ease;
+    animation-fill-mode: forwards;
 `;
 
 const ImgC = styled(Img)`
     top: 30%;
     right: 13%;
     filter: drop-shadow(3px 3px 5px #dd8e74ff);
+    animation: ${Opacity} 3s 2s ease;
+    animation-fill-mode: forwards;
 `;
 
 const ArrowImg = styled.img`
@@ -101,6 +103,7 @@ const ArrowImg = styled.img`
     position: absolute;
     filter: drop-shadow(1px 1px 1px black);
     animation: ${UpDown} 2s infinite;
+    opacity: .7;
 `;
 
 export default MainSec1;

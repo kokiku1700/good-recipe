@@ -3,6 +3,7 @@ import { contents } from "../constants/FAQContents";
 import { useState } from "react";
 import plus from "../assets/img/plus.png";
 import minus from "../assets/img/minus.png";
+import { breakPoints } from "../constants/breakPoints";
 
 const FAQ = () => {
     const [bool, setBool] = useState(new Array(contents.length).fill(false));
@@ -14,7 +15,6 @@ const FAQ = () => {
 
             return newArr;
         });
-        console.log(bool)
     }
 
 
@@ -45,9 +45,17 @@ const Div = styled.div`
 `;
 
 const Nav = styled.nav`
-    width: 40%;
+    width: 45%;
     margin: 0 auto;
     margin-top: 5%;
+
+    ${breakPoints.medium} {
+        width: 70%;
+    }
+    ${breakPoints.small} {
+        width: 85%;
+    }
+    
 `;
 
 const Ul = styled.ul`
@@ -64,10 +72,10 @@ const Li = styled.li`
 const MainWrap = styled.div`
     display: ${props => props.$display};
     justify-content: ${props => props.$justifyContent};
+    align-items: center;
     width: 100%;
     border: 1px solid #6BA368;
-        border-radius: 5px;
-
+    border-radius: 5px;
     padding: 1%;
 `;
 const SubWrap = styled(MainWrap)`

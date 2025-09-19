@@ -294,6 +294,10 @@ const H6Section = styled.section`
 const TopSection = styled.section`
     width: 100%;
     display: flex;
+
+    ${breakPoints.verySmall} {
+        flex-direction: column;
+    }
 `;
 
 const BottomSection = styled.section`
@@ -303,6 +307,10 @@ const BottomSection = styled.section`
     border: 1px solid #6BA368;
     border-radius: 15px;
     margin: 2%;
+
+    ${breakPoints.verySmall} {
+        flex-direction: column;
+    }
 `;
 
 const DivInSection = styled.div`
