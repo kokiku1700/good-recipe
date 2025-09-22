@@ -110,6 +110,10 @@ const ImgWrap = styled.div`
         justify-content: center;
         margin-bottom: 2%;
     }
+    ${breakPoints.verySmall} {
+        justify-content: center;
+        margin-bottom: 5%;
+    }
 `;
 
 const TextWrap = styled.div`
@@ -142,9 +146,6 @@ const Article = styled.article`
     ${breakPoints.medium} {
         width: 80%;
     }
-    ${breakPoints.small} {
-        width: 60%;
-    }
 `;
 
 const P = styled.p`
@@ -168,7 +169,7 @@ const Img = styled.img`
         width: 90%;
     }
     ${breakPoints.small} {
-        width: 70%;
+        width: 80%;
     }
 `;
 
@@ -177,6 +178,9 @@ const ImgILL = styled.img`
 
     ${breakPoints.medium} {
         width: 200px;
+    }
+    ${breakPoints.verySmall} {
+        width: 130px;
     }
 `;
 

@@ -108,12 +108,12 @@ const TextWrap = styled.div`
     ${({ $trigger }) => $trigger && css`animation: ${MoveAniLeft} 1.5s ease-out forwards;`}
 
     ${breakPoints.medium} {
+        padding: 1% 0;
         animation: none;
         opacity: 1;
     }
-
-    ${breakPoints.medium} {
-        padding: 1% 0;
+    ${breakPoints.verySmall} {
+        padding: 15% 0;
     }
 `;
 
@@ -144,6 +144,11 @@ const Img1 = styled(Img)`
         top: 10%;
         left: 10%;
     }
+    ${breakPoints.verySmall} {
+        top: 5%;
+        left: 5%;
+    }
+    
 `;
 
 const Img2 = styled(Img)`
@@ -154,6 +159,10 @@ const Img2 = styled(Img)`
         bottom: 10%;
         right: 10%;
     }
+    ${breakPoints.verySmall} {
+        bottom: 5%;
+        right: 5%;
+    }
 `;
 
 const P = styled.p`
@@ -163,6 +172,9 @@ const P = styled.p`
     ${breakPoints.medium} {
         font-size: 1.8vw;
     }
+    ${breakPoints.verySmall} {
+        font-size: 3vw;
+    }
 `;
 
 const MenuImg = styled.img`
@@ -171,6 +183,9 @@ const MenuImg = styled.img`
     box-shadow: 0px 0px 8px #6BA368; 
     border-radius: 20px;
     
+    ${breakPoints.verySmall} {
+        width: 80%;
+    }
 `;
 
 export default MainSec3;

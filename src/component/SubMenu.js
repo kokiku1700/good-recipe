@@ -2,6 +2,7 @@ import styled from "styled-components";
 import MenuCategory from "./MenuCategory";
 import { useState } from "react";
 import { subMenu } from "../constants/menuExplain";
+import { breakPoints } from "../constants/breakPoints";
 
 const SubMenu = () => {
     const [menuListValue, setMenuListValue] = useState(0);
@@ -44,6 +45,7 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
+    width: 70%;
     display: ${props => props.$display};
     float: left;
     list-style: none;
@@ -56,6 +58,11 @@ const H1 = styled.h1`
 const Img = styled.img`
     width: 500px;
     border-radius: 15px;
+    box-shadow: 0px 0px 4px #6BA368;
+
+    ${breakPoints.small} {
+        width: 300px;
+    }
 `;
 
 export default SubMenu;

@@ -41,7 +41,7 @@ const MainMenuList = ({ menu, menuName, menuListValue }) => {
         const handleBrowserWidth = () => {
             const width = window.innerWidth;
             setBrowserWdith(width);
-            setLiSize(width <= 765 ? 420 : 520);
+            setLiSize(width <= 765 ? 320 : 520);
             
             if ( width <= 1300 ) setVisibleNum(1);
             else if ( width <= 1900 ) setVisibleNum(2);
@@ -125,8 +125,8 @@ const MainMenuList = ({ menu, menuName, menuListValue }) => {
                     ))}
                 </Ul>
             </ImgWrap>
-            <ArrowImg $left="2" src={prev} onClick={prevMove} />
-            <ArrowImg  $right="2" src={next} onClick={nextMove} />
+            <ArrowImg $left={browserWidth <= 430 ? "-2" : "2"} src={prev} onClick={prevMove} />
+            <ArrowImg  $right={browserWidth <= 430 ? "-2" : "2"} src={next} onClick={nextMove} />
         </Div>
     );
 }
@@ -179,7 +179,8 @@ const Li = styled.li`
     box-shadow: 0px 0px 4px #6BA368;
 
     ${breakPoints.small} {
-        width: 400px;
+        width: 300px;
+        height: 400px;
     }
 `;
 
@@ -201,8 +202,8 @@ const Img = styled.img`
     margin: 1%;
 
     ${breakPoints.small} {
-        width: 300px;
-        height: 250px;
+        width: 250px;
+        height: 200px;
     }
 `;
 
