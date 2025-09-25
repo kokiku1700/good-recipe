@@ -168,12 +168,21 @@ const CheckDivWrap = styled.div`
         width: 60%;
         margin-top: 10%;
     }
+    ${breakPoints.verySmall} {
+        width: 80%;
+        margin-top: 15%;
+    }
 `;
 
 const Span = styled.span`
     display: ${props => props.$display};
     width: 80%;
     margin: 3% 0;
+
+    ${breakPoints.verySmall} {
+        width: 80%;
+        margin: 5% 0;
+    }
 `;
 
 const H3 = styled.h3`

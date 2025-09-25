@@ -309,7 +309,11 @@ const BottomSection = styled.section`
     margin: 2%;
 
     ${breakPoints.verySmall} {
+        width: 92%;
         flex-direction: column;
+        border: none;
+        margin: 2%;
+        padding: 1% 2%;
     }
 `;
 
@@ -322,6 +326,11 @@ const DivInSection = styled.div`
     border-radius: 15px;
     margin: 2%;
     padding: 1% 2%;
+
+    ${breakPoints.verySmall} {
+        width: 92%;
+        border: none;
+    }
 `;
 
 const CalendarWrap = styled.span`
@@ -395,6 +404,12 @@ const H6 = styled.h6`
     font-size: 14px;
     font-weight: 500;
     padding: .5% 0;
+
+    ${breakPoints.verySmall} {
+        font-size: 16px;
+        font-weight: 600;
+        padding: .8% 0;
+    }
 `;
 
 const Img = styled.img`

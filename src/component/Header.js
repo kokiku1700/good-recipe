@@ -5,6 +5,7 @@ import { breakPoints } from "../constants/breakPoints";
 import mobileMenu from "../assets/img/mobileMenu.png";
 import mobileClose from "../assets/img/mobileClose.png";
 import { useEffect, useState } from "react";
+import MobileHeader from "./MobileHeader";
 
 const Header = () => {
     const [bool, setBool] = useState(false);
@@ -46,6 +47,7 @@ const Header = () => {
                 <StyledLink to="/faq"><Li>FAQ</Li></StyledLink>
             </Ul>
             <Img onClick={toggleMenu} src={bool ? mobileClose : mobileMenu} alt="mobileMenu" />
+            <MobileHeader bool={bool} toggleMenu={toggleMenu} />
         </Div>
     );
 };

@@ -136,84 +136,78 @@ const Reserve = () => {
     };
 
     return (
-        <DivWrap>
-            <Div>
-                <Span>
-                    <H3>이름</H3>
-                    <InputWrap>
-                        <Input name="name" width="98" type="name" 
-                                padding="2.5% 1%"
-                                value={confirmation.name} 
-                                onChange={onChangeConFirmation} 
-                                placeholder="한글만 입력 가능합니다."
-                                onBlur={onBlur}
-                                disabled={showTimer}
-                        />
-                    </InputWrap>
-                    <P $display={errNameMessage ? "none" : "block"}>양식을 제대로 입력해주세요</P>
-                </Span>
-                <Span>
-                    <H3>전화번호</H3>
-                    <InputWrap>
-                        <Input name="tel" width="68" type="tel" 
-                                padding="2.5% 1%"
-                                value={confirmation.tel} 
-                                onChange={onChangeConFirmation} 
-                                placeholder="'-' 빼고 입력해주세요" 
-                                autoComplete="off" 
-                                onBlur={onBlur}
-                                disabled={showTimer}
-                        />
-                        <Button width="30"
-                                margin="0 0 0 1%"
-                                content={confirmButton} 
-                                background={ !telStatus || showTimer ? "#999" : "#6BA368"}
-                                onClick={onClickConfirmationSend} 
-                                cursor={ !telStatus || showTimer ? "default" : "pointer"}
-                                disabled={ !telStatus || showTimer}
-                        />
-                    </InputWrap> 
-                    <P $display={errTelMessage ? "none" : "block"}>전화번호를 제대로 입력해주세요.</P>
-                    <P $display={errTelExistMessage ? "none" : "block"}>이미 같은 번호로 예약이 되어 있습니다.</P>
-                </Span>
-                <Span>
-                    <H3>인증번호</H3>
-                    <InputWrap>
-                        <Input width="68" 
-                                value={confirmationNumberCheck} 
-                                padding="2.5% 1%"
-                                onChange={onChangeConfirmationCheck} 
-                                autoComplete="off" disabled={confirmSuccessStatus} 
-                        />
-                        {showTimer && <Timer onEnd={endTime} />}
-                        <Button width="30" 
-                                margin="0 0 0 1%"
-                                background={confirmationNumberCheck.length !== 6 || confirmSuccessStatus ? "#999" : "#6BA368"} 
-                                content="인증번호 학인" onClick={onClickConfirmationCheck} 
-                                disabled={confirmationNumberCheck.length !== 6 || confirmSuccessStatus} 
-                                cursor={confirmationNumberCheck.length !== 6 || confirmSuccessStatus ? "default" : "pointer"}
-                        />
-                    </InputWrap>
-                    <P $display={errCheckNumber ? "none" : "block"}>인증번호가 올바르지 않습니다.</P>
-                </Span>
-                <Span>
-                    <Button width="100" 
-                        margin="0"
-                        background={!confirmSuccessStatus || !telStatus || !nameStatus ? "#999" :  "#6BA368"} 
-                        content="확인" onClick={AllSuccess} 
-                        disabled={!confirmSuccessStatus || !telStatus || !nameStatus}
-                        cursor={!confirmSuccessStatus || !telStatus || !nameStatus ? "default" : "pointer"}
+        <Div>
+            <Span>
+                <H3>이름</H3>
+                <InputWrap>
+                    <Input name="name" width="98" type="name" 
+                            padding="2.5% 1%"
+                            value={confirmation.name} 
+                            onChange={onChangeConFirmation} 
+                            placeholder="한글만 입력 가능합니다."
+                            onBlur={onBlur}
+                            disabled={showTimer}
                     />
-                </Span>
-                
-            </Div>
-        </DivWrap>
+                </InputWrap>
+                <P $display={errNameMessage ? "none" : "block"}>양식을 제대로 입력해주세요</P>
+            </Span>
+            <Span>
+                <H3>전화번호</H3>
+                <InputWrap>
+                    <Input name="tel" width="68" type="tel" 
+                            padding="2.5% 1%"
+                            value={confirmation.tel} 
+                            onChange={onChangeConFirmation} 
+                            placeholder="'-' 빼고 입력해주세요" 
+                            autoComplete="off" 
+                            onBlur={onBlur}
+                            disabled={showTimer}
+                    />
+                    <Button width="30"
+                            margin="0 0 0 1%"
+                            content={confirmButton} 
+                            background={ !telStatus || showTimer ? "#999" : "#6BA368"}
+                            onClick={onClickConfirmationSend} 
+                            cursor={ !telStatus || showTimer ? "default" : "pointer"}
+                            disabled={ !telStatus || showTimer}
+                    />
+                </InputWrap> 
+                <P $display={errTelMessage ? "none" : "block"}>전화번호를 제대로 입력해주세요.</P>
+                <P $display={errTelExistMessage ? "none" : "block"}>이미 같은 번호로 예약이 되어 있습니다.</P>
+            </Span>
+            <Span>
+                <H3>인증번호</H3>
+                <InputWrap>
+                    <Input width="68" 
+                            value={confirmationNumberCheck} 
+                            padding="2.5% 1%"
+                            onChange={onChangeConfirmationCheck} 
+                            autoComplete="off" disabled={confirmSuccessStatus} 
+                    />
+                    {showTimer && <Timer onEnd={endTime} />}
+                    <Button width="30" 
+                            margin="0 0 0 1%"
+                            background={confirmationNumberCheck.length !== 6 || confirmSuccessStatus ? "#999" : "#6BA368"} 
+                            content="인증번호 학인" onClick={onClickConfirmationCheck} 
+                            disabled={confirmationNumberCheck.length !== 6 || confirmSuccessStatus} 
+                            cursor={confirmationNumberCheck.length !== 6 || confirmSuccessStatus ? "default" : "pointer"}
+                    />
+                </InputWrap>
+                <P $display={errCheckNumber ? "none" : "block"}>인증번호가 올바르지 않습니다.</P>
+            </Span>
+            <Span>
+                <Button width="100" 
+                    margin="0"
+                    background={!confirmSuccessStatus || !telStatus || !nameStatus ? "#999" :  "#6BA368"} 
+                    content="확인" onClick={AllSuccess} 
+                    disabled={!confirmSuccessStatus || !telStatus || !nameStatus}
+                    cursor={!confirmSuccessStatus || !telStatus || !nameStatus ? "default" : "pointer"}
+                />
+            </Span>
+            
+        </Div>
     );
 };
-
-const DivWrap = styled.div`
-    width: 100%;
-`;
 
 const Div = styled.div`
     width: 600px;
@@ -230,6 +224,10 @@ const Div = styled.div`
         width: 60%;
         margin-top: 10%;
     }
+    ${breakPoints.verySmall} {
+        width: 90%;
+        margin-top: 15%;
+    }
 `;
 
 const Span = styled.span`
@@ -241,6 +239,9 @@ const Span = styled.span`
 
     ${breakPoints.medium} {
         width: 90%;
+    }
+    ${breakPoints.verySmall} {
+        margin: 3% auto;
     }
 `;
 

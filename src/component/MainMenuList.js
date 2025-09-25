@@ -36,16 +36,24 @@ const MainMenuList = ({ menu, menuName, menuListValue }) => {
         setSlideTransition(false);
     }, [menuListValue])
 
+    useEffect(() => {
+        setLiSize(window.innerWidth <= 765 ? 320 : 520);
+
+    }, [browserWidth])
+
     // 화면에 크기에 따라 보여지는 슬라이드 개수를 조정하기 위한 코드
     useEffect(() => {        
         const handleBrowserWidth = () => {
             const width = window.innerWidth;
             setBrowserWdith(width);
-            setLiSize(width <= 765 ? 320 : 520);
-            
-            if ( width <= 1300 ) setVisibleNum(1);
-            else if ( width <= 1900 ) setVisibleNum(2);
-            else setVisibleNum(3);
+            setVisibleNum(prev => {
+                let next;
+                if ( width <= 1300 ) next = 1;
+                else if ( width <= 1900 ) next = 2;
+                else next = 3;
+
+                return prev !== next ? next : prev;
+            });
 
             setSlideTransition(false);
             setImgIdx(i => i);
@@ -57,7 +65,7 @@ const MainMenuList = ({ menu, menuName, menuListValue }) => {
 
         return () => window.removeEventListener("resize", handleBrowserWidth);
 
-    }, [visibleNum, browserWidth]);
+    }, [visibleNum]);
 
     // 앞, 뒤로 슬라이드 이동 시 처음 혹은 마지막을 만났을 때 
     // 자연스러운 움직임을 위한 코드
@@ -125,8 +133,8 @@ const MainMenuList = ({ menu, menuName, menuListValue }) => {
                     ))}
                 </Ul>
             </ImgWrap>
-            <ArrowImg $left={browserWidth <= 430 ? "-2" : "2"} src={prev} onClick={prevMove} />
-            <ArrowImg  $right={browserWidth <= 430 ? "-2" : "2"} src={next} onClick={nextMove} />
+            <ArrowImg $left={browserWidth <= 430 ? "-2.5" : "2"} src={prev} onClick={prevMove} />
+            <ArrowImg  $right={browserWidth <= 430 ? "-2.5" : "2"} src={next} onClick={nextMove} />
         </Div>
     );
 }
