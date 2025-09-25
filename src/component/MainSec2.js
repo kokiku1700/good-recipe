@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from "styled-components";
 import lotusLeafSet from "../assets/img/lotusLeafSet.jpg";
-import Button from "../component/components/Button";
+import Button from "./components/Button";
 import { useNavigate } from "react-router-dom";
 import divisionLeaf from "../assets/img/divisionLeaf.png";
 import { breakPoints } from "../constants/breakPoints";
