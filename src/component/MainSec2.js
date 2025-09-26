@@ -1,40 +1,23 @@
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import lotusLeafSet from "../assets/img/lotusLeafSet.jpg";
 import Button from "./components/Button";
 import { useNavigate } from "react-router-dom";
 import divisionLeaf from "../assets/img/divisionLeaf.png";
 import { breakPoints } from "../constants/breakPoints";
-import { useEffect, useState } from "react";
 
 const MainSec2 = () => {
     const navigate = useNavigate();
-    const [trigger, setTrigger] = useState(false);
 
-    
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const location = window.scrollY || document.documentElement.scrollTop;
-
-            if ( location >= 300 &&!trigger ) {
-                setTrigger(true);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [trigger]);
-    
     const onClickMoveMenu = () => {
         navigate('/menu');
     };
 
     return (
         <Section2>
-            <ImgWrap $trigger={trigger}>
+            <ImgWrap>
                 <Img src={lotusLeafSet} />
             </ImgWrap>
-            <TextWrap $trigger={trigger}>
+            <TextWrap>
                 <Article>
                     <ImgILL src={divisionLeaf} />
                     <P>연잎의 향을 머금은 따뜻한 한 끼 정식</P>
@@ -47,39 +30,6 @@ const MainSec2 = () => {
         </Section2>
     )
 };
-
-const BackgroundChange = keyframes`
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-`;
-
-const MoveAniLeft = keyframes`
-    from{
-        transform: translate(-1200px);
-        opacity: 0;
-    }
-    to{
-        tranform: translate(0);
-        opacity: 1;
-    }
-`;
-const MoveAniRight = keyframes`
-    from{
-        transform: translate(1200px);
-        opacity: 0;
-    }
-    to{
-        tranform: translate(0);
-        opacity: 1;
-    }
-`;
 
 const Section2 = styled.section`
     width: 100%;
@@ -98,8 +48,6 @@ const ImgWrap = styled.div`
     display: flex;
     justify-content: end;
     align-items: center;
-    opacity: 0;
-    ${({ $trigger }) => $trigger && css`animation: ${MoveAniLeft} 1.5s ease-out forwards;`}
 
     ${breakPoints.medium} {
         animation: none;
@@ -121,8 +69,6 @@ const TextWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    ${({ $trigger }) => $trigger && css`animation: ${MoveAniRight} 1.5s ease-out forwards;`}
 
     ${breakPoints.medium} {
         animation: none;
@@ -139,9 +85,7 @@ const Article = styled.article`
     align-items: center;
     box-shadow: 0px 0px 6px #6BA368;
     border-radius: 15px;
-    background: linear-gradient(270deg, #ecf1d6ff, #FAF6E9, #eafcccff);
-    background-size: 600% 600%;
-    animation: ${BackgroundChange} 5s ease infinite; 
+    background: linear-gradient(#ecf1d6ff, #FAF6E9, #eafcccff);
     
     ${breakPoints.medium} {
         width: 80%;
@@ -151,7 +95,6 @@ const Article = styled.article`
 const P = styled.p`
     margin-bottom: 5%;
     font-size: 18px;
-    text-shadow: 0px 0px 10px #6BA368; 
 
     ${breakPoints.medium} {
         margin-bottom: 2.5%;

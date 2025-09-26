@@ -3,87 +3,24 @@ import B from "../assets/img/B.png";
 import boxmenu from "../assets/img/boxMenu.jpg";
 import C from "../assets/img/C.png";
 import { breakPoints } from "../constants/breakPoints";
-import { useState, useEffect } from "react";
-import { keyframes, css } from "styled-components";
 
 const MainSec3 = () => {
-    const [trigger, setTrigger] = useState(false);
-
-    
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const location = window.scrollY || document.documentElement.scrollTop;
-
-            if ( location >= 1300 &&!trigger ) {
-                setTrigger(true);
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [trigger]);
 
     return (
         <Section3>
-            <TextWrap $trigger={trigger}>
+            <TextWrap>
                 <Img1 src={B} />
                 <P>“도시락·반찬, 1개부터 단체까지 포장 OK!”</P>
                 <P>“모든 메뉴 포장 가능합니다 — 전화 주문·배달 앱 이용 가능”</P>
                 <P>“한 끼든 단체든, 편리하게 포장하세요”</P>
                 <Img2 src={C} />
             </TextWrap>
-            <ImgWrap $trigger={trigger}>
+            <ImgWrap>
                 <MenuImg src={boxmenu} />
             </ImgWrap>
         </Section3>
     )
 };
-
-const UpDownB = keyframes`
-    0% {
-        top: 16%;
-    }
-    50% {
-        top: 15%;
-    }    
-    100% {
-        top: 16%;
-    }
-`;
-
-const UpDownC = keyframes`
-    0% {
-        bottom: 16%;
-    }
-    50% {
-        bottom: 15%;
-    }    
-    100% {
-        bottom: 16%;
-    }
-`;
-
-const MoveAniLeft = keyframes`
-    from{
-        transform: translate(-1200px);
-        opacity: 0;
-    }
-    to{
-        tranform: translate(0);
-        opacity: 1;
-    }
-`;
-const MoveAniRight = keyframes`
-    from{
-        transform: translate(1200px);
-        opacity: 0;
-    }
-    to{
-        tranform: translate(0);
-        opacity: 1;
-    }
-`;
 
 const Section3 = styled.section`
     width: 100%;
@@ -104,13 +41,9 @@ const TextWrap = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    ${({ $trigger }) => $trigger && css`animation: ${MoveAniLeft} 1.5s ease-out forwards;`}
 
     ${breakPoints.medium} {
         padding: 1% 0;
-        animation: none;
-        opacity: 1;
     }
     ${breakPoints.verySmall} {
         padding: 15% 0;
@@ -122,13 +55,7 @@ const ImgWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0;
-    ${({ $trigger }) => $trigger && css`animation: ${MoveAniRight} 1.5s ease-out forwards;`}
 
-    ${breakPoints.medium} {
-        animation: none;
-        opacity: 1;
-    }
 `;
 
 const Img = styled.img`
@@ -137,8 +64,8 @@ const Img = styled.img`
 `;
 
 const Img1 = styled(Img)`
+    top: 15%;
     left: 15%;
-    animation: ${UpDownB} 2s infinite;
 
     ${breakPoints.medium} {
         top: 10%;
@@ -152,8 +79,8 @@ const Img1 = styled(Img)`
 `;
 
 const Img2 = styled(Img)`
+    bottom: 15%;
     right: 15%;
-    animation: ${UpDownC} 2s infinite;
 
     ${breakPoints.medium} {
         bottom: 10%;

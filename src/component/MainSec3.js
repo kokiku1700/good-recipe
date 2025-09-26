@@ -19,14 +19,15 @@ const MainSec4 = () => {
 };
 
 const Section4 = styled.section`
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-bottom: 3%;
-    border-bottom: 1px solid white;
-
+    box-shadow: 0px 1px 7px #6BA368;
+    border-radius: 10px;
 `;
 
 const H3 = styled.h3`

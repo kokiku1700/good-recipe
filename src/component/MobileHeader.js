@@ -9,7 +9,7 @@ const MobileHeader = ({ bool, toggleMenu }) => {
     };
 
     return (
-        <Div $display={bool}>
+        <Div $bool={bool}>
             <Ul>
                 <StyledLink to="/menu" onClick={onClickToggle}><Li>메뉴</Li></StyledLink>
                 <StyledLink to="/reserve" onClick={onClickToggle}><Li>예약</Li></StyledLink>
@@ -21,24 +21,39 @@ const MobileHeader = ({ bool, toggleMenu }) => {
 };
 
 const Div = styled.div`
-    display: ${props => props.$display ? "block" : "none"};
-
-`;
-
-const StyledLink = styled(Link)`
-
+    width: 100%;
+    display: ${props => props.$bool ? "block" : "none"};
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    
 `;
 
 const Ul = styled.ul`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    width: 95%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin: 0 auto;
+    padding: 2% 0;
+`;
+
+const StyledLink = styled(Link)`
+    margin: 1% 0;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    padding: 5% 0;
+    border: 1px solid #6BA368;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
 `;
 
 const Li = styled.li`
     list-style: none;
+    width: 100%;
 `;
 
 export default MobileHeader;

@@ -7,20 +7,25 @@ import Main from "../page/Main";
 import ReserveDetail from "../page/ReserveDetail";
 import ReserveSuccess from "../page/ReserveSuccess";
 import Street from "../page/Map";
+import ScrollToTop from "./components/ScrollToTop";
 
 const Router = () => {
 
     return (
-        <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/reserve" element={<Reserve />} />
-            <Route path="/reserveCheck" element={<ReserveCheck />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/reserveDetail" element={<ReserveDetail />} />
-            <Route path="/reserveSuccess" element={<ReserveSuccess />} />
-            <Route path="/street" element={<Street />} />
-        </Routes>
+        <>
+            <ScrollToTop />
+            <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/menu" element={<Menu />} />
+                <Route path="/reserve" element={<Reserve />} />
+                <Route path="/reserveCheck" element={<ReserveCheck />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/reserveDetail" element={<ReserveDetail />} />
+                <Route path="/reserveSuccess" element={<ReserveSuccess />} />
+                <Route path="/street" element={<Street />} />
+            </Routes>    
+        </>
+            
     );
 };
 

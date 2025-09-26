@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Button from "../component/components/Button";
 import Input from "../component/components/Input";
 import { breakPoints } from "../constants/breakPoints";
+import Modal from "../component/Modal";
 
 const ReserveCheck = () => {
     // 예약 정보를 찾기 위한 입력 정보 저장
@@ -24,6 +25,9 @@ const ReserveCheck = () => {
     const [checkErrMessage, setCheckErrMessage] = useState(false);
     const [checkEmptyErrMessage, setCheckEmptyErrMessage] = useState(false);
     const naviage = useNavigate();
+
+    const [modalOpen, setModalOpen] = useState(false);
+
 
     // 입력 값를 저장하는 함수
     const onChangeReserveCheck = e => {
@@ -69,6 +73,7 @@ const ReserveCheck = () => {
 
     const onClickMoveChange = () => {
         naviage("/reserveDetail", { 
+            replace: true,
             state: { 
                 name: reserveInformation.name, 
                 tel: reserveInformation.tel,
@@ -95,6 +100,10 @@ const ReserveCheck = () => {
             naviage('/');
         })
     }
+
+    const handleModalOpen = () => {
+        setModalOpen(!modalOpen);
+    };
 
     return (
         <Div>
@@ -141,9 +150,10 @@ const ReserveCheck = () => {
                 <Span $display="flex">
                     <Button width="100" margin="0 1%" content="홈" onClick={onClickMove} />
                     <Button width="100" margin="0 1%" content="예약 정보 변경" onClick={onClickMoveChange} />
-                    <Button width="100" margin="0 1%" content="예약 취소" onClick={onClickDelete} />
+                    <Button width="100" margin="0 1%" content="예약 취소" onClick={handleModalOpen} />
                 </Span>
             </CheckDivWrap>
+            <Modal content="예약을 취소하시겠습니까?" modalOpenState={modalOpen} modalOpenSetState={setModalOpen} onClick={onClickDelete} />
         </Div>
     );
 };
