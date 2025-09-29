@@ -109,7 +109,7 @@ const ReserveCheck = () => {
         <Div>
             <CheckDivWrap $display={checkState ? "none" : "flex"}>
                 <Span>
-                    <H3>이름</H3>
+                    <H3 $marginBottom="3%">이름</H3>
                     <Input name="name" value={reserveCheck.name}
                             width="98"
                             padding="2.5% 1%"
@@ -118,7 +118,7 @@ const ReserveCheck = () => {
                     />
                 </Span>
                 <Span>
-                    <H3>전화번호</H3>
+                    <H3 $marginBottom="3%">전화번호</H3>
                     <Input name="tel" value={reserveCheck.tel}
                             width="98"
                             padding="2.5% 1%"
@@ -140,12 +140,30 @@ const ReserveCheck = () => {
             </CheckDivWrap>
             <CheckDivWrap $display={checkState ? "flex" : "none"}>
                 <Span>
-                    <H3>이름: {reserveInformation.name}</H3>
-                    <H3>전화번호: {reserveInformation.tel}</H3>
-                    <H3>날짜: {reserveInformation.date}</H3>
-                    <H3>시간: {reserveInformation.ampm} {reserveInformation.time}</H3>
-                    <H3>성인: {reserveInformation.adult}</H3>
-                    <H3>아이: {reserveInformation.children}</H3>
+                    <InforSpan>
+                        <H3>이름:</H3>
+                        <H5>{reserveInformation.name}</H5>
+                    </InforSpan>
+                    <InforSpan>
+                        <H3>전화번호:</H3>
+                        <H5>{reserveInformation.tel}</H5>
+                    </InforSpan>
+                    <InforSpan>
+                        <H3>날짜:</H3>
+                        <H5>{reserveInformation.date}</H5>
+                    </InforSpan>
+                    <InforSpan>
+                        <H3>시간:</H3>
+                        <H5>{reserveInformation.ampm} {reserveInformation.time}</H5>
+                    </InforSpan>
+                    <InforSpan>
+                        <H3>성인:</H3>
+                        <H5>{reserveInformation.adult}</H5>
+                    </InforSpan>
+                    <InforSpan>
+                        <H3>아이:</H3>
+                        <H5>{reserveInformation.children}</H5>
+                    </InforSpan>
                 </Span>
                 <Span $display="flex">
                     <Button width="100" margin="0 1%" content="홈" onClick={onClickMove} />
@@ -195,8 +213,20 @@ const Span = styled.span`
     }
 `;
 
+const InforSpan = styled.span`
+    display: flex;
+    align-items: center;
+    padding: 3% 0;
+`;
+
 const H3 = styled.h3`
-    margin-bottom: 3%;
+    margin-bottom: ${props => props.$marginBottom};
+    margin-right: 1%;
+`;
+
+const H5 = styled.h5`
+    margin-left: 1%;
+    font-weight: 500;
 `;
 
 const P = styled.p`

@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# 선한레시피
+대학교부터 4년 넘게 일한 음식점으로 온라인 예약이 가능하면 어떨까
+에서 시작하게 된 프로젝트다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 사용기술 
+### REACT 
+### Styled-Components
+### Node.js
+### axios
+### express
 
-## Available Scripts
+# 핵심 기능
 
-In the project directory, you can run:
+smsAPI를 이용한 인증번호 구현, 무한 슬라이드(캐러셀)
 
-### `npm start`
+# 프로젝트를 진행하면서 배운 점
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+한 번도 외부 api를 연동해본 적이 없었다. 이번 프로젝트를 진행하면서 외부 api를 연동하게 되면서 요청/응답의 구조를 다시 한 번 배우게 되었다. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+또한 무한 슬라이드 구현 과정 중에서 리액트의 생명주기 및 렌더링 순서를 다시 공부하는 계기가 되었다.
 
-### `npm test`
+# 해결 못하거나 아쉬운 점
+현재 발견한 문제점은 반응형 전환 부분이다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+650px 이하에서 개발자 모드 반응형 버전으로 전환시 화면이 꽉차는 것이 아닌 화면을 넘어 스크롤이 생기는 문제가 있다.
 
-### `npm run build`
+다른 페이지에서는 발생하지 않지만 슬라이드 페이지에서만 발생해 해결 방법을 고민중이다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+자세히 설명하면 다른 페이지에서 반응형 전환 후 슬라이드 페이지로 이동하는 것은 괜찮지만 슬라이드 페이지에서 반응형 전환할 경우 생기는 문제다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+조금 더 고민하고 방법이 없다면 슬라이드를 li의 float:left를 display: flex로 바꾸는 방안을 생각중이다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+이렇게 되면 슬라이드 페이지의 코드를 완전히 새롭게 작성해야 한다.
