@@ -12,7 +12,7 @@ const ReserveSuccess = () => {
 
     return (
         <Div>
-            {data.state.result === "reserve Success" ?
+            {data.state.result === "예약" ?
                 <H2>예약이 완료되었습니다.</H2> :
                 <H2>예약이 변경되었습니다.</H2>
             }

@@ -31,7 +31,7 @@ const Reserve = () => {
     const [errTelMessage, setErrTelMessage] = useState(true);
     const [errTelExistMessage, setErrTelExistMessage] = useState(true);
     const [errCheckNumber, setErrCheckNumber] = useState(true);
-    // const [timer, setTimer] = useState(180);
+    
     const navigate = useNavigate();
 
     // 이름과 전화번호 입력정보를 저장
@@ -77,7 +77,7 @@ const Reserve = () => {
                     }
 
                     setConfirmationNumber(randomNum);
-                    console.log(confirmationNumber)
+                    
                     axios.get("http://localhost:4000/confirmation", {params: {tel: confirmation.tel, num: randomNum}})
                     .then(res => {
                         console.log(res);

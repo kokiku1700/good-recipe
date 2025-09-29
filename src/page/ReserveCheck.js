@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -6,6 +5,8 @@ import Button from "../component/components/Button";
 import Input from "../component/components/Input";
 import { breakPoints } from "../constants/breakPoints";
 import Modal from "../component/Modal";
+import { useReservationRead } from "../hooks/useReservationRead";
+import { useReservationDelete } from "../hooks/useReservationDelete";
 
 const ReserveCheck = () => {
     // 예약 정보를 찾기 위한 입력 정보 저장
@@ -20,11 +21,14 @@ const ReserveCheck = () => {
     });
     // 예약 정보 존재 여부에 따라 보여질 화면 상태
     const [checkState, setCheckState] = useState(false);
-    // 예약 정보가 있다면 여기에 저장
-    const [reserveInformation, setReserveInformation] = useState({});
     const [checkErrMessage, setCheckErrMessage] = useState(false);
     const [checkEmptyErrMessage, setCheckEmptyErrMessage] = useState(false);
-    const naviage = useNavigate();
+    
+    const navigate = useNavigate();
+    
+    // 커스텀훅 변수 
+    const {error, getReservation } = useReservationRead();
+    const reservationDelete = useReservationDelete();
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -40,65 +44,55 @@ const ReserveCheck = () => {
     // 버튼 클릭 시 입력 값에 근거해 값을 가져온다. 
     const onClickReserveCheck = async() => {
         if ( reserveCheck.name !== "" && reserveCheck.tel !== "" ) {
-            await axios.get("http://localhost:4000/reserveCheck", {params: {name: reserveCheck.name, tel: reserveCheck.tel}})
-            .then(res => {
-                if ( res.data !== "" ) {
-                    setCheckState(true);
-                    setReserveInformation(res.data);
-                    setReserveCheck({
-                        ...reserveCheck,
-                        date: res.data.date,
-                        ampm: res.data.ampm,
-                        time: res.data.time,
-                        adult: res.data.adult,
-                        children: res.data.children
-                    });
-                    console.log(res.data);
-                } else {
-                    setCheckErrMessage(true);
-                    setCheckEmptyErrMessage(false);
-                }
- 
-            });
+            const res = await getReservation(reserveCheck.name, reserveCheck.tel);
+            
+            if ( res ) {
+                setCheckState(true);
+                setReserveCheck({
+                    ...reserveCheck,
+                    date: res.date,
+                    ampm: res.ampm,
+                    time: res.time,
+                    adult: res.adult,
+                    children: res.children
+                });
+            } else {
+                setCheckErrMessage(true);
+                setCheckEmptyErrMessage(false);
+            }
         } else {
             setCheckErrMessage(false);
             setCheckEmptyErrMessage(true);
         }
-
     };
 
     const onClickMove = () => {
-        naviage("/");
+        navigate("/");
     };
 
     const onClickMoveChange = () => {
-        naviage("/reserveDetail", { 
+        navigate("/reserveDetail", { 
             replace: true,
             state: { 
-                name: reserveInformation.name, 
-                tel: reserveInformation.tel,
-                date: reserveInformation.date,
-                ampm: reserveInformation.ampm,
-                time: reserveInformation.time,
-                adult: reserveInformation.adult,
-                children: reserveInformation.children,
+                name: reserveCheck.name, 
+                tel: reserveCheck.tel,
+                date: reserveCheck.date,
+                ampm: reserveCheck.ampm,
+                time: reserveCheck.time,
+                adult: reserveCheck.adult,
+                children: reserveCheck.children,
             }
         });
     };
 
     const onClickDelete = async() => {
-        await axios.delete("http://localhost:4000/delete",
-                {
-                    data: 
-                        {
-                            name: reserveInformation.name,
-                            tel: reserveInformation.tel,
-                            date: reserveInformation.date                            
-                        }
-                })
-        .then(res => {
-            naviage('/');
-        })
+        const del = await reservationDelete(
+            reserveCheck.name, 
+            reserveCheck.tel, 
+            reserveCheck.date
+        );
+
+        if ( del ) navigate("/");
     }
 
     const handleModalOpen = () => {
@@ -126,7 +120,7 @@ const ReserveCheck = () => {
                             autoComplete="off"
                     />
                 </Span>
-                <P $display={checkErrMessage ? "block" : "none"}>입력 정보가 올바르지 않거나 예약 정보가 없습니다.</P>
+                <P $display={checkErrMessage ? "block" : "none"}>{error}</P>
                 <P $display={checkEmptyErrMessage ? "block" : "none"}>정보를 입력해주세요</P>
                 <Span>
                     <Button width="100"
@@ -142,27 +136,27 @@ const ReserveCheck = () => {
                 <Span>
                     <InforSpan>
                         <H3>이름:</H3>
-                        <H5>{reserveInformation.name}</H5>
+                        <H5>{reserveCheck.name}</H5>
                     </InforSpan>
                     <InforSpan>
                         <H3>전화번호:</H3>
-                        <H5>{reserveInformation.tel}</H5>
+                        <H5>{reserveCheck.tel}</H5>
                     </InforSpan>
                     <InforSpan>
                         <H3>날짜:</H3>
-                        <H5>{reserveInformation.date}</H5>
+                        <H5>{reserveCheck.date}</H5>
                     </InforSpan>
                     <InforSpan>
                         <H3>시간:</H3>
-                        <H5>{reserveInformation.ampm} {reserveInformation.time}</H5>
+                        <H5>{reserveCheck.ampm} {reserveCheck.time}</H5>
                     </InforSpan>
                     <InforSpan>
                         <H3>성인:</H3>
-                        <H5>{reserveInformation.adult}</H5>
+                        <H5>{reserveCheck.adult}</H5>
                     </InforSpan>
                     <InforSpan>
                         <H3>아이:</H3>
-                        <H5>{reserveInformation.children}</H5>
+                        <H5>{reserveCheck.children}</H5>
                     </InforSpan>
                 </Span>
                 <Span $display="flex">

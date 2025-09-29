@@ -5,12 +5,13 @@ import 'react-calendar/dist/Calendar.css';
 import "../constants/Calendar.css";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import axios from "axios";
 import Button from "../component/components/Button";
 import Input from "../component/components/Input";
 import { breakPoints } from "../constants/breakPoints";
 import calendarImg from "../assets/img/calendar.png";
-
+import { useReservationRead } from "../hooks/useReservationRead";
+import { useReservationUpdate } from "../hooks/useReservationUpdate";
+import { useReservationCreate } from "../hooks/useReservationCreate";
 
 const ReserveDetail = () => {
     const nowDate = new Date();
@@ -18,6 +19,11 @@ const ReserveDetail = () => {
 
     const [calendarHide, setCalendarHide] = useState(false);
     const { state } = useLocation();
+
+    const {error, getReservation} = useReservationRead();
+    const reservationCreate = useReservationCreate();
+    const reservationUpdate = useReservationUpdate();
+
     const navigate = useNavigate();
     // 데이터베이스에 저장 할 값 
     const [reserveData, setReserveData] = useState({
@@ -84,7 +90,7 @@ const ReserveDetail = () => {
     };
 
     // 입력 정보가 올바르면 서버에 데이터 보냄
-    const onSubmit = async() => {
+    const onSubmit = () => {
         const peopleSum = Number(reserveData.people.adult) + Number(reserveData.people.children); 
         
         if ( reserveData.date !== "" &&
@@ -93,37 +99,35 @@ const ReserveDetail = () => {
              reserveData.people.adult !== "" &&
             ( peopleSum >= 5 && peopleSum <= 10 )
         ) {
-            await axios.get("http://localhost:4000/reserveCheck", {params: {name: reserveData.name, tel: reserveData.tel}})
-            .then(res => {
-                if ( res.data ) {
-                    axios.put("http://localhost:4000/reserveEdit", {
-                        "name": reserveData.name,
-                        "tel": reserveData.tel,
-                        "date": reserveData.date,
-                        "time": {"AmPm" : reserveData.time.AmPm, "time": reserveData.time.time},
-                        "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
-                    })
-                    .then(res => {
-                        if ( res.data === "reserveEdit Success" ) {
-                            navigate("/reserveSuccess", { replace: true, state: { result: res.data } });
-                        }
-                    })
-                } else {
-                    axios.post("http://localhost:4000/Reserve", {
-                        "name": reserveData.name,
-                        "tel": reserveData.tel,
-                        "date": reserveData.date,
-                        "time": {"AmPm" : reserveData.time.AmPm, "time": reserveData.time.time},
-                        "people": {"adult": reserveData.people.adult, "children": reserveData.people.children},
-                    })
-                    .then(res => {
-                        if ( res.data === "reserve Success" && res.status === 200 ) {
-                            navigate("/reserveSuccess", { replace: true, state: { result: res.data } });
-                        }
-                    });
+            const check = getReservation(reserveData.name, reserveData.tel);
+            
+            if ( check ) {
+                const update = reservationUpdate(
+                    reserveData.name,
+                    reserveData.tel,
+                    reserveData.date,
+                    reserveData.time.AmPm, 
+                    reserveData.time.time,
+                    reserveData.people.adult, 
+                    reserveData.people.children
+                )
+                if ( update ) {
+                    navigate("/reserveSuccess", { replace: true, state: { result: "수정" } });
                 }
-            })   
-        // 인원수에 따른 경고 문구를 위한 상태 
+            } else {
+                const create = reservationCreate(
+                    reserveData.name,
+                    reserveData.tel,
+                    reserveData.date,
+                    reserveData.time.AmPm, 
+                    reserveData.time.time,
+                    reserveData.people.adult, 
+                    reserveData.people.children
+                )
+                if ( create ) {
+                    navigate("/reserveSuccess", { replace: true, state: { result: "예약" } });
+                }
+            } 
         } else {
             if ( peopleSum === 0 ) {
                 setPeopleState({

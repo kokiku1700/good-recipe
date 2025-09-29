@@ -133,6 +133,7 @@ app.put("/reserveEdit", (req, res) => {
     })
 });
 
+// 예약 취소
 app.delete("/delete", (req, res) => {
     Reserve.deleteOne({tel: req.body.tel})
     .then(data => {
