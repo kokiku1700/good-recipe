@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import '../assets/fonts/fonts.css';
 import { Link } from "react-router-dom";
 const Footer = () => {
 
@@ -35,6 +36,7 @@ const StyledLink = styled(Link)`
 
 const H2 = styled.h2`
     margin-bottom: 3%;
+    font-family: 'Shilla_CultureB-Bold';
 `;
 
 const Address = styled.address`

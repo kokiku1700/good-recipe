@@ -3,9 +3,16 @@ import '../../assets/fonts/fonts.css';
 import { Link } from "react-router-dom";
 import { breakPoints } from "../../constants/breakPoints";
 
-const Logo = () => {
+const Logo = ({ toggleBool, toggleMenu}) => {
 
-    return <StyledLink to="/">선한레시피</StyledLink>;
+    const onClickToggle = () => {
+        
+        if ( toggleBool ) {
+            toggleMenu();
+        }
+    }
+
+    return <StyledLink to="/" onClick={onClickToggle}>선한레시피</StyledLink>;
 };
 
 const StyledLink = styled(Link)`

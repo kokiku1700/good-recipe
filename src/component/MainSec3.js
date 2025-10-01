@@ -13,7 +13,7 @@ const MainSec4 = () => {
     return (
         <Section4>
             <H3>친구, 연인, 가족과 함께 하는 건강한 한끼, 혹시 5명 이상이라면?</H3>
-            <Button content="예약하러가기" width="8" padding="1% 0" onClick={onClickMove} />
+            <Button content="예약하러 가기" width="20" padding="1.5% 2%" onClick={onClickMove} />
         </Section4>
     )
 };
@@ -28,6 +28,10 @@ const Section4 = styled.section`
     padding-bottom: 3%;
     box-shadow: 0px 1px 7px #6BA368;
     border-radius: 10px;
+
+    ${breakPoints.verySmall} {
+        width: 90%;
+    }
 `;
 
 const H3 = styled.h3`

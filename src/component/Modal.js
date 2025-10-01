@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakPoints } from "../constants/breakPoints";
 
 const Modal = ({ content, modalOpenState, modalOpenSetState, onClick }) => {
 
@@ -37,12 +38,21 @@ const Div = styled.div`
     align-items: center;
     background: rgba(0, 0, 0, .1);
     z-index: 9999;
+
+    ${breakPoints.small} {
+        align-items: flex-start;
+    }
 `;
 
 const Article = styled.article`
     width: 30%;
     background: white;
     border-radius: 10px;
+
+    ${breakPoints.small} {
+        margin-top: 50%;
+        width: 70%;
+    }
 `;
 
 const ButtonWrap = styled.div`

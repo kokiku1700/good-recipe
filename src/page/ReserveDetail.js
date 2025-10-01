@@ -90,7 +90,7 @@ const ReserveDetail = () => {
     };
 
     // 입력 정보가 올바르면 서버에 데이터 보냄
-    const onSubmit = () => {
+    const onSubmit = async () => {
         const peopleSum = Number(reserveData.people.adult) + Number(reserveData.people.children); 
         
         if ( reserveData.date !== "" &&
@@ -99,10 +99,10 @@ const ReserveDetail = () => {
              reserveData.people.adult !== "" &&
             ( peopleSum >= 5 && peopleSum <= 10 )
         ) {
-            const check = getReservation(reserveData.name, reserveData.tel);
-            
+            const check = await getReservation(reserveData.name, reserveData.tel);
+            console.log(check);
             if ( check ) {
-                const update = reservationUpdate(
+                const update = await reservationUpdate(
                     reserveData.name,
                     reserveData.tel,
                     reserveData.date,
@@ -112,10 +112,11 @@ const ReserveDetail = () => {
                     reserveData.people.children
                 )
                 if ( update ) {
+                    console.log(update)
                     navigate("/reserveSuccess", { replace: true, state: { result: "수정" } });
                 }
             } else {
-                const create = reservationCreate(
+                const create = await reservationCreate(
                     reserveData.name,
                     reserveData.tel,
                     reserveData.date,
@@ -125,6 +126,7 @@ const ReserveDetail = () => {
                     reserveData.people.children
                 )
                 if ( create ) {
+                    console.log(create)
                     navigate("/reserveSuccess", { replace: true, state: { result: "예약" } });
                 }
             } 

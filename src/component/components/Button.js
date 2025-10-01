@@ -34,6 +34,9 @@ const StyledButton = styled.button`
     ${breakPoints.small} {
         font-size: 1.8vw;
     }
+    ${breakPoints.small} {
+        font-size: 2vw;
+    }
 `;
 
 export default Button;

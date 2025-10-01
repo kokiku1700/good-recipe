@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "./components/Logo";
 import { breakPoints } from "../constants/breakPoints";
 import mobileMenu from "../assets/img/mobileMenu.png";
@@ -14,6 +14,8 @@ const Header = () => {
     const [headerColor, setHeaderColor] = useState("#FFFDF6");
     const [headShadow, setHeadShadow] = useState("none");
     
+    const location = useLocation();
+
     const updateScroll = () => {
         setScrollPosition(window.scrollY || document.documentElement.scrollTop);
     };
@@ -33,13 +35,17 @@ const Header = () => {
         } 
     }, [scrollPosition]);
 
+    useEffect(() => {
+        if ( bool ) setBool(!bool);
+    }, [location]);
+
     const toggleMenu = () => {
         setBool(!bool);
     };
 
     return (
         <Div $background={headerColor} $boxShadow={headShadow}>
-            <Logo />
+            <Logo toggleBool={bool} toggleMenu={toggleMenu} />
             <Ul>
                 <StyledLink to="/menu"><Li>메뉴</Li></StyledLink>
                 <StyledLink to="/reserve"><Li>예약</Li></StyledLink>
